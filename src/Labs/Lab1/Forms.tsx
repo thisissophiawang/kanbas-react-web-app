@@ -24,16 +24,16 @@ export default function Forms() {
           Hello World!
         </button>
 
-        <h5 id="wd-radio-buttons">Radio Buttons</h5>
-        <label>
-          <input type="radio" name="option" value="option1" /> Option 1
-        </label>
-        <label>
-          <input type="radio" name="option" value="option2" /> Option 2
-        </label>
-        <label>
-          <input type="radio" name="option" value="option3" /> Option 3
-        </label>
+        <h5 id="wd-radio-buttons">Radio buttons</h5>
+        <label>Favorite movie genre:</label><br />
+        <input type="radio" name="radio-genre" id="wd-radio-comedy"/>
+        <label htmlFor="wd-radio-comedy">Comedy</label><br />
+        <input type="radio" name="radio-genre" id="wd-radio-drama"/>
+        <label htmlFor="wd-radio-drama">Drama</label><br />
+        <input type="radio" name="radio-genre" id="wd-radio-scifi"/>
+        <label htmlFor="wd-radio-scifi">Science Fiction</label><br />
+        <input type="radio" name="radio-genre" id="wd-radio-fantasy"/>
+        <label htmlFor="wd-radio-fantasy">Fantasy</label><br />
 
         <h5 id="wd-checkboxes">Checkboxes</h5>
         <label>
@@ -45,9 +45,18 @@ export default function Forms() {
         <label>
           <input type="checkbox" name="check" value="check3" /> Check 3
         </label>
+
+        <h5 id="wd-dropdowns">Dropdowns</h5>
+        <label htmlFor="wd-dropdown">Choose an option:</label>
+        <select id="wd-dropdown" name="dropdown">
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+          <option value="option3">Option 3</option>
+        </select>
       </form>
     </div>
   );
 }
+
 
 
