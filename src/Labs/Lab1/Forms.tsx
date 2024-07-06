@@ -36,23 +36,72 @@ export default function Forms() {
         <label htmlFor="wd-radio-fantasy">Fantasy</label><br />
 
         <h5 id="wd-checkboxes">Checkboxes</h5>
-        <label>
-          <input type="checkbox" name="check" value="check1" /> Check 1
-        </label>
-        <label>
-          <input type="checkbox" name="check" value="check2" /> Check 2
-        </label>
-        <label>
-          <input type="checkbox" name="check" value="check3" /> Check 3
-        </label>
+<label>Favorite movie genre:</label><br/>
 
-        <h5 id="wd-dropdowns">Dropdowns</h5>
-        <label htmlFor="wd-dropdown">Choose an option:</label>
-        <select id="wd-dropdown" name="dropdown">
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </select>
+<input type="checkbox" name="check-genre" id="wd-chkbox-comedy"/>
+<label htmlFor="wd-chkbox-comedy">Comedy</label><br/>
+
+<input type="checkbox" name="check-genre" id="wd-chkbox-drama"/>
+<label htmlFor="wd-chkbox-drama">Drama</label><br/>
+
+<input type="checkbox" name="check-genre" id="wd-chkbox-scifi"/>
+<label htmlFor="wd-chkbox-scifi">Science Fiction</label><br/>
+
+<input type="checkbox" name="check-genre" id="wd-chkbox-fantasy"/>
+<label htmlFor="wd-chkbox-fantasy">Fantasy</label>
+
+        <h4 id="wd-dropdowns">Dropdowns</h4>
+
+<h5>Select one</h5>
+<label htmlFor="wd-select-one-genre"> Favorite movie genre: </label><br/>
+<select id="wd-select-one-genre">
+   <option value="COMEDY">Comedy</option>
+   <option value="DRAMA">Drama</option>
+   <option selected value="SCIFI">
+       Science Fiction</option>
+   <option value="FANTASY">Fantasy</option>
+</select>
+
+<h5>Select many</h5>
+<label htmlFor="wd-select-many-genre"> Favorite movie genres: </label><br/>
+<select id="wd-select-many-genre" multiple>
+   <option selected value="COMEDY">Comedy</option>
+   <option value="DRAMA">Drama</option>
+   <option selected value="SCIFI">
+       Science Fiction</option>
+   <option value="FANTASY">Fantasy</option>
+</select>
+
+<h4>Other HTML field types</h4>
+
+<label htmlFor="wd-text-fields-email"> Email: </label>
+<input type="email"
+      placeholder="jdoe@somewhere.com"
+      id="wd-text-fields-email"/><br/>
+
+<label htmlFor="wd-text-fields-salary-start"> Starting salary:
+</label>
+<input type="number"
+      id="wd-text-fields-salary-start"
+      placeholder="1000"
+      value="100000"/><br/>
+
+<label htmlFor="wd-text-fields-rating"> Rating: </label>
+<input type="range" id="wd-text-fields-rating"
+      placeholder="Doe"
+      max="5"
+      value="4"/><br/>
+
+<label htmlFor="wd-text-fields-dob"> Date of birth: </label>
+<input type="date"
+      id="wd-text-fields-dob"
+      value="2000-01-21"/><br/>
+
+<h4>Anchor tag</h4>
+Please
+<a id="wd-lipsum" href="https://www.lipsum.com">click here</a>
+to get dummy text<br/>
+
       </form>
     </div>
   );
