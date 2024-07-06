@@ -23,8 +23,20 @@ export default function Forms() {
         <button id="wd-all-good" onClick={() => alert("Life is Good!")} type="button">
           Hello World!
         </button>
+
+        <h5 id="wd-radio-buttons">Radio Buttons</h5>
+        <label>
+          <input type="radio" name="option" value="option1" /> Option 1
+        </label>
+        <label>
+          <input type="radio" name="option" value="option2" /> Option 2
+        </label>
+        <label>
+          <input type="radio" name="option" value="option3" /> Option 3
+        </label>
       </form>
     </div>
   );
 }
+
 
