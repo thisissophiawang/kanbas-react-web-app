@@ -3,6 +3,9 @@ import Paragraphs from "./Paragraphs";
 import Headings from "./Headings";
 import Lists from "./Lists";
 import Tables from "./Tables";
+import Images from "./Images";
+import Forms from "./Forms";
+
 
 export default function Lab1() {
   return (
@@ -13,6 +16,8 @@ export default function Lab1() {
       <Paragraphs />
       <Lists />
       <Tables />
+      <Images />
+      <Forms />
     </div>
   );
 }
