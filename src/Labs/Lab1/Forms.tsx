@@ -34,6 +34,17 @@ export default function Forms() {
         <label>
           <input type="radio" name="option" value="option3" /> Option 3
         </label>
+
+        <h5 id="wd-checkboxes">Checkboxes</h5>
+        <label>
+          <input type="checkbox" name="check" value="check1" /> Check 1
+        </label>
+        <label>
+          <input type="checkbox" name="check" value="check2" /> Check 2
+        </label>
+        <label>
+          <input type="checkbox" name="check" value="check3" /> Check 3
+        </label>
       </form>
     </div>
   );
