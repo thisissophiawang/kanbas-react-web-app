@@ -1,15 +1,16 @@
 import React from "react";
 import Labs from "./Labs";
+import Kanbas from "./Kanbas"; // 确保正确导入Kanbas组件
 import { HashRouter, Route, Routes, Navigate } from "react-router-dom";
 
 function App() {
   return (
     <HashRouter>
       <div>
-        <h1>Xinyi Wang/Sophia</h1>
         <Routes>
           <Route path="/" element={<Navigate to="/Labs" />} />
           <Route path="/Labs/*" element={<Labs />} />
+          <Route path="/Kanbas/*" element={<Kanbas />} />
         </Routes>
         {/* Kanbas */}
         <a href="https://github.com/thisissophiawang/kanbas-react-web-app/tree/a1">

@@ -7,6 +7,7 @@ import Lab3 from "./Lab3";
 export default function Labs() {
   return (
     <div>
+      <h1>Xinyi Wang/Sophia</h1>
       <h1>Labs</h1>
       <TOC />
       <Routes>
@@ -15,6 +16,9 @@ export default function Labs() {
         <Route path="Lab2" element={<Lab2 />} />
         <Route path="Lab3" element={<Lab3 />} />
       </Routes>
+      <a href="https://github.com/thisissophiawang/kanbas-react-web-app/tree/a1">
+          Github
+        </a>
     </div>
   );
 }
