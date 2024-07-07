@@ -2,7 +2,7 @@ import React from "react";
 import KanbasNavigation from "./Navigation"; 
 import Dashboard from "./Dashboard"; 
 import Courses from "./Courses";
-import { Navigate, Route, Routes } from "react-router";
+import { Routes, Route } from "react-router-dom";
 
 export default function Kanbas() {
   return (
@@ -14,9 +14,8 @@ export default function Kanbas() {
           </td>
           <td valign="top">
             <Routes>
-              <Route path="/" element={<Navigate to="Dashboard" />} />
-              <Route path="Dashboard" element={<Dashboard />} />
               <Route path="Courses/*" element={<Courses />} />
+              <Route path="Dashboard" element={<Dashboard />} />
             </Routes>
           </td>
         </tr>
