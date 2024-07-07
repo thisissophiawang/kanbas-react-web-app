@@ -1,0 +1,33 @@
+/* src/Kanbas/Courses/Modules/Modules.css */
+#wd-modules {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .wd-module {
+    margin-bottom: 1em;
+  }
+  
+  .wd-title {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+  
+  .wd-lessons {
+    list-style-type: none;
+    padding: 0 0 0 1em;
+  }
+  
+  .wd-lesson {
+    margin-bottom: 0.5em;
+  }
+  
+  .wd-content {
+    list-style-type: none;
+    padding: 0 0 0 1em;
+  }
+  
+  .wd-content-item {
+    margin-bottom: 0.25em;
+  }
+  

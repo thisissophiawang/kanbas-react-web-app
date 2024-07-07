@@ -1,3 +1,7 @@
+// src/Kanbas/Courses/Modules/index.tsx
+import React from 'react';
+import './Modules.css'; // Make sure to create this CSS file with the provided styles.
+
 export default function Modules() {
   return (
     <div>
@@ -20,7 +24,7 @@ export default function Modules() {
               <span className="wd-title">READING</span>
               <ul className="wd-content">
                 <li className="wd-content-item">Full Stack Developer - Chapter 1 - Introduction</li>
-                <li className="wd-content-item">Full Stack Developer - Chapter 2 - Creating Us</li>
+                <li className="wd-content-item">Full Stack Developer - Chapter 2 - Creating User Interfaces</li>
               </ul>
             </li>
             <li className="wd-lesson">
