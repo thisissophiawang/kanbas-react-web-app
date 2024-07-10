@@ -1,10 +1,11 @@
-import Lab1 from "./Lab1";
-import { Route, Routes, Navigate } from "react-router";
-import TOC from "./TOC";
-import Lab2 from "./Lab2";
-import Lab3 from "./Lab3";
+import React from 'react';
+import { Route, Routes, Navigate } from 'react-router';
+import Lab1 from './Lab1';
+import Lab2 from './Lab2';
+import Lab3 from './Lab3';
+import TOC from './TOC';
 
-export default function Labs() {
+const Labs: React.FC = () => {
   return (
     <div>
       <h1>Xinyi Wang/Sophia</h1>
@@ -16,9 +17,10 @@ export default function Labs() {
         <Route path="Lab2" element={<Lab2 />} />
         <Route path="Lab3" element={<Lab3 />} />
       </Routes>
-      <a href="https://github.com/thisissophiawang/kanbas-react-web-app/tree/a1">
-          Github
-        </a>
+      <a href="https://github.com/thisissophiawang/kanbas-react-web-app/tree/a1">Github</a>
     </div>
   );
 }
+
+export default Labs;
+

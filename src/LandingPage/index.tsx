@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-function LandingPage() {
+const LandingPage: React.FC = () => {
   return (
     <div>
       <h1>Landing Page</h1>
@@ -23,15 +23,14 @@ function LandingPage() {
 
       <h2>Labs</h2>
       <ul>
-        <li><Link to="/Lab1">Lab 1</Link></li>
-        <li><Link to="/Lab2">Lab 2</Link></li>
-        <li><Link to="/Lab3">Lab 3</Link></li>
+        <li><Link to="/Labs/Lab1">Lab 1</Link></li>
+        <li><Link to="/Labs/Lab2">Lab 2</Link></li>
+        <li><Link to="/Labs/Lab3">Lab 3</Link></li>
       </ul>
     </div>
   );
 }
 
 export default LandingPage;
-
 
 

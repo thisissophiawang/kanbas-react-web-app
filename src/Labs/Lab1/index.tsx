@@ -7,7 +7,8 @@ import Images from "./Images";
 import Forms from "./Forms";
 import Anchors from "./Anchors";
 
-export default function Lab1() {
+
+const Lab1: React.FC = () => {
   return (
     <div id="wd-lab1">
       <h2>Lab 1</h2>
@@ -18,8 +19,9 @@ export default function Lab1() {
       <Tables />
       <Images />
       <Forms />
-      <Anchors showGitHub={false} /> {/* Pass the prop here */}
+      <Anchors showGitHub={false} />
     </div>
   );
 }
 
+export default Lab1;
