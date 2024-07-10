@@ -18,7 +18,8 @@ export default function Lab1() {
       <Tables />
       <Images />
       <Forms />
-      <Anchors />
+      <Anchors showGitHub={false} /> {/* Pass the prop here */}
     </div>
   );
 }
+
