@@ -5,6 +5,7 @@ import BackgroundColors from './BackgroundColors';
 import Borders from './Borders';
 import Padding from './Padding';
 import Margins from './Margins';
+import Corners from './Corners';
 
 const Lab2: React.FC = () => {
   return (
@@ -60,6 +61,7 @@ const Lab2: React.FC = () => {
       <Borders />
       <Padding />
       <Margins />
+      <Corners />
     </div>
   );
 }
