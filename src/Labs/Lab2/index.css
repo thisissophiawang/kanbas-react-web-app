@@ -62,3 +62,16 @@ p#wd-id-selector-2 {
 .wd-border-blue {
  border-color: #7070ff;
 }
+.wd-padded-top-left {
+  padding-top: 50px;
+  padding-left: 50px;
+}
+.wd-padded-bottom-right {
+  padding-bottom: 50px;
+  padding-right: 50px;
+}
+
+.wd-padding-fat {
+  padding: 50px;
+}
+
