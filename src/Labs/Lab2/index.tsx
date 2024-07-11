@@ -17,6 +17,9 @@ import ReactIconsSampler from './ReactIcons';
 import "bootstrap/dist/css/bootstrap.min.css";
 import BootstrapGrids from './BootstrapGrids';
 import ScreenSizeLabel from './ScreenSizeLabel';
+import BootstrapTables from './BootstrapTables';
+import BootstrapLists from './BootstrapLists';
+import BootstrapFroms from './BootstrapForms';
 
 const Lab2: React.FC = () => {
   return (
@@ -83,6 +86,9 @@ const Lab2: React.FC = () => {
       <ReactIconsSampler />
       <BootstrapGrids />
       <ScreenSizeLabel />
+      <BootstrapTables />
+      <BootstrapLists />
+      <BootstrapFroms />
     </div>
   );
 }
