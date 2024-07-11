@@ -6,6 +6,11 @@ import Borders from './Borders';
 import Padding from './Padding';
 import Margins from './Margins';
 import Corners from './Corners';
+import Dimensions from './Dimensions';
+import Positions from './Positions';
+import AbsPositions from './AbsPositions';
+import Zindex from './Zindex';
+import Float from './Float';
 
 const Lab2: React.FC = () => {
   return (
@@ -62,6 +67,11 @@ const Lab2: React.FC = () => {
       <Padding />
       <Margins />
       <Corners />
+      <Dimensions />
+      <Positions />
+      <AbsPositions />
+      <Zindex />
+      <Float />
     </div>
   );
 }
