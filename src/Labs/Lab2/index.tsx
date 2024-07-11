@@ -12,6 +12,7 @@ import AbsPositions from './AbsPositions';
 import Zindex from './Zindex';
 import Float from './Float';
 import GridLayout from './GridLayout';
+import Flex from './Flex';
 
 const Lab2: React.FC = () => {
   return (
@@ -74,6 +75,7 @@ const Lab2: React.FC = () => {
       <Zindex />
       <Float />
       <GridLayout/>
+      <Flex/>
     </div>
   );
 }
