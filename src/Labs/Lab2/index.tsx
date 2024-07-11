@@ -20,6 +20,7 @@ import ScreenSizeLabel from './ScreenSizeLabel';
 import BootstrapTables from './BootstrapTables';
 import BootstrapLists from './BootstrapLists';
 import BootstrapFroms from './BootstrapForms';
+import BootstrapNavigation from './BootstrapNavigation';
 
 const Lab2: React.FC = () => {
   return (
@@ -89,6 +90,7 @@ const Lab2: React.FC = () => {
       <BootstrapTables />
       <BootstrapLists />
       <BootstrapFroms />
+      <BootstrapNavigation />
     </div>
   );
 }
