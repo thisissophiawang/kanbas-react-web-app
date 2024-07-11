@@ -1,6 +1,8 @@
 import React from 'react';
 import './index.css';
 import ForegroundColors from './ForegroundColors';
+import BackgroundColors from './BackgroundColors';
+import Borders from './Borders';
 
 const Lab2: React.FC = () => {
   return (
@@ -15,12 +17,11 @@ const Lab2: React.FC = () => {
       <div id="wd-css-id-selectors">
         <h3>ID selectors</h3>
         <p id="wd-id-selector-1">
-    Instead of changing the look and feel of all the 
-    elements of the same name, e.g., P, we can refer to a specific element by its ID
+          Instead of changing the look and feel of all the 
+          elements of the same name, e.g., P, we can refer to a specific element by its ID
         </p>
         <p id="wd-id-selector-2">
-    Here's another paragraph using a different ID and a different look and
-          feel
+          Here's another paragraph using a different ID and a different look and feel
         </p>
       </div>
       <div id="wd-css-class-selectors">
@@ -29,7 +30,7 @@ const Lab2: React.FC = () => {
           Instead of using IDs to refer to elements, you can use an element's CLASS attribute
         </p>
         <h4 className="wd-class-selector">
-          This heading has same style as paragraph above
+          This heading has the same style as the paragraph above
         </h4>
       </div>
       <div id="wd-css-document-structure">
@@ -53,9 +54,12 @@ const Lab2: React.FC = () => {
         </div>
       </div>
       <ForegroundColors />
+      <BackgroundColors />
+      <Borders />
     </div>
   );
 }
 
 export default Lab2;
+
 
