@@ -13,6 +13,7 @@ import Zindex from './Zindex';
 import Float from './Float';
 import GridLayout from './GridLayout';
 import Flex from './Flex';
+import ReactIconsSampler from './ReactIcons'; // 导入 ReactIconsSampler 组件
 
 const Lab2: React.FC = () => {
   return (
@@ -76,10 +77,12 @@ const Lab2: React.FC = () => {
       <Float />
       <GridLayout/>
       <Flex/>
+      <ReactIconsSampler /> 
     </div>
   );
 }
 
 export default Lab2;
+
 
 
