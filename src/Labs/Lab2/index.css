@@ -1,8 +1,7 @@
+/* General Paragraphs */
 p {
-  background-color: blue;
-  color: white;
+  color: black;
 }
-
 
 /* ID Selectors */
 p#wd-id-selector-1 {
@@ -99,11 +98,9 @@ p#wd-id-selector-2 {
   padding-right: 50px;
 }
 
-
 .wd-padding-fat {
   padding: 50px;
 }
-
 
 /* Margin */
 .wd-margin-bottom {
@@ -118,7 +115,6 @@ p#wd-id-selector-2 {
 .wd-margin-all-around {
   margin: 30px;
 }
-
 
 /* Rounded Corners */
 .wd-rounded-corners-top {
@@ -181,36 +177,36 @@ p#wd-id-selector-2 {
 .wd-pos-absolute-120-20 {
   position: absolute;
   top: 20px;
-  left: 120px;      }
+  left: 120px;
+}
 
-  /* Fixed Positions */
-  .wd-pos-fixed {
-    position: fixed;
-    right: 0px;
-    bottom: 50%;
-  }
-  
-  /* Z-Index */
-  .wd-zindex-bring-to-front {
-    z-index: 10;
- }
- 
+/* Fixed Positions */
+.wd-pos-fixed {
+  position: fixed;
+  right: 0px;
+  bottom: 50%;
+}
 
- /* Float */
+/* Z-Index */
+.wd-zindex-bring-to-front {
+  z-index: 10;
+}
+
+/* Float */
 .wd-float-left {
-   float: left;
+  float: left;
 }
 
 .wd-float-right {
-   float: right;
-   height: 100px;
+  float: right;
+  height: 100px;
 }
 
 .wd-float-done {
-   clear: both;
+  clear: both;
 }
 
-/*Grid Layout*/
+/* Grid Layout */
 .wd-grid-row {
   clear: both;
 }
@@ -245,15 +241,11 @@ p#wd-id-selector-2 {
   float: left;
 }
 
-
 /* Flex */
 .wd-flex-row-container {
   display: flex;
   flex-direction: row;
 }
-
-
-
-
-
-  
+.wd-flex-grow-1 {
+  flex-grow: 1;
+}
