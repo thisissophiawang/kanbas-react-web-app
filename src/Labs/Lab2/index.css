@@ -1,3 +1,9 @@
+p {
+  background-color: blue;
+  color: white;
+}
+
+
 /* ID Selectors */
 p#wd-id-selector-1 {
   background-color: red;
