@@ -1,72 +1,21 @@
-import React from 'react';
-import { AiOutlineDashboard } from 'react-icons/ai';
-import { IoCalendarOutline } from 'react-icons/io5';
-import { LiaBookSolid, LiaCogSolid } from 'react-icons/lia';
-import { FaInbox, FaUserCircle } from 'react-icons/fa';
-
-export default function KanbasNavigation() {
-  return (
-    <div 
-      id="wd-kanbas-navigation"
-      style={{ width: 120 }}
-      className="list-group rounded-0 position-fixed bottom-0 top-0 d-none d-md-block bg-black z-2"
-    >
-      <a 
-        id="wd-neu-link" 
-        target="_blank" 
-        href="https://www.northeastern.edu/" 
-        className="list-group-item bg-black border-0"
-      >
-        <img src="/images/NEU.png" width="75px" alt="Northeastern University" />
-      </a>
-      <a 
-        id="wd-account-link" 
-        href="#/Kanbas/Account" 
-        className="list-group-item text-white bg-black text-center border-0"
-      >
-        <FaUserCircle className="fs-1 text text-white" /><br />
-        Account
-      </a>
-      <a 
-        id="wd-dashboard-link" 
-        href="#/Kanbas/Dashboard" 
-        className="list-group-item text-center border-0 bg-white text-danger"
-      >
-        <AiOutlineDashboard className="fs-1 text-danger" /><br />
-        Dashboard
-      </a>
-      <a 
-        id="wd-course-link" 
-        href="#/Kanbas/Courses" 
-        className="list-group-item text-white bg-black text-center border-0"
-      >
-        <LiaBookSolid className="fs-1 text-danger" /><br />
-        Courses
-      </a>
-      <a 
-        id="wd-calendar-link" 
-        href="#/Kanbas/Calendar" 
-        className="list-group-item text-white bg-black text-center border-0"
-      >
-        <IoCalendarOutline className="fs-1 text-danger" /><br />
-        Calendar
-      </a>
-      <a 
-        id="wd-inbox-link" 
-        href="#/Kanbas/Inbox" 
-        className="list-group-item text-white bg-black text-center border-0"
-      >
-        <FaInbox className="fs-1 text-danger" /><br />
-        Inbox
-      </a>
-      <a 
-        id="wd-labs-link" 
-        href="#/Labs" 
-        className="list-group-item text-white bg-black text-center border-0"
-      >
-        <LiaCogSolid className="fs-1 text-danger" /><br />
-        Labs
-      </a>
-    </div>
-  );
+import "./index.css";
+export default function CoursesNavigation() {
+    return (
+            <div id="wd-courses-navigation" className="list-group fs-5 rounded-0">
+                    <a id="wd-course-home-link" href="#/Kanbas/Courses/1234/Home"
+                       className="list-group-item active border border-0"> Home </a>
+                <a id="wd-course-modules-link" href="#/Kanbas/Courses/1234/Modules"
+                   className="list-group-item text-danger border border-0"> Modules </a>
+                <a id="wd-course-piazza-link" href="#/Kanbas/Courses/1234/Piazza"
+                   className="list-group-item text-danger border border-0"> Piazza </a>
+                <a id="wd-course-zoom-link" href="#/Kanbas/Courses/1234/Zoom"
+                   className="list-group-item text-danger border border-0"> Zoom </a>
+                <a id="wd-course-quizzes-link" href="#/Kanbas/Courses/1234/Assignments"
+                   className="list-group-item text-danger border border-0"> Assignments </a>
+                <a id="wd-course-assignments-link" href="#/Kanbas/Courses/1234/Quizzes"
+                   className="list-group-item text-danger border border-0"> Quizzes </a>
+                <a id="wd-course-grades-link" href="#/Kanbas/Courses/1234/Grades"
+                   className="list-group-item text-danger border border-0"> Grades </a>
+            </div>
+    );
 }

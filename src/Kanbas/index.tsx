@@ -6,14 +6,14 @@ import "./styles.css";
 
 export default function Kanbas() {
   return (
-      <div id="wd-kanbas">
-        <KanbasNavigation/>
-        <div className="wd-main-content-offset p-3">
-          <Routes>
-            <Route path="Dashboard" element={<Dashboard/>}/>
-            <Route path="Courses/:cid/*" element={<Courses/>}/>
-          </Routes>
-        </div>
+    <div id="wd-kanbas">
+      <KanbasNavigation />
+      <div className="wd-main-content-offset p-3">
+        <Routes>
+          <Route path="Dashboard" element={<Dashboard />} />
+          <Route path="Courses/:cid/*" element={<Courses />} />
+        </Routes>
       </div>
+    </div>
   );
 }
