@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router";
 import Courses from "./Courses";
 import Dashboard from "./Dashboard";
 import KanbasNavigation from "./Navigation";
-import "./styles.css"; // Ensure this path is correct and styles.css exists
+import "./styles.css";
 
 export default function Kanbas() {
   return (
@@ -11,7 +11,7 @@ export default function Kanbas() {
       <div className="wd-main-content-offset p-3">
         <Routes>
           <Route path="Dashboard" element={<Dashboard />} />
-          <Route path="Courses/:cid/*" element={<Courses />} />
+          <Route path="Courses/*" element={<Courses />} />
         </Routes>
       </div>
     </div>
