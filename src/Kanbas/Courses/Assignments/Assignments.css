@@ -1,4 +1,4 @@
-#wd-assignments {
+、#wd-assignments {
   padding: 20px;
 }
 
@@ -156,20 +156,104 @@
   margin-left: auto;
 }
 
+/* Assignments.css */
+
+.container {
+  padding: 20px;
+}
+
+h3, h4, h5 {
+  margin-bottom: 10px;
+}
+
+.form-control, .form-check-label, .form-check-input, .btn {
+  margin-bottom: 15px;
+}
+
+.form-check {
+  margin-left: 10px;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.me-2 {
+  margin-right: 10px;
+}
+
 #wd-assignments-editor {
   padding: 20px;
 }
 
-.form-label {
-  font-weight: bold;
-}
-
-.form-control {
+.form-group {
   margin-bottom: 15px;
 }
 
-.float-end {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
+#wd-entry-options {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
+
+#wd-assign {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.form-check-label {
+  margin-left: 10px;
+}
+
+h3, h4, h5 {
+  margin-bottom: 10px;
+}
+
+.btn {
+  margin-top: 10px;
+  margin-right: 5px;
+}
+
+select.form-control {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="none" stroke="rgba(0, 0, 0, 0.5)" stroke-width="1" d="M0 0l2 2 2-2"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 8px 10px;
+}
+
+label {
+  font-weight: bold;
+}
+
+#wd-entry-options label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.btn-success {
+  background-color: #dc3545; /* Red background for save button */
+  color: white;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #c82333; /* Darker red background on hover */
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.col {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+

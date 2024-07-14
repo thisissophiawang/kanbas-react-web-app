@@ -16,146 +16,140 @@ export default function AssignmentEditor() {
   const [availableUntil, setAvailableUntil] = useState<string>("2024-05-20");
 
   return (
-    <div id="wd-assignments-editor" className="container">
-      <label htmlFor="wd-name" className="form-label">Assignment Name</label>
-      <input 
-        id="wd-name" 
-        value={assignmentName} 
-        onChange={(e) => setAssignmentName(e.target.value)} 
-        className="form-control"
-      />
-      <br />
+    <div id="wd-assignments-editor">
+      <div className="form-group">
+        <label htmlFor="wd-name">Assignment Name</label>
+        <input 
+          id="wd-name" 
+          className="form-control"
+          value={assignmentName} 
+          onChange={(e) => setAssignmentName(e.target.value)} 
+        />
+      </div>
+      
+      <div className="form-group">
+        <label htmlFor="wd-description">Description</label>
+        <textarea 
+          id="wd-description" 
+          className="form-control"
+          rows={5} 
+          value={description} 
+          onChange={(e) => setDescription(e.target.value)} 
+        />
+      </div>
 
-      <textarea 
-        id="wd-description" 
-        rows={5} 
-        cols={33} 
-        value={description} 
-        onChange={(e) => setDescription(e.target.value)} 
-        className="form-control"
-      />
-      <br />
+      <div className="form-group">
+        <label htmlFor="wd-points">Points</label>
+        <input 
+          id="wd-points" 
+          className="form-control"
+          type="number" 
+          value={points} 
+          onChange={(e) => setPoints(Number(e.target.value))} 
+        />
+      </div>
 
-      <div className="row">
-        <div className="col">
-          <label htmlFor="wd-points" className="form-label">Points</label>
-          <input 
-            id="wd-points" 
-            type="number" 
-            value={points} 
-            onChange={(e) => setPoints(Number(e.target.value))} 
-            className="form-control"
-          />
-        </div>
-        <div className="col">
-          <label htmlFor="wd-group" className="form-label">Assignment Group</label>
-          <select 
-            id="wd-group" 
-            value={group} 
-            onChange={(e) => setGroup(e.target.value)}
-            className="form-control"
-          >
-            <option value="ASSIGNMENTS">ASSIGNMENTS</option>
-          </select>
+      <div className="form-group">
+        <label htmlFor="wd-group">Assignment Group</label>
+        <select 
+          id="wd-group" 
+          className="form-control"
+          value={group} 
+          onChange={(e) => setGroup(e.target.value)}
+        >
+          <option value="ASSIGNMENTS">ASSIGNMENTS</option>
+          {/* Add other options as needed */}
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="wd-display-grade-as">Display Grade as</label>
+        <select 
+          id="wd-display-grade-as" 
+          className="form-control"
+          value={displayGradeAs} 
+          onChange={(e) => setDisplayGradeAs(e.target.value)}
+        >
+          <option value="Percentage">Percentage</option>
+          {/* Add other options as needed */}
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="wd-submission-type">Submission Type</label>
+        <select 
+          id="wd-submission-type" 
+          className="form-control"
+          value={submissionType} 
+          onChange={(e) => setSubmissionType(e.target.value)}
+        >
+          <option value="Online">Online</option>
+          {/* Add other options as needed */}
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="wd-entry-options"><strong>Online Entry Options</strong></label>
+        <div id="wd-entry-options" className="form-control">
+          <label>
+            <input id="wd-text-entry" type="checkbox" /> Text Entry
+          </label>
+          <label>
+            <input id="wd-website-url" type="checkbox" /> Website URL
+          </label>
+          <label>
+            <input id="wd-media-recordings" type="checkbox" /> Media Recordings
+          </label>
+          <label>
+            <input id="wd-student-annotation" type="checkbox" /> Student Annotation
+          </label>
+          <label>
+            <input id="wd-file-upload" type="checkbox" /> File Uploads
+          </label>
         </div>
       </div>
-      <br />
 
-      <div className="row">
-        <div className="col">
-          <label htmlFor="wd-display-grade-as" className="form-label">Display Grade as</label>
-          <select 
-            id="wd-display-grade-as" 
-            value={displayGradeAs} 
-            onChange={(e) => setDisplayGradeAs(e.target.value)}
-            className="form-control"
-          >
-            <option value="Percentage">Percentage</option>
-          </select>
-        </div>
-        <div className="col">
-          <label htmlFor="wd-submission-type" className="form-label">Submission Type</label>
-          <select 
-            id="wd-submission-type" 
-            value={submissionType} 
-            onChange={(e) => setSubmissionType(e.target.value)}
-            className="form-control"
-          >
-            <option value="Online">Online</option>
-          </select>
-          <br />
-          <div className="form-check">
-            <input id="wd-text-entry" type="checkbox" className="form-check-input" /> 
-            <label htmlFor="wd-text-entry" className="form-check-label">Text Entry</label>
+      <div className="form-group" id="wd-assign">
+        <label htmlFor="wd-assign-to">Assign to</label>
+        <input 
+          id="wd-assign-to" 
+          className="form-control"
+          value={assignTo} 
+          onChange={(e) => setAssignTo(e.target.value)} 
+        />
+        <label htmlFor="wd-due-date">Due</label>
+        <input 
+          id="wd-due-date" 
+          className="form-control"
+          type="date" 
+          value={dueDate} 
+          onChange={(e) => setDueDate(e.target.value)} 
+        />
+        <div className="row">
+          <div className="col">
+            <label htmlFor="wd-available-from">Available from</label>
+            <input 
+              id="wd-available-from" 
+              className="form-control"
+              type="date" 
+              value={availableFrom} 
+              onChange={(e) => setAvailableFrom(e.target.value)} 
+            />
           </div>
-          <div className="form-check">
-            <input id="wd-website-url" type="checkbox" className="form-check-input" /> 
-            <label htmlFor="wd-website-url" className="form-check-label">Website URL</label>
-          </div>
-          <div className="form-check">
-            <input id="wd-media-recordings" type="checkbox" className="form-check-input" /> 
-            <label htmlFor="wd-media-recordings" className="form-check-label">Media Recordings</label>
-          </div>
-          <div className="form-check">
-            <input id="wd-student-annotation" type="checkbox" className="form-check-input" /> 
-            <label htmlFor="wd-student-annotation" className="form-check-label">Student Annotation</label>
-          </div>
-          <div className="form-check">
-            <input id="wd-file-upload" type="checkbox" className="form-check-input" /> 
-            <label htmlFor="wd-file-upload" className="form-check-label">File Uploads</label>
+          <div className="col">
+            <label htmlFor="wd-available-until">Until</label>
+            <input 
+              id="wd-available-until" 
+              className="form-control"
+              type="date" 
+              value={availableUntil} 
+              onChange={(e) => setAvailableUntil(e.target.value)} 
+            />
           </div>
         </div>
       </div>
-      <br />
 
-      <div className="row">
-        <div className="col">
-          <label htmlFor="wd-assign-to" className="form-label">Assign to</label>
-          <input 
-            id="wd-assign-to" 
-            value={assignTo} 
-            onChange={(e) => setAssignTo(e.target.value)} 
-            className="form-control"
-          />
-        </div>
-        <div className="col">
-          <label htmlFor="wd-due-date" className="form-label">Due</label>
-          <input 
-            id="wd-due-date" 
-            type="date" 
-            value={dueDate} 
-            onChange={(e) => setDueDate(e.target.value)} 
-            className="form-control"
-          />
-        </div>
-      </div>
-      <br />
-
-      <div className="row">
-        <div className="col">
-          <label htmlFor="wd-available-from" className="form-label">Available from</label>
-          <input 
-            id="wd-available-from" 
-            type="date" 
-            value={availableFrom} 
-            onChange={(e) => setAvailableFrom(e.target.value)} 
-            className="form-control"
-          />
-        </div>
-        <div className="col">
-          <label htmlFor="wd-available-until" className="form-label">Until</label>
-          <input 
-            id="wd-available-until" 
-            type="date" 
-            value={availableUntil} 
-            onChange={(e) => setAvailableUntil(e.target.value)} 
-            className="form-control"
-          />
-        </div>
-      </div>
-      <br />
-
-      <div className="float-end">
+      <div className="form-group d-flex justify-content-end">
         <button className="btn btn-secondary me-2">Cancel</button>
         <button className="btn btn-success">Save</button>
       </div>
