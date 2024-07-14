@@ -1,0 +1,32 @@
+.search-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-wrapper input {
+    width: 100%;
+    padding-right: 40px; /* Adjust to fit icons */
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding-left: 10px;
+    height: 36px;
+}
+
+.search-wrapper .icon,
+.search-wrapper .dropdown-icon {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+
+.search-wrapper .dropdown-icon {
+    right: 30px;
+}

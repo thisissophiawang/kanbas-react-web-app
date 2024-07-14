@@ -1,7 +1,8 @@
 import React from 'react';
 import './Grades.css'; // Import the CSS file for styling
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaFilter, FaFileImport, FaFileExport, FaCog } from 'react-icons/fa';
+import { FaFilter, FaFileImport, FaFileExport, FaCog } from 'react-icons/fa'; // Import the icons
+import SearchInputs from './SearchInputs'; // Import the SearchInputs component
 
 const Grades = () => {
   return (
@@ -27,16 +28,7 @@ const Grades = () => {
         </div>
       </div>
       <div className="d-flex justify-content-between mb-3">
-        <div className="d-flex flex-grow-1 me-2">
-          <div className="me-2 flex-fill">
-            <label className="text-dark font-weight-bold">Student Names</label>
-            <input type="text" className="form-control" placeholder="Search Students" />
-          </div>
-          <div className="me-2 flex-fill">
-            <label className="text-dark font-weight-bold">Assignment Names</label>
-            <input type="text" className="form-control" placeholder="Search Assignments" />
-          </div>
-        </div>
+        <SearchInputs /> {/* Use the SearchInputs component */}
       </div>
       <button className="btn btn-secondary mb-3">
         <FaFilter /> Apply Filters
