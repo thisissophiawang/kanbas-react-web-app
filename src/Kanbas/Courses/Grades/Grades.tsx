@@ -1,7 +1,7 @@
 import React from 'react';
 import './Grades.css'; // Import the CSS file for styling
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaFilter, FaFileImport, FaFileExport } from 'react-icons/fa'; // Import the icons from react-icons
+import { FaFilter, FaFileImport, FaFileExport, FaCog } from 'react-icons/fa';
 
 const Grades = () => {
   return (
@@ -21,33 +21,26 @@ const Grades = () => {
               <li><a className="dropdown-item" href="#">Option 2</a></li>
             </ul>
           </div>
+          <button className="btn btn-secondary ms-2">
+            <FaCog />
+          </button>
         </div>
       </div>
       <div className="d-flex justify-content-between mb-3">
         <div className="d-flex flex-grow-1 me-2">
           <div className="me-2 flex-fill">
             <label className="text-dark font-weight-bold">Student Names</label>
-            <div className="input-group">
-              <input type="text" className="form-control" placeholder="Search Students" />
-              <span className="input-group-text">
-                <i className="bi bi-search"></i>
-              </span>
-            </div>
+            <input type="text" className="form-control" placeholder="Search Students" />
           </div>
           <div className="me-2 flex-fill">
             <label className="text-dark font-weight-bold">Assignment Names</label>
-            <div className="input-group">
-              <input type="text" className="form-control" placeholder="Search Assignments" />
-              <span className="input-group-text">
-                <i className="bi bi-search"></i>
-              </span>
-            </div>
+            <input type="text" className="form-control" placeholder="Search Assignments" />
           </div>
         </div>
-        <button className="btn btn-secondary align-self-end">
-          <FaFilter /> Apply Filters
-        </button>
       </div>
+      <button className="btn btn-secondary mb-3">
+        <FaFilter /> Apply Filters
+      </button>
       <div className="table-responsive">
         <table className="table table-striped table-bordered">
           <thead>
