@@ -77,35 +77,34 @@ export default function AssignmentEditor() {
 
       <div className="form-group">
         <label htmlFor="wd-submission-type">Submission Type</label>
-        <select 
-          id="wd-submission-type" 
-          className="form-control"
-          value={submissionType} 
-          onChange={(e) => setSubmissionType(e.target.value)}
-        >
-          <option value="Online">Online</option>
-          {/* Add other options as needed */}
-        </select>
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="wd-entry-options"><strong>Online Entry Options</strong></label>
         <div id="wd-entry-options" className="form-control">
-          <label>
-            <input id="wd-text-entry" type="checkbox" /> Text Entry
-          </label>
-          <label>
-            <input id="wd-website-url" type="checkbox" /> Website URL
-          </label>
-          <label>
-            <input id="wd-media-recordings" type="checkbox" /> Media Recordings
-          </label>
-          <label>
-            <input id="wd-student-annotation" type="checkbox" /> Student Annotation
-          </label>
-          <label>
-            <input id="wd-file-upload" type="checkbox" /> File Uploads
-          </label>
+          <select 
+            id="wd-submission-type" 
+            className="form-control"
+            value={submissionType} 
+            onChange={(e) => setSubmissionType(e.target.value)}
+          >
+            <option value="Online">Online</option>
+            {/* Add other options as needed */}
+          </select>
+          <label><strong>Online Entry Options</strong></label>
+          <div>
+            <label>
+              <input id="wd-text-entry" type="checkbox" /> Text Entry
+            </label>
+            <label>
+              <input id="wd-website-url" type="checkbox" /> Website URL
+            </label>
+            <label>
+              <input id="wd-media-recordings" type="checkbox" /> Media Recordings
+            </label>
+            <label>
+              <input id="wd-student-annotation" type="checkbox" /> Student Annotation
+            </label>
+            <label>
+              <input id="wd-file-upload" type="checkbox" /> File Uploads
+            </label>
+          </div>
         </div>
       </div>
 
@@ -125,8 +124,8 @@ export default function AssignmentEditor() {
           value={dueDate} 
           onChange={(e) => setDueDate(e.target.value)} 
         />
-        <div className="row">
-          <div className="col">
+        <div className="d-flex">
+          <div className="flex-grow-1 me-2">
             <label htmlFor="wd-available-from">Available from</label>
             <input 
               id="wd-available-from" 
@@ -136,7 +135,7 @@ export default function AssignmentEditor() {
               onChange={(e) => setAvailableFrom(e.target.value)} 
             />
           </div>
-          <div className="col">
+          <div className="flex-grow-1">
             <label htmlFor="wd-available-until">Until</label>
             <input 
               id="wd-available-until" 
@@ -149,10 +148,11 @@ export default function AssignmentEditor() {
         </div>
       </div>
 
-      <div className="form-group d-flex justify-content-end">
-        <button className="btn btn-secondary me-2">Cancel</button>
-        <button className="btn btn-success">Save</button>
-      </div>
+      <div className="form-group btn-container">
+  <button className="btn btn-secondary">Cancel</button>
+  <button className="btn btn-danger">Save</button>
+</div>
+
     </div>
   );
 }
