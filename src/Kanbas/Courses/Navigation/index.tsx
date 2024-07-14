@@ -1,3 +1,4 @@
+// src/Kanbas/Courses/Navigation/index.tsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import "./index.css";
@@ -17,10 +18,10 @@ export default function CoursesNavigation() {
       <Link id="wd-course-zoom-link" to="Zoom" className="list-group-item text-danger border border-0">
         Zoom
       </Link>
-      <Link id="wd-course-quizzes-link" to="Assignments" className="list-group-item text-danger border border-0">
+      <Link id="wd-course-assignments-link" to="Assignments" className="list-group-item text-danger border border-0">
         Assignments
       </Link>
-      <Link id="wd-course-assignments-link" to="Quizzes" className="list-group-item text-danger border border-0">
+      <Link id="wd-course-quizzes-link" to="Quizzes" className="list-group-item text-danger border border-0">
         Quizzes
       </Link>
       <Link id="wd-course-grades-link" to="Grades" className="list-group-item text-danger border border-0">
