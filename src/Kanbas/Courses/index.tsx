@@ -1,4 +1,3 @@
-// src/Kanbas/Courses/index.tsx
 import React from 'react';
 import { Routes, Route, Navigate } from "react-router";
 import CoursesNavigation from "./Navigation";
@@ -6,6 +5,7 @@ import Modules from "./Modules";
 import Home from "./Home";
 import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
+import Grades from "./Grades/Grades";  // 导入 Grades 组件
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Courses() {
@@ -25,7 +25,7 @@ export default function Courses() {
             <Route path="Assignments" element={<Assignments />} />
             <Route path="Assignments/:id" element={<AssignmentEditor />} />
             <Route path="Quizzes" element={<h1>Quizzes</h1>} />
-            <Route path="Grades" element={<h1>Grades</h1>} />
+            <Route path="Grades" element={<Grades />} />  {/* 修改 Grades 路由 */}
           </Routes>
         </div>
       </div>
