@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import './Assignments.css';
 
 export default function AssignmentEditor() {
   const { assignmentId } = useParams();
@@ -15,13 +16,15 @@ export default function AssignmentEditor() {
   const [availableUntil, setAvailableUntil] = useState<string>("2024-05-20");
 
   return (
-    <div id="wd-assignments-editor">
-      <label htmlFor="wd-name">Assignment Name</label>
+    <div id="wd-assignments-editor" className="container">
+      <label htmlFor="wd-name" className="form-label">Assignment Name</label>
       <input 
         id="wd-name" 
         value={assignmentName} 
         onChange={(e) => setAssignmentName(e.target.value)} 
-      /><br /><br />
+        className="form-control"
+      />
+      <br />
 
       <textarea 
         id="wd-description" 
@@ -29,152 +32,133 @@ export default function AssignmentEditor() {
         cols={33} 
         value={description} 
         onChange={(e) => setDescription(e.target.value)} 
+        className="form-control"
       />
-      <br /><br />
-
-      <table>
-        <tbody>
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-points">Points</label>
-            </td>
-            <td>
-              <input 
-                id="wd-points" 
-                type="number" 
-                value={points} 
-                onChange={(e) => setPoints(Number(e.target.value))} 
-              />
-            </td>
-          </tr>
-          <tr><td colSpan={2}><br /></td></tr>
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-group">Assignment Group</label>
-            </td>
-            <td>
-              <select 
-                id="wd-group" 
-                value={group} 
-                onChange={(e) => setGroup(e.target.value)}
-              >
-                <option value="ASSIGNMENTS">ASSIGNMENTS</option>
-                {/* Add other options as needed */}
-              </select>
-            </td>
-          </tr>
-          <tr><td colSpan={2}><br /></td></tr>
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-display-grade-as">Display Grade as</label>
-            </td>
-            <td>
-              <select 
-                id="wd-display-grade-as" 
-                value={displayGradeAs} 
-                onChange={(e) => setDisplayGradeAs(e.target.value)}
-              >
-                <option value="Percentage">Percentage</option>
-                {/* Add other options as needed */}
-              </select>
-            </td>
-          </tr>
-          <tr><td colSpan={2}><br /></td></tr>
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-submission-type">Submission Type</label>
-            </td>
-            <td>
-              <select 
-                id="wd-submission-type" 
-                value={submissionType} 
-                onChange={(e) => setSubmissionType(e.target.value)}
-              >
-                <option value="Online">Online</option>
-                {/* Add other options as needed */}
-              </select>
-              <br /><br />
-              <label htmlFor="wd-text-entry">
-                <input id="wd-text-entry" type="checkbox" /> Text Entry
-              </label>
-              <br />
-              <label htmlFor="wd-website-url">
-                <input id="wd-website-url" type="checkbox" /> Website URL
-              </label>
-              <br />
-              <label htmlFor="wd-media-recordings">
-                <input id="wd-media-recordings" type="checkbox" /> Media Recordings
-              </label>
-              <br />
-              <label htmlFor="wd-student-annotation">
-                <input id="wd-student-annotation" type="checkbox" /> Student Annotation
-              </label>
-              <br />
-              <label htmlFor="wd-file-upload">
-                <input id="wd-file-upload" type="checkbox" /> File Uploads
-              </label>
-            </td>
-          </tr>
-          <tr><td colSpan={2}><br /></td></tr>
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-assign-to">Assign to</label>
-            </td>
-            <td>
-              <input 
-                id="wd-assign-to" 
-                value={assignTo} 
-                onChange={(e) => setAssignTo(e.target.value)} 
-              />
-            </td>
-          </tr>
-          <tr><td colSpan={2}><br /></td></tr>
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-due-date">Due</label>
-            </td>
-            <td>
-              <input 
-                id="wd-due-date" 
-                type="date" 
-                value={dueDate} 
-                onChange={(e) => setDueDate(e.target.value)} 
-              />
-            </td>
-          </tr>
-          <tr><td colSpan={2}><br /></td></tr>
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-available-from">Available from</label>
-            </td>
-            <td>
-              <input 
-                id="wd-available-from" 
-                type="date" 
-                value={availableFrom} 
-                onChange={(e) => setAvailableFrom(e.target.value)} 
-              />
-            </td>
-          </tr>
-          <tr><td colSpan={2}><br /></td></tr>
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-available-until">Until</label>
-            </td>
-            <td>
-              <input 
-                id="wd-available-until" 
-                type="date" 
-                value={availableUntil} 
-                onChange={(e) => setAvailableUntil(e.target.value)} 
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
       <br />
-      <button>Cancel</button>
-      <button>Save</button>
+
+      <div className="row">
+        <div className="col">
+          <label htmlFor="wd-points" className="form-label">Points</label>
+          <input 
+            id="wd-points" 
+            type="number" 
+            value={points} 
+            onChange={(e) => setPoints(Number(e.target.value))} 
+            className="form-control"
+          />
+        </div>
+        <div className="col">
+          <label htmlFor="wd-group" className="form-label">Assignment Group</label>
+          <select 
+            id="wd-group" 
+            value={group} 
+            onChange={(e) => setGroup(e.target.value)}
+            className="form-control"
+          >
+            <option value="ASSIGNMENTS">ASSIGNMENTS</option>
+          </select>
+        </div>
+      </div>
+      <br />
+
+      <div className="row">
+        <div className="col">
+          <label htmlFor="wd-display-grade-as" className="form-label">Display Grade as</label>
+          <select 
+            id="wd-display-grade-as" 
+            value={displayGradeAs} 
+            onChange={(e) => setDisplayGradeAs(e.target.value)}
+            className="form-control"
+          >
+            <option value="Percentage">Percentage</option>
+          </select>
+        </div>
+        <div className="col">
+          <label htmlFor="wd-submission-type" className="form-label">Submission Type</label>
+          <select 
+            id="wd-submission-type" 
+            value={submissionType} 
+            onChange={(e) => setSubmissionType(e.target.value)}
+            className="form-control"
+          >
+            <option value="Online">Online</option>
+          </select>
+          <br />
+          <div className="form-check">
+            <input id="wd-text-entry" type="checkbox" className="form-check-input" /> 
+            <label htmlFor="wd-text-entry" className="form-check-label">Text Entry</label>
+          </div>
+          <div className="form-check">
+            <input id="wd-website-url" type="checkbox" className="form-check-input" /> 
+            <label htmlFor="wd-website-url" className="form-check-label">Website URL</label>
+          </div>
+          <div className="form-check">
+            <input id="wd-media-recordings" type="checkbox" className="form-check-input" /> 
+            <label htmlFor="wd-media-recordings" className="form-check-label">Media Recordings</label>
+          </div>
+          <div className="form-check">
+            <input id="wd-student-annotation" type="checkbox" className="form-check-input" /> 
+            <label htmlFor="wd-student-annotation" className="form-check-label">Student Annotation</label>
+          </div>
+          <div className="form-check">
+            <input id="wd-file-upload" type="checkbox" className="form-check-input" /> 
+            <label htmlFor="wd-file-upload" className="form-check-label">File Uploads</label>
+          </div>
+        </div>
+      </div>
+      <br />
+
+      <div className="row">
+        <div className="col">
+          <label htmlFor="wd-assign-to" className="form-label">Assign to</label>
+          <input 
+            id="wd-assign-to" 
+            value={assignTo} 
+            onChange={(e) => setAssignTo(e.target.value)} 
+            className="form-control"
+          />
+        </div>
+        <div className="col">
+          <label htmlFor="wd-due-date" className="form-label">Due</label>
+          <input 
+            id="wd-due-date" 
+            type="date" 
+            value={dueDate} 
+            onChange={(e) => setDueDate(e.target.value)} 
+            className="form-control"
+          />
+        </div>
+      </div>
+      <br />
+
+      <div className="row">
+        <div className="col">
+          <label htmlFor="wd-available-from" className="form-label">Available from</label>
+          <input 
+            id="wd-available-from" 
+            type="date" 
+            value={availableFrom} 
+            onChange={(e) => setAvailableFrom(e.target.value)} 
+            className="form-control"
+          />
+        </div>
+        <div className="col">
+          <label htmlFor="wd-available-until" className="form-label">Until</label>
+          <input 
+            id="wd-available-until" 
+            type="date" 
+            value={availableUntil} 
+            onChange={(e) => setAvailableUntil(e.target.value)} 
+            className="form-control"
+          />
+        </div>
+      </div>
+      <br />
+
+      <div className="float-end">
+        <button className="btn btn-secondary me-2">Cancel</button>
+        <button className="btn btn-success">Save</button>
+      </div>
     </div>
   );
 }

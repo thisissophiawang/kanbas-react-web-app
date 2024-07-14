@@ -155,3 +155,21 @@
 .wd-ellipsis-icon {
   margin-left: auto;
 }
+
+#wd-assignments-editor {
+  padding: 20px;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-control {
+  margin-bottom: 15px;
+}
+
+.float-end {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
