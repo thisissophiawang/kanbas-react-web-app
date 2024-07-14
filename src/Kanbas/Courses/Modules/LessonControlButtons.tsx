@@ -1,5 +1,4 @@
 import { BsPlus } from 'react-icons/bs';
-import React from 'react';
 import GreenCheckmark from './GreenCheckmark';
 
 export default function ModuleControlButtons() {

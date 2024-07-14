@@ -64,3 +64,61 @@
     list-style: none;
   }
   
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .btn-secondary {
+    --bs-btn-color: #000;
+    --bs-btn-bg: #c7cdd1;
+    --bs-btn-border-color: #c7cdd1;
+    --bs-btn-hover-color: #fff;
+  }
+  
+  .bg-secondary {
+    background-color: #c7cdd1 !important;
+  }
+  
+  .border-gray {
+    border: 1px solid gray;
+  }
+  
+  .wd-title {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .wd-content-item {
+    list-style: none;
+  }
+  
+  .wd-module .wd-lesson::before {
+    content: "•";
+    font-size: 1.5em;
+    color: green;
+    position: absolute;
+    left: -25px; /* 调整左侧位置 */
+}
+
+.wd-module .wd-lesson::after {
+    content: "•";
+    font-size: 1.5em;
+    color: green;
+    position: absolute;
+    right: -25px; /* 调整右侧位置 */
+}
+
+.wd-module {
+    position: relative;
+}
+
+.wd-lesson {
+    position: relative;
+    padding-left: 30px; /* 调整以适应点的位置 */
+    padding-right: 30px; /* 调整以适应点的位置 */
+}
