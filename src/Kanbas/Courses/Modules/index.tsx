@@ -20,10 +20,6 @@ export default function Modules() {
             <li className="wd-lesson list-group-item p-3 ps-1">
               LEARNING OBJECTIVES
               <LessonControlButtons />
-              <ul className="wd-content">
-                <li className="wd-content-item">Introduction to the course</li>
-                <li className="wd-content-item">Learn what is Web Development</li>
-              </ul>
             </li>
             <li className="wd-lesson list-group-item p-3 ps-1">
               Introduction to the course
@@ -52,19 +48,58 @@ export default function Modules() {
             <li className="wd-lesson list-group-item p-3 ps-1">
               LEARNING OBJECTIVES
               <LessonControlButtons />
-              <ul className="wd-content">
-                <li className="wd-content-item">Learn how to create user interfaces with HTML</li>
-                <li className="wd-content-item">Deploy the assignment to Netlify</li>
-              </ul>
+            </li>
+            <li className="wd-lesson list-group-item p-3 ps-1">
+              Learn how to create user interfaces with HTML
+              <LessonControlButtons />
+            </li>
+            <li className="wd-lesson list-group-item p-3 ps-1">
+              Deploy the assignment to Netlify
+              <LessonControlButtons />
             </li>
             <li className="wd-lesson list-group-item p-3 ps-1">
               SLIDES
               <LessonControlButtons />
-              <ul className="wd-content">
-                <li className="wd-content-item">Introduction to HTML and the DOM</li>
-                <li className="wd-content-item">Formatting Web content with Headings and</li>
-                <li className="wd-content-item">Formatting content with Lists and Tables</li>
-              </ul>
+            </li>
+            <li className="wd-lesson list-group-item p-3 ps-1">
+              Introduction to HTML and the DOM
+              <LessonControlButtons />
+            </li>
+            <li className="wd-lesson list-group-item p-3 ps-1">
+              Formatting Web content with Headings and
+              <LessonControlButtons />
+            </li>
+            <li className="wd-lesson list-group-item p-3 ps-1">
+              Formatting content with Lists and Tables
+              <LessonControlButtons />
+            </li>
+          </ul>
+        </li>
+        <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
+          <div className="wd-title p-3 ps-2 bg-secondary">
+            Week 2
+            <ModuleControlButtons /> {/* Use the ModuleControlButtons here */}
+          </div>
+          <ul className="wd-lessons list-group rounded-0">
+            <li className="wd-lesson list-group-item p-3 ps-1">
+              LEARNING OBJECTIVES
+              <LessonControlButtons />
+            </li>
+            <li className="wd-lesson list-group-item p-3 ps-1">
+              Learn how to create user interfaces with HTML
+              <LessonControlButtons />
+            </li>
+            <li className="wd-lesson list-group-item p-3 ps-1">
+              Deploy the assignment to Netlify
+              <LessonControlButtons />
+            </li>
+            <li className="wd-lesson list-group-item p-3 ps-1">
+              LESSON 1
+              <LessonControlButtons />
+            </li>
+            <li className="wd-lesson list-group-item p-3 ps-1">
+              LESSON 2
+              <LessonControlButtons />
             </li>
           </ul>
         </li>

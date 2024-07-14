@@ -97,12 +97,18 @@
     list-style: none;
   }
   
-  .wd-module .wd-lesson::before {
+  .wd-module .wd-lesson {
+    position: relative;
+    padding-left: 30px; /* 调整以适应点的位置 */
+    padding-right: 30px; /* 调整以适应点的位置 */
+}
+
+.wd-module .wd-lesson::before {
     content: "•";
     font-size: 1.5em;
     color: green;
     position: absolute;
-    left: -25px; /* 调整左侧位置 */
+    left: 10px; /* 调整左侧位置 */
 }
 
 .wd-module .wd-lesson::after {
@@ -110,15 +116,15 @@
     font-size: 1.5em;
     color: green;
     position: absolute;
-    right: -25px; /* 调整右侧位置 */
+    right: 10px; /* 调整右侧位置 */
 }
 
-.wd-module {
-    position: relative;
+/* 去掉外面的绿色点 */
+.wd-module .wd-lesson .wd-content-item::before {
+    content: none;
 }
 
-.wd-lesson {
-    position: relative;
-    padding-left: 30px; /* 调整以适应点的位置 */
-    padding-right: 30px; /* 调整以适应点的位置 */
+.wd-module .wd-lesson .wd-content-item::after {
+    content: none;
 }
+
