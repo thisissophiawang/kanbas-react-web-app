@@ -1,12 +1,16 @@
-.container {
-    padding: 20px;
-  }
-  
-  .table-responsive {
-    margin-top: 20px;
-  }
-  
-  .btn {
-    margin-right: 5px;
-  }
-  
+/* src/Kanbas/Courses/Grades/Grades.css */
+#wd-grades {
+  padding: 20px;
+}
+
+#wd-grades .form-control {
+  margin-bottom: 15px;
+}
+
+#wd-grades .btn {
+  margin-right: 10px;
+}
+
+#wd-grades h2 {
+  margin-bottom: 20px;
+}
