@@ -1,4 +1,3 @@
-/* src/Kanbas/Courses/Grades/Grades.css */
 #wd-grades {
   padding: 20px;
 }
@@ -13,4 +12,45 @@
 
 #wd-grades h2 {
   margin-bottom: 20px;
+}
+
+#wd-grades .table-responsive {
+  margin-top: 20px;
+}
+
+#wd-grades label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: black;
+}
+
+#wd-grades .btn-group {
+  margin-left: 10px;
+}
+
+#wd-grades .table {
+  border: 1px solid #ddd;
+}
+
+#wd-grades .table th,
+#wd-grades .table td {
+  border: 1px solid #ddd;
+}
+
+#wd-grades .text-danger {
+  color: red !important;
+}
+
+#wd-grades .text-dark {
+  color: black !important;
+}
+
+#wd-grades .font-weight-bold {
+  font-weight: bold;
+}
+
+.input-group-text {
+  background-color: white;
+  border: none;
 }
