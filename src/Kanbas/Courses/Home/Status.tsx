@@ -1,23 +1,21 @@
-// src/Kanbas/Courses/Status.tsx
 import React from 'react';
+import { FaUnlink, FaCheck, FaUpload, FaCloudDownloadAlt, FaHome, FaStream, FaBullhorn, FaChartBar, FaBell } from 'react-icons/fa';
 import './Status.css';
 
 export default function CourseStatus() {
   return (
     <div id="wd-course-status">
-      <h2>Course Status</h2>
       <div className="button-row">
-        <button>Unpublish</button>
-        <button>Publish</button>
+        <button><FaUnlink /> Unpublish</button>
+        <button className="publish-button"><FaCheck /> Publish</button>
       </div>
-      <button>Import Existing Content</button>
-      <button>Import from Commons</button>
-      <button>Choose Home Page</button>
-      <button>View Course Stream</button>
-      <button>New Announcement</button>
-      <button>New Analytics</button>
-      <button>View Course Notifications</button>
+      <button><FaUpload /> Import Existing Content</button>
+      <button><FaCloudDownloadAlt /> Import from Commons</button>
+      <button><FaHome /> Choose Home Page</button>
+      <button><FaStream /> View Course Stream</button>
+      <button><FaBullhorn /> New Announcement</button>
+      <button><FaChartBar /> New Analytics</button>
+      <button><FaBell /> View Course Notifications</button>
     </div>
   );
 }
-
