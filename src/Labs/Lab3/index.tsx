@@ -29,6 +29,8 @@ import DestructingImports from "./DestructingImports";
 import Classes from "./Classes";
 import Styles from "./Styles";
 import Add from "./Add";
+import Square from "./Square";
+import Highlight from "./Highlight";
 
 
 export default function Lab3() {
@@ -66,6 +68,14 @@ export default function Lab3() {
       <Classes />
       <Styles />
       <Add a={3} b={5} />
+      <Square children={4} />
+      <Highlight>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo voluptas
+        non delectus doloribus quod vel iure, accusamus reprehenderit dolorem
+        impedit et sapiente adipisci perferendis fugiat libero ratione?
+        Molestias, maiores sed!
+      </Highlight>
+
     </div>
   );
 }
