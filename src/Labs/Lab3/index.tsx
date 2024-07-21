@@ -22,6 +22,7 @@ import House from "./House";
 import TodoItem from "./TodoItem";
 import TodoList from "./todos/TodoList";
 import Spreading from "./todos/Spreading";
+import Destructing from "./Destructing";
 
 export default function Lab3() {
   return (
@@ -51,6 +52,7 @@ export default function Lab3() {
       <TodoItem />
       <TodoList />
       <Spreading />
+      <Destructing />
     </div>
   );
 }
