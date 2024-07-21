@@ -2,6 +2,7 @@ import VariablesAndConstants from "./VariablesAndConstants";
 import VariableTypes from "./VariableTypes";
 import BooleanVariables from "./BooleanVariables";
 import IfElse from "./IfElse";
+import TernaryOperator from "./TernaryOperator";
 
 
 export default function Lab3() {
@@ -12,6 +13,7 @@ export default function Lab3() {
       <VariableTypes />
       <BooleanVariables />
       <IfElse />
+      <TernaryOperator />
     </div>
   );
 }
