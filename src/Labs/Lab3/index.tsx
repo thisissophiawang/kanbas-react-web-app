@@ -1,6 +1,7 @@
 import VariablesAndConstants from "./VariablesAndConstants";
 import VariableTypes from "./VariableTypes";
 import BooleanVariables from "./BooleanVariables";
+import IfElse from "./IfElse";
 
 
 export default function Lab3() {
@@ -10,6 +11,7 @@ export default function Lab3() {
       <VariablesAndConstants />
       <VariableTypes />
       <BooleanVariables />
+      <IfElse />
     </div>
   );
 }

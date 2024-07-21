@@ -15,7 +15,7 @@ const Labs: React.FC = () => {
         <Route path="/" element={<Navigate to="Lab1" />} />
         <Route path="Lab1" element={<Lab1 />} />
         <Route path="Lab2" element={<Lab2 />} />
-        <Route path="Lab3" element={<Lab3 />} />
+        <Route path="Lab3/*" element={<Lab3 />} />
       </Routes>
       <a href="https://github.com/thisissophiawang/kanbas-react-web-app/tree/a1">Github</a>
     </div>
