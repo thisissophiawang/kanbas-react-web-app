@@ -5,17 +5,17 @@ import Modules from "./Modules";
 import Home from "./Home";
 import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
-import Grades from "./Grades/Grades"; // Import the Grades component
+import Grades from "./Grades/Grades";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Courses() {
   return (
-    <div id="wd-courses">
-      <h2 className="text-danger">Course 1234</h2>
-      <hr />
-      <div style={{ display: 'flex' }}>
-        <CoursesNavigation />
-        <div style={{ flex: 1, paddingLeft: '20px' }}>
+    <div id="wd-kanbas" className="h-100">
+      <div className="d-flex h-100">
+        <div className="d-none d-md-block bg-black">
+          <CoursesNavigation />
+        </div>
+        <div className="flex-fill p-4">
           <Routes>
             <Route path="/" element={<Navigate to="Home" />} />
             <Route path="Home" element={<Home />} />
@@ -25,7 +25,7 @@ export default function Courses() {
             <Route path="Assignments" element={<Assignments />} />
             <Route path="Assignments/:id" element={<AssignmentEditor />} />
             <Route path="Quizzes" element={<h1>Quizzes</h1>} />
-            <Route path="Grades" element={<Grades />} /> {/* Add the Grades route */}
+            <Route path="Grades" element={<Grades />} />
           </Routes>
         </div>
       </div>
