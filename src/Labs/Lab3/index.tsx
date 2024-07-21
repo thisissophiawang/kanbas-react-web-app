@@ -1,13 +1,11 @@
-import React from 'react';
+import VariablesAndConstants from "./VariablesAndConstants";
 
 
-const Lab3: React.FC = () => {
+export default function Lab3() {
   return (
-    <div id="wd-lab3">
-      <h2>Lab 3 - Introduction to JavaScript</h2>
-      <p>This lab covers the basics of JavaScript.</p>
+    <div id="wd-lab3" className="container-fluid">
+      <h3>Lab 3</h3>
+      <VariablesAndConstants />
     </div>
   );
 }
-
-export default Lab3;
