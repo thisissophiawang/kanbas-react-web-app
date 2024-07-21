@@ -23,6 +23,13 @@ import TodoItem from "./TodoItem";
 import TodoList from "./todos/TodoList";
 import Spreading from "./todos/Spreading";
 import Destructing from "./Destructing";
+import FunctionDestructing from "./FunctionDestructing";
+import MathComponent from "./MathComponent";
+import DestructingImports from "./DestructingImports";
+import Classes from "./Classes";
+import Styles from "./Styles";
+import Add from "./Add";
+
 
 export default function Lab3() {
   return (
@@ -53,6 +60,12 @@ export default function Lab3() {
       <TodoList />
       <Spreading />
       <Destructing />
+      <FunctionDestructing />
+      <MathComponent />
+      <DestructingImports />
+      <Classes />
+      <Styles />
+      <Add a={3} b={5} />
     </div>
   );
 }
