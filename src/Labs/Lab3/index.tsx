@@ -1,4 +1,5 @@
 import VariablesAndConstants from "./VariablesAndConstants";
+import VariableTypes from "./VariableTypes";
 
 
 export default function Lab3() {
@@ -6,6 +7,7 @@ export default function Lab3() {
     <div id="wd-lab3" className="container-fluid">
       <h3>Lab 3</h3>
       <VariablesAndConstants />
+      <VariableTypes />
     </div>
   );
 }
