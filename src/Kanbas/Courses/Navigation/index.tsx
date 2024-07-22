@@ -1,5 +1,6 @@
-import { courses, modules } from "../../Database"; // 更新了路径
+import React from 'react';
 import { useParams, useLocation } from "react-router";
+import { courses } from "../../Database"; // 更新了路径
 import "./index.css";
 
 export default function CoursesNavigation() {
