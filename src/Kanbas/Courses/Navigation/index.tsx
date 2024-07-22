@@ -9,11 +9,11 @@ export default function CoursesNavigation() {
   const links = [
     { label: "Home", path: `#/Kanbas/Courses/${course?._id}/Home` },
     { label: "Modules", path: `#/Kanbas/Courses/${course?._id}/Modules` },
-    { label: "Piazza", path: "#/Kanbas/Courses/1234/Piazza" },
-    { label: "Zoom", path: "#/Kanbas/Courses/1234/Zoom" },
+    { label: "Piazza", path: `#/Kanbas/Courses/${course?._id}/Piazza` },
+    { label: "Zoom", path: `#/Kanbas/Courses/${course?._id}/Zoom` },
     { label: "Assignments", path: `#/Kanbas/Courses/${course?._id}/Assignments` },
-    { label: "Quizzes", path: "#/Kanbas/Courses/1234/Quizzes" },
-    { label: "Grades", path: "#/Kanbas/Courses/1234/Grades" },
+    { label: "Quizzes", path: `#/Kanbas/Courses/${course?._id}/Quizzes` },
+    { label: "Grades", path: `#/Kanbas/Courses/${course?._id}/Grades` },
   ];
 
   return (
