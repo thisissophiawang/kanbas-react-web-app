@@ -12,7 +12,6 @@ interface Course {
   department: string;
   credits: number;
   description: string;
-  author?: string;
   image?: string;
 }
 
@@ -25,18 +24,13 @@ export default function Dashboard() {
         <div className="row row-cols-1 row-cols-md-5 g-4">
           {courses.map((course: Course) => (
             <div key={course._id} className="wd-dashboard-course col" style={{ width: "300px" }}>
-              <div className="card new-card">
+              <div className="card new-card"> {/* 更新类 */}
                 <Link className="wd-dashboard-course-link text-decoration-none text-dark" to={`/Kanbas/Courses/${course._id}/Home`}>
-                  <img 
-                    src={`/images/${course.image || 'default.jpg'}`} 
-                    width="100%" 
-                    alt={course.name} 
-                    onError={(e) => e.currentTarget.src = '/images/default.jpg'} 
-                  /> {/* 使用课程 image 或者默认图片 */}
+                  <img src={`/images/${course.image}`} width="100%" alt={course.name} onError={(e) => e.currentTarget.src = '/images/default.jpg'} /> {/* 使用课程ID作为图片路径 */}
                   <div className="card-body">
                     <h5 className="wd-dashboard-course-title card-title">{course.name}</h5>
                     <p className="card-text">{course.description}</p>
-                    <button className="btn new-btn">Go</button>
+                    <button className="btn new-btn">Go</button> {/* 更新按钮类 */}
                   </div>
                 </Link>
               </div>
