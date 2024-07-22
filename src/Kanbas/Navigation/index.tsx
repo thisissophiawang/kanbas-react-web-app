@@ -1,7 +1,7 @@
 import { AiOutlineDashboard } from "react-icons/ai";
 import { IoCalendarOutline } from "react-icons/io5";
 import { LiaBookSolid } from "react-icons/lia";
-import { FaInbox, FaUserCircle, FaCog } from "react-icons/fa"; // 修改了这一行
+import { FaInbox, FaUserCircle, FaCog } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import "../styles.css";
 
@@ -21,7 +21,7 @@ export default function KanbasNavigation() {
         <img src="/images/NEU.png" width="75px" alt="Northeastern University" />
       </a>
       <a className="list-group-item bg-black text-white border-0 text-center" id="wd-account-link" href="#/Kanbas/Account">
-        <FaUserCircle className="fs-1 text text-white" /><br /> {/* 修改了这一行 */}
+        <FaUserCircle className="fs-1 text text-white" /><br />
         Account
       </a>
       {links.map((link) => (
