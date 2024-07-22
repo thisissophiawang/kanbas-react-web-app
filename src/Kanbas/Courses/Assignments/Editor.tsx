@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import * as db from '../../Database';
+import { assignments } from '../../Database'; // import assignments data
 import './Assignments.css';
 
 export default function AssignmentEditor() {
-  //userParams is a hook that returns an object of key/value pairs of URL parameters
-  const { assignmentId, cid } = useParams<{ assignmentId: string, cid: string }>(); // Get assignmentId and courseId from URL params
+  //useParams is a hook that returns an object of key/value pairs of URL parameters
+  const { id } = useParams(); 
+  // from URL get assignment ID
   const [assignment, setAssignment] = useState<any>(null);
 
   useEffect(() => {
-    const foundAssignment = db.assignments.find(a => a._id === assignmentId);
+    //use id to find assignment data
+    const foundAssignment = assignments.find((a: any) => a._id === id);
     setAssignment(foundAssignment);
-  }, [assignmentId]);
+  }, [id]);
 
   if (!assignment) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>; // loading screen
   }
 
   return (
@@ -35,7 +37,7 @@ export default function AssignmentEditor() {
           id="wd-description" 
           className="form-control"
           rows={5} 
-          value={assignment.description || ''} 
+          value={assignment.description} 
           onChange={(e) => setAssignment({ ...assignment, description: e.target.value })} 
         />
       </div>
@@ -46,7 +48,7 @@ export default function AssignmentEditor() {
           id="wd-points" 
           className="form-control"
           type="number" 
-          value={assignment.points || 0} 
+          value={assignment.points} 
           onChange={(e) => setAssignment({ ...assignment, points: Number(e.target.value) })} 
         />
       </div>
@@ -56,7 +58,7 @@ export default function AssignmentEditor() {
         <input 
           id="wd-assign-to" 
           className="form-control"
-          value={assignment.assignTo || ''} 
+          value={assignment.assignTo} 
           onChange={(e) => setAssignment({ ...assignment, assignTo: e.target.value })} 
         />
         <label htmlFor="wd-due-date">Due</label>
@@ -64,7 +66,7 @@ export default function AssignmentEditor() {
           id="wd-due-date" 
           className="form-control"
           type="date" 
-          value={assignment.dueDate || ''} 
+          value={assignment.dueDate} 
           onChange={(e) => setAssignment({ ...assignment, dueDate: e.target.value })} 
         />
         <div className="d-flex">
@@ -74,7 +76,7 @@ export default function AssignmentEditor() {
               id="wd-available-from" 
               className="form-control"
               type="date" 
-              value={assignment.availableFrom || ''} 
+              value={assignment.availableFrom} 
               onChange={(e) => setAssignment({ ...assignment, availableFrom: e.target.value })} 
             />
           </div>
@@ -84,7 +86,7 @@ export default function AssignmentEditor() {
               id="wd-available-until" 
               className="form-control"
               type="date" 
-              value={assignment.availableUntil || ''} 
+              value={assignment.availableUntil} 
               onChange={(e) => setAssignment({ ...assignment, availableUntil: e.target.value })} 
             />
           </div>
@@ -92,7 +94,7 @@ export default function AssignmentEditor() {
       </div>
 
       <div className="form-group btn-container">
-        <Link to={`/Kanbas/Courses/${cid}/Assignments`} className="btn btn-secondary">Cancel</Link>
+        <Link to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-secondary">Cancel</Link>
         <button className="btn btn-danger">Save</button>
       </div>
     </div>
