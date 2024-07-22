@@ -1,5 +1,3 @@
-/* styles.css */
-
 body {
   margin: 0;
   padding: 0;
@@ -11,24 +9,25 @@ body * {
 
 #wd-kanbas {
   display: flex;
-}
-
-#wd-kanbas .content {
-  padding-left: 260px; /* Ensure the content area is offset to the right of both sidebars */
+  height: 100vh;
 }
 
 #wd-kanbas-navigation {
   width: 120px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
 }
 
-#wd-courses-navigation {
-  width: 140px;
-  margin-left: 120px; /* Ensure the course navigation is to the right of the main navigation */
+.wd-main-content-offset {
+  margin-left: 120px; /* Ensure this matches the width of the navigation */
+  flex-grow: 1;
 }
 
 @media (min-width: 768px) {
-  #wd-kanbas .wd-main-content-offset {
-    padding-left: 260px; /* Adjust the main content offset to account for both sidebars */
+  .wd-main-content-offset {
+    padding-left: 140px !important;
   }
 }
 
