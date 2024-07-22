@@ -1,3 +1,5 @@
+///Users/sophiawang/2024/summer/webdev/kanbas-react-web-app/src/Kanbas/Courses/Modules/GreenCheckmark.tsx
+
 import { FaCheckCircle } from "react-icons/fa";
 import { FaCircle } from "react-icons/fa";
 export default function GreenCheckmark() {

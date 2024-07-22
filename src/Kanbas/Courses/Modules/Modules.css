@@ -1,130 +1,74 @@
 /* src/Kanbas/Courses/Modules/Modules.css */
+
 #wd-modules {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .wd-module {
-    margin-bottom: 1em;
-  }
-  
-  .wd-title {
-    font-weight: bold;
-    margin-bottom: 0.5em;
-  }
-  
-  .wd-lessons {
-    list-style-type: none;
-    padding: 0 0 0 1em;
-  }
-  
-  .wd-lesson {
-    margin-bottom: 0.5em;
-  }
-  
-  .wd-content {
-    list-style-type: none;
-    padding: 0 0 0 1em;
-  }
-  
-  .wd-content-item {
-    margin-bottom: 0.25em;
-  }
-  
-  body {
-    margin: 0;
-    padding: 0;
-  }
-  
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  .btn-secondary {
-    --bs-btn-color: #000;
-    --bs-btn-bg: #c7cdd1;
-    --bs-btn-border-color: #c7cdd1;
-    --bs-btn-hover-color: #fff;
-  }
-  
-  .bg-secondary {
-    background-color: #c7cdd1 !important;
-  }
-  
-  .border-gray {
-    border: 1px solid gray;
-  }
-  
-  .wd-title {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .wd-content-item {
-    list-style: none;
-  }
-  
-  body {
-    margin: 0;
-    padding: 0;
-  }
-  
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  .btn-secondary {
-    --bs-btn-color: #000;
-    --bs-btn-bg: #c7cdd1;
-    --bs-btn-border-color: #c7cdd1;
-    --bs-btn-hover-color: #fff;
-  }
-  
-  .bg-secondary {
-    background-color: #c7cdd1 !important;
-  }
-  
-  .border-gray {
-    border: 1px solid gray;
-  }
-  
-  .wd-title {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .wd-content-item {
-    list-style: none;
-  }
-  
-  .wd-module .wd-lesson {
-    position: relative;
-    padding-left: 30px; /* 调整以适应点的位置 */
-    padding-right: 30px; /* 调整以适应点的位置 */
+  list-style-type: none;
+  padding: 0;
 }
 
-.wd-module .wd-lesson::before {
-    content: "•";
-    font-size: 1.5em;
-    color: green;
-    position: absolute;
-    left: 10px; /* 调整左侧位置 */
+.wd-module {
+  margin-bottom: 1em;
 }
 
-.wd-module .wd-lesson::after {
-    content: "•";
-    font-size: 1.5em;
-    color: green;
-    position: absolute;
-    right: 10px; /* 调整右侧位置 */
+.wd-title {
+  font-weight: bold;
+  margin-bottom: 0.5em;
 }
 
-/* 去掉外面的绿色点 */
-.wd-module .wd-lesson .wd-content-item::before {
-    content: none;
+.wd-lessons {
+  list-style-type: none;
+  padding: 0 0 0 1em;
 }
 
-.wd-module .wd-lesson .wd-content-item::after {
-    content: none;
+.wd-lesson {
+  margin-bottom: 0.5em;
+  position: relative;
+  padding-left: 30px; /* Adjust to fit position of icons */
+  padding-right: 30px; /* Adjust to fit position of icons */
 }
 
+.wd-lesson::before {
+  content: none; /* Remove the left green dot */
+}
+
+.wd-lesson::after {
+  content: none; /* Remove the right green dot */
+}
+
+.wd-content {
+  list-style-type: none;
+  padding: 0 0 0 1em;
+}
+
+.wd-content-item {
+  margin-bottom: 0.25em;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn-secondary {
+  --bs-btn-color: #000;
+  --bs-btn-bg: #c7cdd1;
+  --bs-btn-border-color: #c7cdd1;
+  --bs-btn-hover-color: #fff;
+}
+
+.bg-secondary {
+  background-color: #c7cdd1 !important;
+}
+
+.border-gray {
+  border: 1px solid gray;
+}
+
+.wd-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.wd-content-item {
+  list-style: none;
+}

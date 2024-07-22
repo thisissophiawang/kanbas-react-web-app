@@ -1,5 +1,6 @@
+///Users/sophiawang/2024/summer/webdev/kanbas-react-web-app/src/Kanbas/Courses/Modules/ModulesControls.tsx
+
 import { FaPlus } from 'react-icons/fa6';
-import React from 'react';
 import GreenCheckmark from './GreenCheckmark';
 
 export default function ModulesControls() {
