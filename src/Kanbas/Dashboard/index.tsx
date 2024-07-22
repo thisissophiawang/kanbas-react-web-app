@@ -30,7 +30,7 @@ export default function Dashboard() {
                   <div className="card-body">
                     <h5 className="wd-dashboard-course-title card-title">{course.name}</h5>
                     <p className="card-text">{course.description}</p>
-                    <button className="btn new-btn">Go</button> {/* 更新按钮类 */}
+                    <button className="btn btn-primary">Go</button> {/* 更新按钮类 */}
                   </div>
                 </Link>
               </div>

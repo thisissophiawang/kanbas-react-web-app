@@ -21,7 +21,7 @@ export default function Courses() {
         {course && course.name} &gt; {pathname.split("/")[4]}
       </h2>
       <div className="d-flex h-100">
-        <div className="d-none d-md-block bg-black">
+        <div className="d-none d-md-block bg-light"> {/* Change bg-black to bg-light */}
           <CoursesNavigation />
         </div>
         <div className="flex-fill p-4">
@@ -30,7 +30,7 @@ export default function Courses() {
             <Route path="Home" element={<Home />} />
             <Route path="Modules" element={<Modules />} />
             <Route path="Piazza" element={<h1>Piazza</h1>} />
-            <Route path="Zoom" element={<h1>Zoom</h1>} /> {/* Fixed the closing tag here */}
+            <Route path="Zoom" element={<h1>Zoom</h1>} />
             <Route path="Assignments" element={<Assignments />} />
             <Route path="Assignments/:id" element={<AssignmentEditor />} />
             <Route path="Quizzes" element={<h1>Quizzes</h1>} />
