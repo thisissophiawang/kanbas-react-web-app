@@ -17,7 +17,7 @@ export default function CoursesNavigation() {
   ];
 
   return (
-    <div id="wd-courses-navigation" className="list-group rounded-0 position-fixed bottom-0 top-0 d-none d-md-block bg-light z-2">
+    <div id="wd-courses-navigation" className="list-group rounded-0 position-fixed bottom-0 top-0 d-none d-md-block bg-light z-2" style={{ width: '140px', marginLeft: '120px' }}>
       {links.map((link) => (
         <a key={link.label} href={link.path} className="list-group-item text-danger border border-0">
           {link.label}
