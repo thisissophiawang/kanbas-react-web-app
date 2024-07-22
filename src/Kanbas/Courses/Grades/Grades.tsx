@@ -6,14 +6,17 @@ import { FaFilter, FaFileImport, FaFileExport, FaCog } from 'react-icons/fa';
 import './Grades.css';
 
 const Grades = () => {
-  const { cid } = useParams();
+  const { cid } = useParams<{ cid: string }>();
 
-  // Get enrolled students for the current course
+  // Get the enrolled students for the current course
   const enrolledStudents = enrollments
     .filter(enrollment => enrollment.course === cid)
-    .map(enrollment => users.find(user => user._id === enrollment.user));
+    .map(enrollment => {
+      return users.find(user => user._id === enrollment.user);
+    })
+    .filter((student): student is NonNullable<typeof student> => student !== undefined);
 
-  // Get assignments for the current course
+  // Get the assignments for the current course
   const courseAssignments = assignments.filter(assignment => assignment.course === cid);
 
   return (
@@ -38,9 +41,11 @@ const Grades = () => {
           </button>
         </div>
       </div>
-      <button className="btn btn-secondary mb-3">
-        <FaFilter /> Apply Filters
-      </button>
+      <div className="d-flex justify-content-between mb-3">
+        <button className="btn btn-secondary mb-3">
+          <FaFilter /> Apply Filters
+        </button>
+      </div>
       <div className="table-responsive">
         <table className="table table-striped table-bordered">
           <thead>
@@ -53,17 +58,11 @@ const Grades = () => {
           </thead>
           <tbody>
             {enrolledStudents.map(student => (
-              <tr key={student?._id}>
-                <td className="text-danger">{student?.firstName} {student?.lastName}</td>
+              <tr key={student._id}>
+                <td className="text-danger">{student.firstName} {student.lastName}</td>
                 {courseAssignments.map(assignment => {
-                  const grade = grades.find(
-                    grade => grade.student === student?._id && grade.assignment === assignment._id
-                  );
-                  return (
-                    <td key={assignment._id}>
-                      {grade ? `${grade.grade}%` : 'N/A'}
-                    </td>
-                  );
+                  const grade = grades.find(grade => grade.student === student._id && grade.assignment === assignment._id);
+                  return <td key={assignment._id}>{grade ? `${grade.grade}%` : 'N/A'}</td>;
                 })}
               </tr>
             ))}
