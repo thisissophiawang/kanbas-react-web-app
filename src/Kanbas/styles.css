@@ -1,3 +1,5 @@
+/* styles.css */
+
 body {
   margin: 0;
   padding: 0;
@@ -7,33 +9,26 @@ body * {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+#wd-kanbas {
+  display: flex;
+}
+
+#wd-kanbas .content {
+  padding-left: 260px; /* Ensure the content area is offset to the right of both sidebars */
+}
+
 #wd-kanbas-navigation {
   width: 120px;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  z-index: 1000;
-  background-color: black;
 }
 
-#inner-sidebar {
-  width: 200px;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 120px;
-  z-index: 900;
-  background-color: white;
-}
-
-#inner-content {
-  margin-left: 320px;
-  padding: 20px;
+#wd-courses-navigation {
+  width: 140px;
+  margin-left: 120px; /* Ensure the course navigation is to the right of the main navigation */
 }
 
 @media (min-width: 768px) {
-  .wd-main-content-offset {
-    padding-left: 140px !important;
+  #wd-kanbas .wd-main-content-offset {
+    padding-left: 260px; /* Adjust the main content offset to account for both sidebars */
   }
 }
 

@@ -1,8 +1,10 @@
+// src/Kanbas/Navigation.tsx
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { IoCalendarOutline } from "react-icons/io5";
 import { LiaBookSolid } from "react-icons/lia";
 import { FaInbox, FaUserCircle, FaCog } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom";
 import "../styles.css";
 
 export default function KanbasNavigation() {
@@ -16,7 +18,7 @@ export default function KanbasNavigation() {
   ];
 
   return (
-    <div style={{ width: 120 }} id="wd-kanbas-navigation" className="list-group rounded-0 position-fixed bottom-0 top-0 d-none d-md-block bg-black z-2">
+    <div id="wd-kanbas-navigation" className="list-group rounded-0 position-fixed bottom-0 top-0 d-none d-md-block bg-black z-2">
       <a className="list-group-item bg-black text-white border-0 text-center" id="wd-neu-link" href="https://www.northeastern.edu/">
         <img src="/images/NEU.png" width="75px" alt="Northeastern University" />
       </a>
