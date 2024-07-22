@@ -1,10 +1,16 @@
+///Users/sophiawang/2024/summer/webdev/kanbas-react-web-app/src/Kanbas/Courses/Assignments/index.tsx
+
 import React from 'react';
-import { Link, Routes, Route } from 'react-router-dom';
+import { useParams, Link, Routes, Route } from 'react-router-dom';
 import AssignmentEditor from './Editor';
 import { FaSearch, FaPlus, FaCheckCircle, FaEllipsisV, FaPen } from 'react-icons/fa';
+import * as db from '../../Database'; // Import the assignments data
 import './Assignments.css';
 
 export default function Assignments() {
+  const { cid } = useParams<{ cid: string }>(); // Get the current course ID
+  const assignments = db.assignments.filter((assignment: any) => assignment.course === cid); // Filter assignments by course ID
+
   return (
     <div id="wd-assignments">
       <div className="wd-assignments-header">
@@ -27,51 +33,23 @@ export default function Assignments() {
         </div>
       </div>
       <ul id="wd-assignment-list">
-        <li className="wd-assignment-list-item">
-          <div className="wd-assignment-item-header">
-            <FaPen className="wd-pen-icon" />
-            <Link className="wd-assignment-link" to="123">
-              A1
-            </Link>
-            <FaCheckCircle className="wd-check-icon" />
-            <FaEllipsisV className="wd-ellipsis-icon" />
-          </div>
-          <div className="wd-assignment-item-details">
-            <span className="wd-multiple-modules">Multiple Modules</span> | Not available until May 6 at 12:00am |
-            <br />
-            Due May 13 at 11:59pm | 100 pts
-          </div>
-        </li>
-        <li className="wd-assignment-list-item">
-          <div className="wd-assignment-item-header">
-            <FaPen className="wd-pen-icon" />
-            <Link className="wd-assignment-link" to="124">
-              A2
-            </Link>
-            <FaCheckCircle className="wd-check-icon" />
-            <FaEllipsisV className="wd-ellipsis-icon" />
-          </div>
-          <div className="wd-assignment-item-details">
-            <span className="wd-multiple-modules">Multiple Modules</span> | Not available until May 13 at 12:00am |
-            <br />
-            Due May 20 at 11:59pm | 100 pts
-          </div>
-        </li>
-        <li className="wd-assignment-list-item">
-          <div className="wd-assignment-item-header">
-            <FaPen className="wd-pen-icon" />
-            <Link className="wd-assignment-link" to="125">
-              A3
-            </Link>
-            <FaCheckCircle className="wd-check-icon" />
-            <FaEllipsisV className="wd-ellipsis-icon" />
-          </div>
-          <div className="wd-assignment-item-details">
-            <span className="wd-multiple-modules">Multiple Modules</span> | Not available until May 20 at 12:00am |
-            <br />
-            Due May 27 at 11:59pm | 100 pts
-          </div>
-        </li>
+        {assignments.map((assignment: any) => (
+          <li key={assignment._id} className="wd-assignment-list-item">
+            <div className="wd-assignment-item-header">
+              <FaPen className="wd-pen-icon" />
+              <Link className="wd-assignment-link" to={assignment._id}>
+                {assignment.title}
+              </Link>
+              <FaCheckCircle className="wd-check-icon" />
+              <FaEllipsisV className="wd-ellipsis-icon" />
+            </div>
+            <div className="wd-assignment-item-details">
+              <span className="wd-multiple-modules">Multiple Modules</span> | Not available until May 6 at 12:00am |
+              <br />
+              Due May 13 at 11:59pm | 100 pts
+            </div>
+          </li>
+        ))}
       </ul>
 
       <Routes>
