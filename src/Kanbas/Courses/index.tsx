@@ -45,7 +45,7 @@ export default function Courses() {
       <div className="content p-3 flex-grow-1" style={{ marginLeft: '260px' }}>
         <h2 className="text-danger">
           <FaAlignJustify className="me-3 fs-4 mb-1" />
-          {course?.name} &gt; {breadcrumbs[currentPath]} {currentPath}
+          {course?.name} &gt; {breadcrumbs[currentPath]}
         </h2>
         <Routes>
           <Route path="/" element={<Navigate to="Home" />} />
