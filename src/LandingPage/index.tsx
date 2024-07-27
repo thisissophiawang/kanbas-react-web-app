@@ -15,6 +15,7 @@ const LandingPage: React.FC = () => {
         <li><Link to="/Labs/Lab1">Lab 1</Link></li>
         <li><Link to="/Labs/Lab2">Lab 2</Link></li>
         <li><Link to="/Labs/Lab3">Lab 3</Link></li>
+        <li><Link to="/Labs/Lab4">Lab 4</Link></li>
       </ul>
 
       <h2>Kanbas</h2>
@@ -23,7 +24,6 @@ const LandingPage: React.FC = () => {
       </ul>
 
       <h2>Links to all relevant source code repositories</h2>
-      <p><a href="https://github.com/thisissophiawang/kanbas-react-web-app/tree/a1">Github Repository</a></p>
 
     </div>
   );
