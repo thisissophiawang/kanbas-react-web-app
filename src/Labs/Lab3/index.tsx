@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import { useSelector } from "react-redux";
 import VariablesAndConstants from "./VariablesAndConstants";
 import VariableTypes from "./VariableTypes";
 import BooleanVariables from "./BooleanVariables";
@@ -36,11 +37,18 @@ import AddPathParameters from "./AddPathParameters";
 import PathParameters from "./PathParameters";
 
 export default function Lab3() {
-  console.log("Hello World!");
+  const todos = useSelector((state: any) => state.todosReducer.todos);
 
   return (
     <div id="wd-lab3" className="container-fluid">
       <h3>Lab 3</h3>
+      <ul className="list-group">
+        {todos.map((todo: any) => (
+          <li className="list-group-item" key={todo.id}>
+            {todo.title}
+          </li>
+        ))}
+      </ul>
       <VariablesAndConstants />
       <VariableTypes />
       <BooleanVariables />
