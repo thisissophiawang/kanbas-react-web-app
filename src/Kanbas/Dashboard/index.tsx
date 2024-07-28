@@ -18,11 +18,37 @@ interface Course {
 export default function Dashboard() {
   const [courses, setCourses] = useState<Course[]>(dbCourses); // 使用 useState 钩子创建 courses 状态
 
+  const course: Course = {
+    _id: "0",
+    name: "New Course",
+    number: "New Number",
+    startDate: "2023-09-10",
+    endDate: "2023-12-15",
+    image: "/images/reactjs.jpg",
+    description: "New Description",
+    department: "New Department",
+    credits: 3,
+  };
+
+  const addNewCourse = () => {
+    const newCourse = { ...course, _id: new Date().getTime().toString() };
+    setCourses([...courses, newCourse]);
+  };
+
   return (
     <div id="wd-dashboard" className="p-4">
       <h1 id="wd-dashboard-title">Dashboard</h1>
       <hr />
       <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
+      <hr />
+      <h5>New Course</h5>
+      <button
+        className="btn btn-primary float-end"
+        id="wd-add-new-course-click"
+        onClick={addNewCourse}
+      >
+        Add
+      </button>
       <hr />
       <div id="wd-dashboard-courses" className="row">
         <div className="row row-cols-1 row-cols-md-5 g-4">
