@@ -1,3 +1,4 @@
+///Users/sophiawang/2024/summer/webdev/kanbas-react-web-app/src/Labs/TOC.tsx
 import { useLocation } from "react-router";
 
 export default function TOC() {
