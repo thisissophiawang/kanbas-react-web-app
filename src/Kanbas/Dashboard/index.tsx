@@ -17,8 +17,7 @@ interface Course {
 
 export default function Dashboard() {
   const [courses, setCourses] = useState<Course[]>(dbCourses); // 使用 useState 钩子创建 courses 状态
-
-  const course: Course = {
+  const [course, setCourse] = useState<Course>({
     _id: "0",
     name: "New Course",
     number: "New Number",
@@ -28,7 +27,7 @@ export default function Dashboard() {
     description: "New Description",
     department: "New Department",
     credits: 3,
-  };
+  }); // 将 course 转换为状态变量
 
   const addNewCourse = () => {
     const newCourse = { ...course, _id: new Date().getTime().toString() };
@@ -42,13 +41,25 @@ export default function Dashboard() {
       <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
       <hr />
       <h5>New Course</h5>
-      <button
-        className="btn btn-primary float-end"
-        id="wd-add-new-course-click"
-        onClick={addNewCourse}
-      >
-        Add
-      </button>
+      <div className="d-flex mb-2">
+        <input
+          value={course.name}
+          className="form-control me-2"
+          onChange={(e) => setCourse({ ...course, name: e.target.value })}
+        />
+        <button
+          className="btn btn-primary"
+          id="wd-add-new-course-click"
+          onClick={addNewCourse}
+        >
+          Add
+        </button>
+      </div>
+      <textarea
+        value={course.description}
+        className="form-control mb-2"
+        onChange={(e) => setCourse({ ...course, description: e.target.value })}
+      />
       <hr />
       <div id="wd-dashboard-courses" className="row">
         <div className="row row-cols-1 row-cols-md-5 g-4">
