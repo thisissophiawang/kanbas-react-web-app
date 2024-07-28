@@ -7,9 +7,12 @@ import Lab2 from './Lab2';
 import Lab3 from './Lab3';
 import Lab4 from './Lab4';
 import TOC from './TOC';
+import store from './store';
+import { Provider } from 'react-redux';
 
 const Labs: React.FC = () => {
   return (
+    <Provider store={store}>
     <div>
       <h1>Xinyi Wang/Sophia</h1>
       <h1>Labs</h1>
@@ -23,6 +26,8 @@ const Labs: React.FC = () => {
       </Routes>
       <a href="https://github.com/thisissophiawang/kanbas-react-web-app/tree/a1">Github</a>
     </div>
+    </Provider>
+
   );
 }
 
