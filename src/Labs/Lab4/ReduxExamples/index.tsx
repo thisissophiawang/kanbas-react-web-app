@@ -3,6 +3,7 @@ import HelloRedux from "./HelloRedux";
 import CounterRedux from "./CounterRedux";
 import Add from "../../Lab3/Add";
 import AddRedux from "./AddRedux";
+import TodoList from "./todos/TodoList";
 
 
 
@@ -13,6 +14,7 @@ export default function ReduxExamples() {
       <HelloRedux />
       <CounterRedux />
       <AddRedux />
+      <TodoList />
 
     </div>
   );
