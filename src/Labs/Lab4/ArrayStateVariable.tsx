@@ -9,7 +9,7 @@ export default function ArrayStateVariable() {
     setArray(array.filter((item, i) => i !== index));
   };
   return (
-    <div id="wd-array-state-variables" style={{ margin: '20px', width: '300px' }}>
+    <div id="wd-array-state-variables" style={{ margin: '20px', width: '200px' }}>
       <h2>Array State Variable</h2>
       <button 
         onClick={addElement} 

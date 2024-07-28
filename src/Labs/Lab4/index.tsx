@@ -9,6 +9,8 @@ import StringStateVariables from "./StringStateVariables";
 import DateStateVariable from "./DateStateVariable";
 import ObjectStateVariable from "./ObjectStateVariable";
 import ArrayStateVariable from "./ArrayStateVariable";
+import Paragraphs from "../Lab1/Paragraphs";
+import ParentStateComponent from "./ParentStateComponent";
 
 
 
@@ -30,6 +32,7 @@ export default function Lab4() {
             <DateStateVariable />
             <ObjectStateVariable />
             <ArrayStateVariable />
+            <ParentStateComponent />
         </div>
     );
 }
