@@ -37,7 +37,10 @@ export default function Modules() {
       { _id: new Date().getTime().toString(), name: moduleName, course: cid || '', lessons: [] },
     ]);
     setModuleName('');
-    console.log('Module added:', { _id: new Date().getTime().toString(), name: moduleName, course: cid || '', lessons: [] });
+  };
+
+  const deleteModule = (moduleId: string) => {
+    setModules(modules.filter((module) => module._id !== moduleId));
   };
 
   useEffect(() => {
@@ -58,7 +61,7 @@ export default function Modules() {
               <div className="wd-title p-3 ps-2 bg-secondary">
                 <BsGripVertical className="me-2 fs-3" />
                 {module.name}
-                <ModuleControlButtons />
+                <ModuleControlButtons moduleId={module._id} deleteModule={deleteModule} />
               </div>
               <ul className="wd-lessons list-group rounded-0">
                 {module.lessons.map((lesson: Lesson) => (
