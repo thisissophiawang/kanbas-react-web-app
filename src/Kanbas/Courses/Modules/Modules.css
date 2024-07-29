@@ -73,3 +73,11 @@ body {
   list-style: none;
 }
 
+
+.wd-title input {
+  display: inline-block;
+  width: 80%; /* Adjust width to your desired length */
+  margin-left: 10px; /* Adjust the margin to match the current position of the module name */
+  vertical-align: middle; /* Align vertically with the module name */
+}
+

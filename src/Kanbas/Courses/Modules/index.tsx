@@ -75,7 +75,7 @@ export default function Modules() {
                   module.name
                 ) : (
                   <input
-                    className="form-control w-50 d-inline-block"
+                    className="form-control"
                     value={module.name}
                     onChange={(e) => updateModule(module._id, e.target.value)}
                     onKeyDown={(e) => {
