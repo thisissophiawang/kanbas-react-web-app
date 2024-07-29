@@ -38,6 +38,25 @@ export default function Dashboard() {
     setCourses(courses.filter((course) => course._id !== courseId));
   };
 
+  const editCourse = (course: Course) => {
+    setCourse(course);
+  };
+
+  const updateCourse = () => {
+    setCourses(courses.map((c) => (c._id === course._id ? course : c)));
+    setCourse({
+      _id: "0",
+      name: "New Course",
+      number: "New Number",
+      startDate: "2023-09-10",
+      endDate: "2023-12-15",
+      image: "reactjs.jpg",
+      description: "New Description",
+      department: "New Department",
+      credits: 3,
+    });
+  };
+
   return (
     <div id="wd-dashboard" className="p-4">
       <h1 id="wd-dashboard-title">Dashboard</h1>
@@ -64,6 +83,13 @@ export default function Dashboard() {
         className="form-control mb-2"
         onChange={(e) => setCourse({ ...course, description: e.target.value })}
       />
+      <button
+        className="btn btn-warning float-end me-2"
+        id="wd-update-course-click"
+        onClick={updateCourse}
+      >
+        Update
+      </button>
       <hr />
       <div id="wd-dashboard-courses" className="row">
         <div className="row row-cols-1 row-cols-md-5 g-4">
@@ -77,6 +103,15 @@ export default function Dashboard() {
                     <p className="card-text">{course.description}</p>
                     <div className="d-flex justify-content-between">
                       <button className="btn btn-primary">Go</button>
+                      <button
+                        className="btn btn-warning"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          editCourse(course);
+                        }}
+                      >
+                        Edit
+                      </button>
                       <button
                         className="btn btn-danger"
                         onClick={(event) => {
