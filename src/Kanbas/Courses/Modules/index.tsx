@@ -20,6 +20,7 @@ interface Module {
   name: string;
   course: string;
   lessons: Lesson[];
+  editing?: boolean;
 }
 
 export default function Modules() {
@@ -43,6 +44,16 @@ export default function Modules() {
     setModules(modules.filter((module) => module._id !== moduleId));
   };
 
+  const editModule = (moduleId: string) => {
+    setModules(modules.map((module) => (module._id === moduleId ? { ...module, editing: true } : module)));
+  };
+
+  const updateModule = (moduleId: string, name: string) => {
+    setModules(modules.map((module) =>
+      module._id === moduleId ? { ...module, name, editing: false } : module
+    ));
+  };
+
   useEffect(() => {
     // For debugging purposes: log the modules state whenever it changes
     console.log('Modules state:', modules);
@@ -60,8 +71,21 @@ export default function Modules() {
             <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray" key={module._id}>
               <div className="wd-title p-3 ps-2 bg-secondary">
                 <BsGripVertical className="me-2 fs-3" />
-                {module.name}
-                <ModuleControlButtons moduleId={module._id} deleteModule={deleteModule} />
+                {!module.editing ? (
+                  module.name
+                ) : (
+                  <input
+                    className="form-control w-50 d-inline-block"
+                    value={module.name}
+                    onChange={(e) => updateModule(module._id, e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        updateModule(module._id, module.name);
+                      }
+                    }}
+                  />
+                )}
+                <ModuleControlButtons moduleId={module._id} deleteModule={deleteModule} editModule={editModule} />
               </div>
               <ul className="wd-lessons list-group rounded-0">
                 {module.lessons.map((lesson: Lesson) => (
