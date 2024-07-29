@@ -1,6 +1,6 @@
 // src/Kanbas/Courses/Assignments/index.tsx
 import React from 'react';
-import { useParams, Link, Routes, Route } from 'react-router-dom';
+import { useParams, Link, Routes, Route, useNavigate } from 'react-router-dom';
 import AssignmentEditor from './Editor';
 import { FaSearch, FaPlus, FaCheckCircle, FaEllipsisV, FaPen } from 'react-icons/fa';
 import * as db from '../../Database'; // Import the assignments data
@@ -9,6 +9,7 @@ import './Assignments.css';
 export default function Assignments() {
   const { cid } = useParams<{ cid: string }>(); // Get the current course ID
   const assignments = db.assignments.filter((assignment: any) => assignment.course === cid); // Filter assignments by course ID
+  const navigate = useNavigate(); // Hook to navigate programmatically
 
   return (
     <div id="wd-assignments">
@@ -18,7 +19,9 @@ export default function Assignments() {
           <input id="wd-search-assignment" placeholder="Search for Assignments" />
         </div>
         <button id="wd-add-assignment-group" className="btn btn-secondary">+ Group</button>
-        <button id="wd-add-assignment" className="btn btn-danger">+ Assignment</button>
+        <button id="wd-add-assignment" className="btn btn-danger" onClick={() => navigate('new')}>
+          + Assignment
+        </button>
       </div>
       <div id="wd-assignments-title" className="wd-assignment-title-container">
         <div className="wd-assignment-title-left">
@@ -53,6 +56,7 @@ export default function Assignments() {
 
       <Routes>
         <Route path=":id" element={<AssignmentEditor />} />
+        <Route path="new" element={<AssignmentEditor />} />
       </Routes>
     </div>
   );
