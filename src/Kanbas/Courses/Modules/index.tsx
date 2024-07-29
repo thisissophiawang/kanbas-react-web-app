@@ -1,31 +1,30 @@
-
-///Users/sophiawang/2024/summer/webdev/kanbas-react-web-app/src/Kanbas/Courses/Modules/index.tsx
-
+// src/Kanbas/Courses/Modules/index.tsx
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import * as db from '../../Database'; 
 import ModulesControls from './ModulesControls';
 import LessonControlButtons from './LessonControlButtons';
-import ModuleControlButtons from './ModuleControlButtons'; // Ensure this import
+import ModuleControlButtons from './ModuleControlButtons';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './Modules.css';
 import { BsGripVertical } from 'react-icons/bs';
 
 export default function Modules() {
-  const { cid } = useParams();
-  const modules = db.modules;
+  const { cid } = useParams<{ cid: string }>();
+  const modules = useSelector((state: any) => state.modules.modules);
+
   return (
     <div id="wd-modules">
       <ModulesControls /><br /><br /><br />
       <ul id="wd-modules" className="list-group rounded-0">
-      {modules
+        {modules
           .filter((module: any) => module.course === cid)
           .map((module: any) => (
             <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray" key={module._id}>
               <div className="wd-title p-3 ps-2 bg-secondary">
-              <BsGripVertical className="me-2 fs-3" />
-              {module.name}
+                <BsGripVertical className="me-2 fs-3" />
+                {module.name}
                 <ModuleControlButtons />
               </div>
               <ul className="wd-lessons list-group rounded-0">
@@ -41,4 +40,5 @@ export default function Modules() {
           ))}
       </ul>
     </div>
-  );}
+  );
+}
