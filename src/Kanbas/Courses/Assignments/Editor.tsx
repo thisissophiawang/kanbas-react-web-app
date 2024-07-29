@@ -1,22 +1,20 @@
+// src/Kanbas/Courses/Assignments/Editor.tsx
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { assignments } from '../../Database'; // import assignments data
 import './Assignments.css';
 
 export default function AssignmentEditor() {
-  //useParams is a hook that returns an object of key/value pairs of URL parameters
-  const { id } = useParams(); 
-  // from URL get assignment ID
+  const { id } = useParams();
   const [assignment, setAssignment] = useState<any>(null);
 
   useEffect(() => {
-    //use id to find assignment data
     const foundAssignment = assignments.find((a: any) => a._id === id);
     setAssignment(foundAssignment);
   }, [id]);
 
   if (!assignment) {
-    return <div>Loading...</div>; // loading screen
+    return <div>Loading...</div>;
   }
 
   return (

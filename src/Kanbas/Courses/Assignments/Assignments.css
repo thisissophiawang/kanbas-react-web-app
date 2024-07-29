@@ -51,12 +51,12 @@
 }
 
 #wd-add-assignment {
-  background-color: #dc3545; /* 红色背景 */
-  color: white; /* 白色字体 */
+  background-color: #dc3545; /* Red background */
+  color: white; /* White text */
 }
 
 #wd-add-assignment:hover {
-  background-color: #c82333; /* 红色背景，稍暗 */
+  background-color: #c82333; /* Slightly darker red background */
 }
 
 #wd-assignments-title {

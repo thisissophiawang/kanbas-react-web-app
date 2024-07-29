@@ -1,5 +1,4 @@
-///Users/sophiawang/2024/summer/webdev/kanbas-react-web-app/src/Kanbas/Courses/Assignments/index.tsx
-
+// src/Kanbas/Courses/Assignments/index.tsx
 import React from 'react';
 import { useParams, Link, Routes, Route } from 'react-router-dom';
 import AssignmentEditor from './Editor';
