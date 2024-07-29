@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import { courses as dbCourses } from '../Database'; // 导入课程数据
+import { courses as dbCourses } from '../Database'; 
 
 interface Course {
   _id: string;
@@ -16,7 +16,7 @@ interface Course {
 }
 
 export default function Dashboard() {
-  const [courses, setCourses] = useState<Course[]>(dbCourses); // 使用 useState 钩子创建 courses 状态
+  const [courses, setCourses] = useState<Course[]>(dbCourses); 
   const [course, setCourse] = useState<Course>({
     _id: "0",
     name: "New Course",
@@ -27,11 +27,15 @@ export default function Dashboard() {
     description: "New Description",
     department: "New Department",
     credits: 3,
-  }); // 将 course 转换为状态变量
+  }); 
 
   const addNewCourse = () => {
-    const newCourse = { ...course, _id: new Date().getTime().toString() };
+    const newCourse = { ...course, _id: new Date().getTime().toString(), image: "reactjs.jpg" };
     setCourses([...courses, newCourse]);
+  };
+
+  const deleteCourse = (courseId: string) => {
+    setCourses(courses.filter((course) => course._id !== courseId));
   };
 
   return (
@@ -71,7 +75,18 @@ export default function Dashboard() {
                   <div className="card-body">
                     <h5 className="wd-dashboard-course-title card-title">{course.name}</h5>
                     <p className="card-text">{course.description}</p>
-                    <button className="btn btn-primary">Go</button>
+                    <div className="d-flex justify-content-between">
+                      <button className="btn btn-primary">Go</button>
+                      <button
+                        className="btn btn-danger"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          deleteCourse(course._id);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 </Link>
               </div>
