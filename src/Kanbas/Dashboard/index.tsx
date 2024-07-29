@@ -99,28 +99,32 @@ export default function Dashboard() {
                 <Link className="wd-dashboard-course-link text-decoration-none text-dark" to={`/Kanbas/Courses/${course._id}/Home`}>
                   <img src={`/images/${course.image}`} width="100%" alt={course.name} onError={(e) => e.currentTarget.src = '/images/default.jpg'} />
                   <div className="card-body">
-                    <h5 className="wd-dashboard-course-title card-title">{course.name}</h5>
+                    <h5 className="wd-dashboard-course-title card-title mt-2">{course.name}</h5>
                     <p className="card-text">{course.description}</p>
-                    <div className="d-flex justify-content-between">
-                      <button className="btn btn-primary">Go</button>
-                      <button
-                        className="btn btn-warning"
-                        onClick={(event) => {
-                          event.preventDefault();
-                          editCourse(course);
-                        }}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        className="btn btn-danger"
-                        onClick={(event) => {
-                          event.preventDefault();
-                          deleteCourse(course._id);
-                        }}
-                      >
-                        Delete
-                      </button>
+                    <div className="d-flex justify-content-between mt-2">
+                      <Link className="btn btn-primary" to={`/Kanbas/Courses/${course._id}/Home`}>
+                        Go
+                      </Link>
+                      <div>
+                        <button
+                          className="btn btn-warning me-2"
+                          onClick={(event) => {
+                            event.preventDefault();
+                            editCourse(course);
+                          }}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="btn btn-danger"
+                          onClick={(event) => {
+                            event.preventDefault();
+                            deleteCourse(course._id);
+                          }}
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </Link>
