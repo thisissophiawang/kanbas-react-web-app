@@ -1,22 +1,16 @@
 // src/Kanbas/Courses/Modules/ModulesControls.tsx
-import React, { useState } from 'react';
+import React from 'react';
 import { FaPlus } from 'react-icons/fa';
 import GreenCheckmark from './GreenCheckmark';
 import ModuleEditor from './ModuleEditor';
-import { useDispatch } from 'react-redux';
-import { addModule } from './reducer';
-import { useParams } from 'react-router';
 
-export default function ModulesControls() {
-  const dispatch = useDispatch();
-  const { cid } = useParams<{ cid: string }>();
-  const [moduleName, setModuleName] = useState('');
+interface ModulesControlsProps {
+  setModuleName: (name: string) => void;
+  moduleName: string;
+  addModule: () => void;
+}
 
-  const handleAddModule = () => {
-    dispatch(addModule({ name: moduleName, course: cid }));
-    setModuleName('');
-  };
-
+export default function ModulesControls({ setModuleName, moduleName, addModule }: ModulesControlsProps) {
   return (
     <div id="wd-modules-controls" className="text-nowrap">
       <button
@@ -70,7 +64,7 @@ export default function ModulesControls() {
         dialogTitle="Add Module"
         moduleName={moduleName}
         setModuleName={setModuleName}
-        addModule={handleAddModule}
+        addModule={addModule}
       />
     </div>
   );
