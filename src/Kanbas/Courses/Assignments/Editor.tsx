@@ -1,20 +1,37 @@
 // src/Kanbas/Courses/Assignments/Editor.tsx
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { assignments } from '../../Database'; // import assignments data
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { addAssignment, updateAssignment } from './reducer';
 import './Assignments.css';
 
 export default function AssignmentEditor() {
-  const { id } = useParams();
+  const { id, cid } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const assignments = useSelector((state: any) => state.assignments.assignments);
   const [assignment, setAssignment] = useState<any>(null);
 
   useEffect(() => {
-    const foundAssignment = assignments.find((a: any) => a._id === id);
-    setAssignment(foundAssignment);
-  }, [id]);
+    if (id === 'new') {
+      setAssignment({
+        title: '',
+        description: '',
+        points: 0,
+        assignTo: '',
+        dueDate: '',
+        availableFrom: '',
+        availableUntil: '',
+        course: cid,
+      });
+    } else {
+      const foundAssignment = assignments.find((a: any) => a._id === id);
+      setAssignment(foundAssignment);
+    }
+  }, [id, assignments, cid]);
 
   if (!assignment) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>; // loading screen
   }
 
   return (
@@ -93,7 +110,19 @@ export default function AssignmentEditor() {
 
       <div className="form-group btn-container">
         <Link to={`/Kanbas/Courses/${assignment.course}/Assignments`} className="btn btn-secondary">Cancel</Link>
-        <button className="btn btn-danger">Save</button>
+        <button 
+          className="btn btn-danger" 
+          onClick={() => {
+            if (id === 'new') {
+              dispatch(addAssignment(assignment));
+            } else {
+              dispatch(updateAssignment(assignment));
+            }
+            navigate(`/Kanbas/Courses/${assignment.course}/Assignments`);
+          }}
+        >
+          Save
+        </button>
       </div>
     </div>
   );
