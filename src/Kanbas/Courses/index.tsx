@@ -1,15 +1,14 @@
-// src/Kanbas/Courses/index.tsx
-import { Navigate, Route, Routes, useParams, useLocation } from "react-router";
-import CoursesNavigation from "./Navigation";
-import Modules from "./Modules";
-import Home from "./Home";
-import Assignments from "./Assignments";
-import AssignmentEditor from "./Assignments/Editor";
-import Grades from "./Grades/Grades";
-import { courses } from "../Database";
+import React from 'react';
+import { Navigate, Route, Routes, useParams, useLocation } from 'react-router';
+import CoursesNavigation from './Navigation';
+import Modules from './Modules';
+import Home from './Home';
+import Assignments from './Assignments';
+import AssignmentEditor from './Assignments/Editor';
+import Grades from './Grades/Grades';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaAlignJustify } from "react-icons/fa";
-import KanbasNavigation from "../Navigation";
+import { FaAlignJustify } from 'react-icons/fa';
+import KanbasNavigation from '../Navigation';
 
 type Breadcrumbs = {
   Home: string;
@@ -31,7 +30,23 @@ const breadcrumbs: Breadcrumbs = {
   Grades: "Grades",
 };
 
-export default function Courses() {
+interface Course {
+  _id: string;
+  name: string;
+  number: string;
+  startDate: string;
+  endDate: string;
+  department: string;
+  credits: number;
+  description: string;
+  image?: string;
+}
+
+interface CoursesProps {
+  courses: Course[];
+}
+
+export default function Courses({ courses }: CoursesProps) {
   const { cid } = useParams<{ cid: string }>();
   const course = courses.find((course) => course._id === cid);
   const { pathname } = useLocation();

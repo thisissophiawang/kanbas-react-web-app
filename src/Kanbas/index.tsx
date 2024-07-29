@@ -1,17 +1,77 @@
-import { Route, Routes } from "react-router";
-import Courses from "./Courses";
-import Dashboard from "./Dashboard";
-import KanbasNavigation from "./Navigation";
-import "./styles.css"; // Ensure this path is correct
+import React, { useState } from 'react';
+import { Route, Routes } from 'react-router';
+import Dashboard from './Dashboard';
+import Courses from './Courses';
+import KanbasNavigation from './Navigation';
+import { courses as dbCourses } from './Database';
+import './styles.css'; // Ensure this path is correct
+
+interface Course {
+  _id: string;
+  name: string;
+  number: string;
+  startDate: string;
+  endDate: string;
+  department: string;
+  credits: number;
+  description: string;
+  image?: string;
+}
 
 export default function Kanbas() {
+  const [courses, setCourses] = useState<Course[]>(dbCourses);
+  const [course, setCourse] = useState<Course>({
+    _id: "0",
+    name: "New Course",
+    number: "New Number",
+    startDate: "2023-09-10",
+    endDate: "2023-12-15",
+    image: "reactjs.jpg",
+    description: "New Description",
+    department: "New Department",
+    credits: 3,
+  });
+
+  const addNewCourse = () => {
+    const newCourse = { ...course, _id: new Date().getTime().toString(), image: "reactjs.jpg" };
+    setCourses([...courses, newCourse]);
+  };
+
+  const deleteCourse = (courseId: string) => {
+    setCourses(courses.filter((course) => course._id !== courseId));
+  };
+
+  const updateCourse = () => {
+    setCourses(courses.map((c) => (c._id === course._id ? course : c)));
+    setCourse({
+      _id: "0",
+      name: "New Course",
+      number: "New Number",
+      startDate: "2023-09-10",
+      endDate: "2023-12-15",
+      image: "reactjs.jpg",
+      description: "New Description",
+      department: "New Department",
+      credits: 3,
+    });
+  };
+
   return (
     <div id="wd-kanbas" className="d-flex">
       <KanbasNavigation />
       <div className="wd-main-content-offset p-3 flex-grow-1">
         <Routes>
-          <Route path="Dashboard" element={<Dashboard />} />
-          <Route path="Courses/*" element={<Courses />} />
+          <Route path="Dashboard" element={
+            <Dashboard
+              courses={courses}
+              course={course}
+              setCourse={setCourse}
+              addNewCourse={addNewCourse}
+              deleteCourse={deleteCourse}
+              updateCourse={updateCourse}
+            />
+          } />
+          <Route path="Courses/*" element={<Courses courses={courses} />} />
         </Routes>
       </div>
     </div>

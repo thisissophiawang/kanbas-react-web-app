@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { courses as dbCourses } from '../Database'; 
 
 interface Course {
   _id: string;
@@ -15,48 +13,16 @@ interface Course {
   image?: string;
 }
 
-export default function Dashboard() {
-  const [courses, setCourses] = useState<Course[]>(dbCourses); 
-  const [course, setCourse] = useState<Course>({
-    _id: "0",
-    name: "New Course",
-    number: "New Number",
-    startDate: "2023-09-10",
-    endDate: "2023-12-15",
-    image: "reactjs.jpg",
-    description: "New Description",
-    department: "New Department",
-    credits: 3,
-  }); 
+interface DashboardProps {
+  courses: Course[];
+  course: Course;
+  setCourse: (course: Course) => void;
+  addNewCourse: () => void;
+  deleteCourse: (courseId: string) => void;
+  updateCourse: () => void;
+}
 
-  const addNewCourse = () => {
-    const newCourse = { ...course, _id: new Date().getTime().toString(), image: "reactjs.jpg" };
-    setCourses([...courses, newCourse]);
-  };
-
-  const deleteCourse = (courseId: string) => {
-    setCourses(courses.filter((course) => course._id !== courseId));
-  };
-
-  const editCourse = (course: Course) => {
-    setCourse(course);
-  };
-
-  const updateCourse = () => {
-    setCourses(courses.map((c) => (c._id === course._id ? course : c)));
-    setCourse({
-      _id: "0",
-      name: "New Course",
-      number: "New Number",
-      startDate: "2023-09-10",
-      endDate: "2023-12-15",
-      image: "reactjs.jpg",
-      description: "New Description",
-      department: "New Department",
-      credits: 3,
-    });
-  };
-
+export default function Dashboard({ courses, course, setCourse, addNewCourse, deleteCourse, updateCourse }: DashboardProps) {
   return (
     <div id="wd-dashboard" className="p-4">
       <h1 id="wd-dashboard-title">Dashboard</h1>
@@ -112,7 +78,7 @@ export default function Dashboard() {
                           className="btn btn-warning me-2"
                           onClick={(event) => {
                             event.preventDefault();
-                            editCourse(course);
+                            setCourse(course);
                           }}
                         >
                           Edit
