@@ -63,28 +63,30 @@ export default function Dashboard() {
       <hr />
       <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
       <hr />
-      <h5>New Course</h5>
-      <div className="d-flex mb-2">
-        <input
-          value={course.name}
-          className="form-control me-2"
-          onChange={(e) => setCourse({ ...course, name: e.target.value })}
-        />
-        <button
-          className="btn btn-warning me-2"
-          id="wd-update-course-click"
-          onClick={updateCourse}
-        >
-          Update
-        </button>
-        <button
-          className="btn btn-primary"
-          id="wd-add-new-course-click"
-          onClick={addNewCourse}
-        >
-          Add
-        </button>
+      <div className="d-flex justify-content-between align-items-center">
+        <h5>New Course</h5>
+        <div>
+          <button
+            className="btn btn-warning me-2"
+            id="wd-update-course-click"
+            onClick={updateCourse}
+          >
+            Update
+          </button>
+          <button
+            className="btn btn-primary"
+            id="wd-add-new-course-click"
+            onClick={addNewCourse}
+          >
+            Add
+          </button>
+        </div>
       </div>
+      <input
+        value={course.name}
+        className="form-control mb-2"
+        onChange={(e) => setCourse({ ...course, name: e.target.value })}
+      />
       <textarea
         value={course.description}
         className="form-control mb-2"
