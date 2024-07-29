@@ -71,6 +71,13 @@ export default function Dashboard() {
           onChange={(e) => setCourse({ ...course, name: e.target.value })}
         />
         <button
+          className="btn btn-warning me-2"
+          id="wd-update-course-click"
+          onClick={updateCourse}
+        >
+          Update
+        </button>
+        <button
           className="btn btn-primary"
           id="wd-add-new-course-click"
           onClick={addNewCourse}
@@ -83,13 +90,6 @@ export default function Dashboard() {
         className="form-control mb-2"
         onChange={(e) => setCourse({ ...course, description: e.target.value })}
       />
-      <button
-        className="btn btn-warning float-end me-2"
-        id="wd-update-course-click"
-        onClick={updateCourse}
-      >
-        Update
-      </button>
       <hr />
       <div id="wd-dashboard-courses" className="row">
         <div className="row row-cols-1 row-cols-md-5 g-4">
