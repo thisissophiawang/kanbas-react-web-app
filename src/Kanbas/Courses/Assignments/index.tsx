@@ -1,5 +1,5 @@
 // src/Kanbas/Courses/Assignments/index.tsx
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams, Link, Routes, Route, useNavigate } from 'react-router-dom';
 import AssignmentEditor from './Editor';
 import { FaSearch, FaPlus, FaCheckCircle, FaEllipsisV, FaPen, FaTrash } from 'react-icons/fa';
@@ -12,25 +12,6 @@ export default function Assignments() {
   const assignments = useSelector((state: any) => state.assignments.assignments.filter((assignment: any) => assignment.course === cid)); // Filter assignments by course ID
   const dispatch = useDispatch();
   const navigate = useNavigate(); // Hook to navigate programmatically
-
-  const [showDialog, setShowDialog] = useState(false);
-  const [assignmentToDelete, setAssignmentToDelete] = useState<any>(null);
-
-  const handleDelete = (assignment: any) => {
-    setShowDialog(true);
-    setAssignmentToDelete(assignment);
-  };
-
-  const confirmDelete = () => {
-    dispatch(deleteAssignment(assignmentToDelete._id));
-    setShowDialog(false);
-    setAssignmentToDelete(null);
-  };
-
-  const cancelDelete = () => {
-    setShowDialog(false);
-    setAssignmentToDelete(null);
-  };
 
   return (
     <div id="wd-assignments">
@@ -66,7 +47,11 @@ export default function Assignments() {
               <FaCheckCircle className="wd-check-icon" />
               <FaTrash 
                 className="wd-trash-icon" 
-                onClick={() => handleDelete(assignment)} 
+                onClick={() => {
+                  if (window.confirm("Are you sure you want to delete this assignment?")) {
+                    dispatch(deleteAssignment(assignment._id));
+                  }
+                }} 
               />
             </div>
             <div className="wd-assignment-item-details">
@@ -77,14 +62,6 @@ export default function Assignments() {
           </li>
         ))}
       </ul>
-
-      {showDialog && (
-        <div className="confirmation-dialog">
-          <p>Are you sure you want to delete this assignment?</p>
-          <button onClick={confirmDelete} className="btn btn-danger">Yes</button>
-          <button onClick={cancelDelete} className="btn btn-secondary">No</button>
-        </div>
-      )}
 
       <Routes>
         <Route path=":id" element={<AssignmentEditor />} />
