@@ -1,5 +1,9 @@
+//src/Kanbas/index.tsx
+
 import React, { useState } from 'react';
 import { Route, Routes } from 'react-router';
+import { Provider } from 'react-redux';
+import store from './store';
 import Dashboard from './Dashboard';
 import Courses from './Courses';
 import KanbasNavigation from './Navigation';
@@ -57,23 +61,25 @@ export default function Kanbas() {
   };
 
   return (
-    <div id="wd-kanbas" className="d-flex">
-      <KanbasNavigation />
-      <div className="wd-main-content-offset p-3 flex-grow-1">
-        <Routes>
-          <Route path="Dashboard" element={
-            <Dashboard
-              courses={courses}
-              course={course}
-              setCourse={setCourse}
-              addNewCourse={addNewCourse}
-              deleteCourse={deleteCourse}
-              updateCourse={updateCourse}
-            />
-          } />
-          <Route path="Courses/*" element={<Courses courses={courses} />} />
-        </Routes>
+    <Provider store={store}>
+      <div id="wd-kanbas" className="d-flex">
+        <KanbasNavigation />
+        <div className="wd-main-content-offset p-3 flex-grow-1">
+          <Routes>
+            <Route path="Dashboard" element={
+              <Dashboard
+                courses={courses}
+                course={course}
+                setCourse={setCourse}
+                addNewCourse={addNewCourse}
+                deleteCourse={deleteCourse}
+                updateCourse={updateCourse}
+              />
+            } />
+            <Route path="Courses/*" element={<Courses courses={courses} />} />
+          </Routes>
+        </div>
       </div>
-    </div>
+    </Provider>
   );
 }
