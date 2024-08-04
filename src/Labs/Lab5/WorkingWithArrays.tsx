@@ -7,11 +7,18 @@ function WorkingWithArrays() {
     return (
         <div>
             <h3>Working with Arrays</h3>
+            <h3>Creating new Items in an Array</h3>
+            <a href={`${API}/create`}>
+             Create Todo
+            </a>
             <h3>Filtering Array Items</h3>
             <a href={`${API}?completed=true`}>
              Get Completed Todos
             </a>
-
+            <h3>Deleting from an Array</h3>
+            <a href={`${API}/${todo.id}/delete`}>
+             Delete Todo with ID = {todo.id}
+            </a>
             <h4>Retrieving an Item from an Array by ID</h4>
             <input 
                 value={todo.id}
