@@ -4,6 +4,7 @@ import React from 'react';
 import EncodingParametersInURLs from './EncodingParameterslnURLs';
 import EnvironmentVariables from './EnvironmentVariables';
 import WorkingWithObjects from './WorkingWithObjects';
+import WorkingWithArrays from './WorkingWithArrays';
 
 export default function Lab5() {
     return (
@@ -11,6 +12,7 @@ export default function Lab5() {
         <h2>Lab 5</h2>
         <a href="http://localhost:4000/lab5">Hello</a>
         <h2>Calculator</h2>
+        <WorkingWithArrays />
         <EncodingParametersInURLs />
         <WorkingWithObjects />
         <EnvironmentVariables />
