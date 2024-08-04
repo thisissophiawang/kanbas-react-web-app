@@ -25,6 +25,14 @@ export default function EncodingParametersInURLs() {
             <a href={`http://localhost:4000/lab5/subtract/${a}/${b}`}>
                 Subtract {a} - {b}
             </a>
+            <h3>Query Parameters</h3>
+            <a className="btn btn-primary" href={`http://localhost:4000/a5/calculator?operation=add&a=${a}&b=${b}`}>
+                Add {a} + {b}
+            </a>
+            <br />
+            <a className="btn btn-danger" href={`http://localhost:4000/a5/calculator?operation=subtract&a=${a}&b=${b}`}>
+                Subtract {a} - {b}
+            </a>
         </div>
     );
 }
