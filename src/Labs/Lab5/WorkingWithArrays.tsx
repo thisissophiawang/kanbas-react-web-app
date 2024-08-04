@@ -7,6 +7,11 @@ function WorkingWithArrays() {
     return (
         <div>
             <h3>Working with Arrays</h3>
+            <h3>Filtering Array Items</h3>
+            <a href={`${API}?completed=true`}>
+             Get Completed Todos
+            </a>
+
             <h4>Retrieving an Item from an Array by ID</h4>
             <input 
                 value={todo.id}
