@@ -12,6 +12,7 @@ interface Todo {
 
 export default function WorkingWithArraysAsynchronously() {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const fetchTodos = async () => {
     try {
@@ -24,10 +25,12 @@ export default function WorkingWithArraysAsynchronously() {
 
   const removeTodo = async (todo: Todo) => {
     try {
-      const updatedTodos = await client.removeTodo(todo);
+      await client.removeTodo(todo.id);
+      const updatedTodos = todos.filter(t => t.id !== todo.id);
       setTodos(updatedTodos);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error removing todo", error);
+      setErrorMessage(error.response.data.message);
     }
   };
 
@@ -57,8 +60,9 @@ export default function WorkingWithArraysAsynchronously() {
       await client.deleteTodo(todoId);
       const newTodos = todos.filter((t) => t.id !== todoId);
       setTodos(newTodos);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error deleting todo", error);
+      setErrorMessage(error.response.data.message);
     }
   };
 
@@ -85,6 +89,11 @@ export default function WorkingWithArraysAsynchronously() {
   return (
     <div id="wd-asynchronous-arrays" className="container mt-3">
       <h3>Working with Arrays Asynchronously</h3>
+      {errorMessage && (
+        <div id="wd-todo-error-message" className="alert alert-danger mb-2 mt-2">
+          {errorMessage}
+        </div>
+      )}
       <h4>Todos</h4>
       <FaPlusCircle onClick={createTodo} className="text-success float-end fs-3" id="wd-create-todo" />
       <FaPlusCircle onClick={postTodo} className="text-primary float-end fs-3 me-3" id="wd-post-todo" />
@@ -121,9 +130,8 @@ export default function WorkingWithArraysAsynchronously() {
             </div>
             <div>
             <FaTrash onClick={() => removeTodo(todo)} className="text-danger float-end mt-1 me-2" id="wd-remove-todo" />
-              <FaTimes onClick={() => deleteTodo(todo.id)} className="text-danger float-end fs-3 me-2" id="wd-delete-todo" />
+            <FaTimes onClick={() => deleteTodo(todo.id)} className="text-danger float-end fs-3 me-2" id="wd-delete-todo" />
               <FaPencilAlt onClick={() => editTodo(todo)} className="text-primary float-end me-2 mt-1" id="wd-edit-todo" />
-
             </div>
           </li>
         ))}

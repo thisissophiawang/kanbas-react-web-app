@@ -26,8 +26,8 @@ export const fetchTodos = async () => {
   return response.data;
 };
 
-export const removeTodo = async (todo: any) => {
-  const response = await axios.get(`${TODOS_API}/${todo.id}/delete`);
+export const removeTodo = async (todoId: any) => {
+  const response = await axios.delete(`${TODOS_API}/${todoId}`);
   return response.data;
 };
 
@@ -46,7 +46,6 @@ export const deleteTodo = async (todoId: any) => {
   return response.data;
 };
 
-// New function to update a todo
 export const updateTodo = async (todo: any) => {
   const response = await axios.put(`${TODOS_API}/${todo.id}`, todo);
   return response.data;
