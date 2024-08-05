@@ -1,0 +1,41 @@
+/* src/Labs/Lab5/WorkingWithObjects.css */
+
+/* Add padding and margin to ensure proper spacing */
+.container {
+    padding: 20px;
+    margin: auto;
+  }
+  
+  /* Style headers for better visibility */
+  h3, h4 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  /* Style buttons for a consistent look */
+  .btn {
+    width: 200px; /* Adjust as necessary */
+    text-align: left;
+  }
+  
+  /* Ensure buttons stack nicely and have enough space */
+  .btn-primary, .btn-danger {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  /* Style the input fields for better alignment */
+  .form-control {
+    margin-bottom: 10px;
+  }
+  
+  /* Align checkboxes with labels */
+  .form-check {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .form-check-input {
+    margin-right: 10px;
+  }
+  
