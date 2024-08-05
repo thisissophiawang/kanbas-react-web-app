@@ -1,13 +1,12 @@
-//src/Kanbas/index.tsx
-
-import React, { useState, useEffect} from 'react';
+// src/Kanbas/index.tsx
+import React, { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router';
 import { Provider } from 'react-redux';
 import store from './store';
 import Dashboard from './Dashboard';
 import Courses from './Courses';
 import KanbasNavigation from './Navigation';
-import { courses as dbCourses } from './Database';
+import * as client from './Courses/client';
 import './styles.css'; // Ensure this path is correct
 
 interface Course {
@@ -23,7 +22,7 @@ interface Course {
 }
 
 export default function Kanbas() {
-  const [courses, setCourses] = useState<Course[]>(dbCourses);
+  const [courses, setCourses] = useState<Course[]>([]);
   const [course, setCourse] = useState<Course>({
     _id: "0",
     name: "New Course",
@@ -35,6 +34,18 @@ export default function Kanbas() {
     department: "New Department",
     credits: 3,
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await client.fetchAllCourses();
+        setCourses(data);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const addNewCourse = () => {
     const newCourse = { ...course, _id: new Date().getTime().toString(), image: "reactjs.jpg" };
