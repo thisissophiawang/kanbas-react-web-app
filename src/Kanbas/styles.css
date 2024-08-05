@@ -13,22 +13,53 @@ body * {
 }
 
 #wd-kanbas-navigation {
-  width: 120px;
+  width: 133px; /* Adjust this to fit the smaller logo */
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
+  background-color: #000; /* Ensure the background color of the navigation matches the design */
+  z-index: 2; /* Ensure the main navigation is on top */
+}
+
+.wd-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px; /* Fixed height for the logo container */
+  width: 100%; /* Ensure the container width is 100% of the navigation */
+  margin-bottom: 20px;
+}
+
+.wd-logo img {
+  width: 80%; /* Adjust width to ensure the logo fits within the container */
+  height: auto; /* Maintain the aspect ratio */
+}
+
+.wd-kanbas-navigation .nav-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: #fff; /* Ensure the text color is white for better visibility */
 }
 
 .wd-main-content-offset {
-  margin-left: 120px; /* Ensure this matches the width of the navigation */
+  margin-left: 150px; /* Ensure this matches the width of the navigation */
   flex-grow: 1;
   padding: 20px;
+  z-index: 1; /* Ensure the content is below the navigation */
+}
+
+#course-navigation {
+  position: relative;
+  margin-left: 100px; /* Adjust this value to move the course navigation to the right */
+  width: calc(100% - 160px); /* Ensure the width fits within the remaining space */
+  z-index: 1; /* Ensure the course navigation is below the main navigation */
 }
 
 @media (min-width: 768px) {
   .wd-main-content-offset {
-    padding-left: 140px !important;
+    padding-left: 20px !important; /* Adjust this to increase the white space */
   }
 }
 
@@ -77,4 +108,12 @@ body * {
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-bottom: 10px;
+}
+
+/* Ensure course navigation items do not overlap the main navigation */
+#course-navigation .nav-item {
+  padding: 20px;
+  color: #000; /* Ensure the text color is black for better visibility */
+  background-color: #fff; /* Ensure the background color is white for contrast */
+  border-bottom: 1px solid #ccc;
 }

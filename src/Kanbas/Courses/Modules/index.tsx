@@ -1,6 +1,4 @@
-//src/Kanbas/Courses/Modules/index.tsx
-
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { addModule, deleteModule, editModule, updateModule } from './reducer';
@@ -27,12 +25,12 @@ interface Module {
 
 export default function Modules() {
   const { cid } = useParams<{ cid: string }>();
-  const modules = useSelector((state: any) => state.modules.modules);
+  const modules = useSelector((state: any) => state.modules.modules || []);
   const dispatch = useDispatch();
   const [moduleName, setModuleName] = useState('');
 
   return (
-    <div className="ad-modules">
+    <div id="wd-modules">
       <ModulesControls
         moduleName={moduleName}
         setModuleName={setModuleName}
@@ -41,10 +39,10 @@ export default function Modules() {
           setModuleName('');
         }}
       />
-      <ul id="wd-modules" className="list-group rounded-0">
+      <ul className="list-group rounded-0">
         {modules
-          .filter((module: Module) => module.course === cid)
-          .map((module: Module) => (
+          .filter((module: any) => module.course === cid)
+          .map((module: any) => (
             <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray" key={module._id}>
               <div className="wd-title p-3 ps-2 bg-secondary text-white">
                 <BsGripVertical className="me-2 fs-3" />
@@ -71,7 +69,7 @@ export default function Modules() {
                 />
               </div>
               <ul className="wd-lessons list-group rounded-0">
-                {module.lessons.map((lesson: Lesson) => (
+                {module.lessons && module.lessons.map((lesson: any) => (
                   <li className="wd-lesson list-group-item p-3 ps-1" key={lesson._id}>
                     <BsGripVertical className="me-2 fs-3" />
                     {lesson.name}
