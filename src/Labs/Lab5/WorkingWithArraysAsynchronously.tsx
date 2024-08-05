@@ -17,7 +17,11 @@ export default function WorkingWithArraysAsynchronously() {
   const fetchTodos = async () => {
     try {
       const todos = await client.fetchTodos();
-      setTodos(todos);
+      if (Array.isArray(todos)) {
+        setTodos(todos);
+      } else {
+        console.error("Fetched todos is not an array:", todos);
+      }
     } catch (error) {
       console.error("Error fetching todos", error);
     }
@@ -36,8 +40,10 @@ export default function WorkingWithArraysAsynchronously() {
 
   const createTodo = async () => {
     try {
-      const todos = await client.createTodo();
-      setTodos(todos);
+      const newTodo = await client.createTodo();
+      if (newTodo) {
+        setTodos((prevTodos) => [...prevTodos, newTodo]);
+      }
     } catch (error) {
       console.error("Error creating todo", error);
     }
@@ -45,9 +51,7 @@ export default function WorkingWithArraysAsynchronously() {
 
   const postTodo = async () => {
     try {
-      console.log("Attempting to post a new todo");
       const newTodo = await client.postTodo({ title: "New Posted Todo", completed: false });
-      console.log("New todo posted successfully:", newTodo);
       setTodos((prevTodos) => [...prevTodos, newTodo]);
     } catch (error) {
       console.error("Error posting new todo", error);
@@ -56,7 +60,6 @@ export default function WorkingWithArraysAsynchronously() {
 
   const deleteTodo = async (todoId: number) => {
     try {
-      console.log("Attempting to delete todo", todoId);
       await client.deleteTodo(todoId);
       const newTodos = todos.filter((t) => t.id !== todoId);
       setTodos(newTodos);
@@ -68,7 +71,6 @@ export default function WorkingWithArraysAsynchronously() {
 
   const updateTodo = async (todo: Todo) => {
     try {
-      console.log("Attempting to update todo", todo);
       await client.updateTodo(todo);
       const updatedTodos = todos.map(t => t.id === todo.id ? todo : t);
       setTodos(updatedTodos);
@@ -129,9 +131,9 @@ export default function WorkingWithArraysAsynchronously() {
               )}
             </div>
             <div>
-            <FaTrash onClick={() => removeTodo(todo)} className="text-danger float-end mt-1 me-2" id="wd-remove-todo" />
-            <FaTimes onClick={() => deleteTodo(todo.id)} className="text-danger float-end fs-3 me-2" id="wd-delete-todo" />
               <FaPencilAlt onClick={() => editTodo(todo)} className="text-primary float-end me-2 mt-1" id="wd-edit-todo" />
+              <FaTimes onClick={() => deleteTodo(todo.id)} className="text-danger float-end fs-3 me-2" id="wd-delete-todo" />
+              <FaTrash onClick={() => removeTodo(todo)} className="text-danger float-end mt-1 me-2" id="wd-remove-todo" />
             </div>
           </li>
         ))}
