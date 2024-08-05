@@ -23,6 +23,7 @@ body * {
 .wd-main-content-offset {
   margin-left: 120px; /* Ensure this matches the width of the navigation */
   flex-grow: 1;
+  padding: 20px;
 }
 
 @media (min-width: 768px) {
@@ -58,4 +59,22 @@ body * {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 4px;
+}
+
+/* Style for course headers */
+.course-header {
+  background-color: #e0e0e0; /* Gray background for headers */
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+/* Style for course content */
+.course-content {
+  background-color: #fff; /* White background for content */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
