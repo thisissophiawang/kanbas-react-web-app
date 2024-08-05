@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
 import * as client from "./client";
-import { FaPlusCircle, FaTrash, FaTimes } from "react-icons/fa";
+import { FaPlusCircle, FaTrash, FaTimes, FaPencilAlt } from "react-icons/fa";
 import './WorkingWithArraysAsynchronously.css';
 
+interface Todo {
+  id: number;
+  title: string;
+  completed: boolean;
+  editing?: boolean;
+}
+
 export default function WorkingWithArraysAsynchronously() {
-  const [todos, setTodos] = useState<any[]>([]);
+  const [todos, setTodos] = useState<Todo[]>([]);
 
   const fetchTodos = async () => {
     try {
@@ -15,7 +22,7 @@ export default function WorkingWithArraysAsynchronously() {
     }
   };
 
-  const removeTodo = async (todo: any) => {
+  const removeTodo = async (todo: Todo) => {
     try {
       const updatedTodos = await client.removeTodo(todo);
       setTodos(updatedTodos);
@@ -40,11 +47,11 @@ export default function WorkingWithArraysAsynchronously() {
       console.log("New todo posted successfully:", newTodo);
       setTodos((prevTodos) => [...prevTodos, newTodo]);
     } catch (error) {
-      console.error("Error posting new todo:", error);
+      console.error("Error posting new todo", error);
     }
   };
 
-  const deleteTodo = async (todoId: any) => {
+  const deleteTodo = async (todoId: number) => {
     try {
       console.log("Attempting to delete todo", todoId);
       await client.deleteTodo(todoId);
@@ -53,6 +60,22 @@ export default function WorkingWithArraysAsynchronously() {
     } catch (error) {
       console.error("Error deleting todo", error);
     }
+  };
+
+  const updateTodo = async (todo: Todo) => {
+    try {
+      console.log("Attempting to update todo", todo);
+      await client.updateTodo(todo);
+      const updatedTodos = todos.map(t => t.id === todo.id ? todo : t);
+      setTodos(updatedTodos);
+    } catch (error) {
+      console.error("Error updating todo", error);
+    }
+  };
+
+  const editTodo = (todo: Todo) => {
+    const updatedTodos = todos.map(t => t.id === todo.id ? { ...t, editing: true } : t);
+    setTodos(updatedTodos);
   };
 
   useEffect(() => {
@@ -73,18 +96,34 @@ export default function WorkingWithArraysAsynchronously() {
                 type="checkbox"
                 className="form-check-input me-2"
                 defaultChecked={todo.completed}
+                onChange={(e) => updateTodo({ ...todo, completed: e.target.checked })}
               />
-              <span
-                style={{
-                  textDecoration: todo.completed ? "line-through" : "none",
-                }}
-              >
-                {todo.title}
-              </span>
+              {todo.editing ? (
+                <input
+                  className="form-control w-50 float-start"
+                  defaultValue={todo.title}
+                  onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                    if (e.key === "Enter") {
+                      updateTodo({ ...todo, title: (e.target as HTMLInputElement).value, editing: false });
+                    }
+                  }}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateTodo({ ...todo, title: e.target.value })}
+                />
+              ) : (
+                <span
+                  style={{
+                    textDecoration: todo.completed ? "line-through" : "none",
+                  }}
+                >
+                  {todo.title}
+                </span>
+              )}
             </div>
             <div>
-              <FaTrash onClick={() => removeTodo(todo)} className="text-danger float-end mt-1 me-2" id="wd-remove-todo" />
+            <FaTrash onClick={() => removeTodo(todo)} className="text-danger float-end mt-1 me-2" id="wd-remove-todo" />
               <FaTimes onClick={() => deleteTodo(todo.id)} className="text-danger float-end fs-3 me-2" id="wd-delete-todo" />
+              <FaPencilAlt onClick={() => editTodo(todo)} className="text-primary float-end me-2 mt-1" id="wd-edit-todo" />
+
             </div>
           </li>
         ))}
