@@ -20,6 +20,7 @@ export const updateTitle = async (title: string) => {
 };
 
 const TODOS_API = `${REMOTE_SERVER}/a5/todos`;
+
 export const fetchTodos = async () => {
   const response = await axios.get(TODOS_API);
   return response.data;
@@ -30,8 +31,12 @@ export const removeTodo = async (todo: any) => {
   return response.data;
 };
 
-// New function to create a new todo
 export const createTodo = async () => {
   const response = await axios.get(`${TODOS_API}/create`);
+  return response.data;
+};
+
+export const postTodo = async (todo: any) => {
+  const response = await axios.post(TODOS_API, todo);
   return response.data;
 };

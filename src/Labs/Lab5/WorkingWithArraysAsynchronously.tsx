@@ -33,6 +33,17 @@ export default function WorkingWithArraysAsynchronously() {
     }
   };
 
+  const postTodo = async () => {
+    try {
+      console.log("Attempting to post a new todo");
+      const newTodo = await client.postTodo({ title: "New Posted Todo", completed: false });
+      console.log("New todo posted successfully:", newTodo);
+      setTodos((prevTodos) => [...prevTodos, newTodo]);
+    } catch (error) {
+      console.error("Error posting new todo:", error);
+    }
+  };
+
   useEffect(() => {
     fetchTodos();
   }, []);
@@ -42,6 +53,7 @@ export default function WorkingWithArraysAsynchronously() {
       <h3>Working with Arrays Asynchronously</h3>
       <h4>Todos</h4>
       <FaPlusCircle onClick={createTodo} className="text-success float-end fs-3" id="wd-create-todo" />
+      <FaPlusCircle onClick={postTodo} className="text-primary float-end fs-3 me-3" id="wd-post-todo" />
       <ul className="list-group">
         {todos.map((todo) => (
           <li key={todo.id} className="list-group-item d-flex justify-content-between align-items-center">
