@@ -65,7 +65,12 @@ export default function Dashboard({ courses, course, setCourse, addNewCourse, de
             <div key={course._id} className="wd-dashboard-course col" style={{ width: "300px" }}>
               <div className="card new-card">
                 <Link className="wd-dashboard-course-link text-decoration-none text-dark" to={`/Kanbas/Courses/${course._id}/Home`}>
-                  <img src={`/images/${course.image}`} width="100%" alt={course.name} onError={(e) => e.currentTarget.src = '/images/default.jpg'} />
+                  <img 
+                    src={`/images/${course.image || 'reactjs.jpg'}`} 
+                    width="100%" 
+                    alt={course.name} 
+                    onError={(e) => e.currentTarget.src = '/images/reactjs.jpg'} 
+                  />
                   <div className="card-body">
                     <h5 className="wd-dashboard-course-title card-title mt-2">{course.name}</h5>
                     <p className="card-text">{course.description}</p>

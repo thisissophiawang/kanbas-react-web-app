@@ -1,4 +1,3 @@
-// src/Kanbas/index.tsx
 import React, { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router';
 import { Provider } from 'react-redux';
@@ -47,28 +46,42 @@ export default function Kanbas() {
     fetchData();
   }, []);
 
-  const addNewCourse = () => {
-    const newCourse = { ...course, _id: new Date().getTime().toString(), image: "reactjs.jpg" };
-    setCourses([...courses, newCourse]);
+  const addNewCourse = async () => {
+    try {
+      const newCourse = await client.createCourse(course);
+      setCourses([...courses, newCourse]);
+    } catch (error) {
+      console.error("Error creating course:", error);
+    }
   };
 
-  const deleteCourse = (courseId: string) => {
-    setCourses(courses.filter((course) => course._id !== courseId));
+  const deleteCourse = async (courseId: string) => {
+    try {
+      await client.deleteCourse(courseId);
+      setCourses(courses.filter((course) => course._id !== courseId));
+    } catch (error) {
+      console.error("Error deleting course:", error);
+    }
   };
 
-  const updateCourse = () => {
-    setCourses(courses.map((c) => (c._id === course._id ? course : c)));
-    setCourse({
-      _id: "0",
-      name: "New Course",
-      number: "New Number",
-      startDate: "2023-09-10",
-      endDate: "2023-12-15",
-      image: "reactjs.jpg",
-      description: "New Description",
-      department: "New Department",
-      credits: 3,
-    });
+  const updateCourse = async () => {
+    try {
+      await client.updateCourse(course);
+      setCourses(courses.map((c) => (c._id === course._id ? course : c)));
+      setCourse({
+        _id: "0",
+        name: "New Course",
+        number: "New Number",
+        startDate: "2023-09-10",
+        endDate: "2023-12-15",
+        image: "reactjs.jpg",
+        description: "New Description",
+        department: "New Department",
+        credits: 3,
+      });
+    } catch (error) {
+      console.error("Error updating course:", error);
+    }
   };
 
   return (
@@ -77,16 +90,19 @@ export default function Kanbas() {
         <KanbasNavigation />
         <div className="wd-main-content-offset p-3 flex-grow-1">
           <Routes>
-            <Route path="Dashboard" element={
-              <Dashboard
-                courses={courses}
-                course={course}
-                setCourse={setCourse}
-                addNewCourse={addNewCourse}
-                deleteCourse={deleteCourse}
-                updateCourse={updateCourse}
-              />
-            } />
+            <Route
+              path="Dashboard"
+              element={
+                <Dashboard
+                  courses={courses}
+                  course={course}
+                  setCourse={setCourse}
+                  addNewCourse={addNewCourse}
+                  deleteCourse={deleteCourse}
+                  updateCourse={updateCourse}
+                />
+              }
+            />
             <Route path="Courses/*" element={<Courses courses={courses} />} />
           </Routes>
         </div>
