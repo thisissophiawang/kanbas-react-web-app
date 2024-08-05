@@ -22,8 +22,9 @@ export default function WorkingWithArraysAsynchronously() {
       } else {
         console.error("Fetched todos is not an array:", todos);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error fetching todos", error);
+      setErrorMessage(error.response?.data?.message || "Error fetching todos");
     }
   };
 
@@ -34,7 +35,7 @@ export default function WorkingWithArraysAsynchronously() {
       setTodos(updatedTodos);
     } catch (error: any) {
       console.error("Error removing todo", error);
-      setErrorMessage(error.response.data.message);
+      setErrorMessage(error.response?.data?.message || "Error removing todo");
     }
   };
 
@@ -44,8 +45,9 @@ export default function WorkingWithArraysAsynchronously() {
       if (newTodo) {
         setTodos((prevTodos) => [...prevTodos, newTodo]);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error creating todo", error);
+      setErrorMessage(error.response?.data?.message || "Error creating todo");
     }
   };
 
@@ -53,8 +55,9 @@ export default function WorkingWithArraysAsynchronously() {
     try {
       const newTodo = await client.postTodo({ title: "New Posted Todo", completed: false });
       setTodos((prevTodos) => [...prevTodos, newTodo]);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error posting new todo", error);
+      setErrorMessage(error.response?.data?.message || "Error posting new todo");
     }
   };
 
@@ -65,7 +68,7 @@ export default function WorkingWithArraysAsynchronously() {
       setTodos(newTodos);
     } catch (error: any) {
       console.error("Error deleting todo", error);
-      setErrorMessage(error.response.data.message);
+      setErrorMessage(error.response?.data?.message || "Error deleting todo");
     }
   };
 
@@ -74,8 +77,9 @@ export default function WorkingWithArraysAsynchronously() {
       await client.updateTodo(todo);
       const updatedTodos = todos.map(t => t.id === todo.id ? todo : t);
       setTodos(updatedTodos);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error updating todo", error);
+      setErrorMessage(error.response?.data?.message || "Error updating todo");
     }
   };
 
@@ -96,9 +100,11 @@ export default function WorkingWithArraysAsynchronously() {
           {errorMessage}
         </div>
       )}
-      <h4>Todos</h4>
-      <FaPlusCircle onClick={createTodo} className="text-success float-end fs-3" id="wd-create-todo" />
-      <FaPlusCircle onClick={postTodo} className="text-primary float-end fs-3 me-3" id="wd-post-todo" />
+      <h4>
+        Todos
+        <FaPlusCircle onClick={createTodo} className="text-success float-end fs-3" id="wd-create-todo" />
+        <FaPlusCircle onClick={postTodo} className="text-primary float-end fs-3 me-3" id="wd-post-todo" />
+      </h4>
       <ul className="list-group">
         {todos.map((todo) => (
           <li key={todo.id} className="list-group-item d-flex justify-content-between align-items-center">
@@ -131,9 +137,10 @@ export default function WorkingWithArraysAsynchronously() {
               )}
             </div>
             <div>
-              <FaPencilAlt onClick={() => editTodo(todo)} className="text-primary float-end me-2 mt-1" id="wd-edit-todo" />
+            <FaTrash onClick={() => removeTodo(todo)} className="text-danger float-end mt-1 me-2" id="wd-remove-todo" />
               <FaTimes onClick={() => deleteTodo(todo.id)} className="text-danger float-end fs-3 me-2" id="wd-delete-todo" />
-              <FaTrash onClick={() => removeTodo(todo)} className="text-danger float-end mt-1 me-2" id="wd-remove-todo" />
+              <FaPencilAlt onClick={() => editTodo(todo)} className="text-primary float-end me-2 mt-1" id="wd-edit-todo" />
+
             </div>
           </li>
         ))}
