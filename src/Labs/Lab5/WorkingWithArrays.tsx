@@ -27,9 +27,17 @@ export default function WorkingWithArrays() {
                     Get Completed Todos
                 </a>
                 <h4>Deleting from an Array</h4>
-                <a className="btn btn-primary mb-2" href={`${API}/${todo.id}/delete`}>
-                    Delete Todo with ID = {todo.id}
-                </a>
+                <div className="input-group mb-2">
+                    <input
+                        className="form-control"
+                        value={todo.id}
+                        onChange={(e) => setTodo({ ...todo, id: e.target.value })}
+                        placeholder="Enter Todo ID"
+                    />
+                    <a className="btn btn-primary ms-2" href={`${API}/${todo.id}/delete`}>
+                        Delete Todo with ID = {todo.id}
+                    </a>
+                </div>
                 <h4>Retrieving an Item from an Array by ID</h4>
                 <div className="input-group mb-2">
                     <input
@@ -64,6 +72,7 @@ export default function WorkingWithArrays() {
                         Update Todo
                     </a>
                 </div>
+                <h4>Updating Description and Completed Status</h4>
                 <div className="input-group mb-2">
                     <input
                         className="form-control w-50 float-start me-2"
@@ -76,9 +85,7 @@ export default function WorkingWithArrays() {
                     </a>
                 </div>
                 <div className="input-group mb-2">
-                    <label className="form-check-label me-2" htmlFor="completedCheckbox">Completed:</label>
                     <input
-                        id="completedCheckbox"
                         type="checkbox"
                         className="form-check-input me-2"
                         checked={todo.completed}
