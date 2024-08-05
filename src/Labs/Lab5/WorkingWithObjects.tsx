@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './WorkingWithObjects.css';  // Assuming you have a CSS file for additional styles
 
 function WorkingWithObjects() {
   const [assignment, setAssignment] = useState({
@@ -24,69 +25,71 @@ function WorkingWithObjects() {
   return (
     <div className="container mt-3">
       <h3>Working With Objects</h3>
-      <h4>Retrieving Objects</h4>
-      <div className="d-flex flex-column align-items-start">
-        <a className="btn btn-primary mb-2" href={`${ASSIGNMENT_URL}`}>
-          Get Assignment
-        </a>
-        <a className="btn btn-primary mb-2" href={`${ASSIGNMENT_URL}/title`}>
-          Get Title
-        </a>
-        <a className="btn btn-primary mb-2" href={`${MODULE_URL}`}>
-          Get Module
-        </a>
-        <a className="btn btn-primary mb-2" href={`${MODULE_URL}/name`}>
-          Get Module Name
-        </a>
-      </div>
-      <h4>Modifying Properties</h4>
-      <div className="d-flex flex-column align-items-start">
-        <a className="btn btn-primary mb-2" href={`${ASSIGNMENT_URL}/title/${assignment.title}`}>
-          Update Title
-        </a>
-        <input
-          className="form-control mt-2"
-          type="text"
-          onChange={(e) =>
-            setAssignment({ ...assignment, title: e.target.value })
-          }
-          value={assignment.title}
-          placeholder="Enter new title"
-        />
-        <input
-          className="form-control mt-2"
-          type="number"
-          onChange={(e) =>
-            setAssignment({ ...assignment, score: parseInt(e.target.value) })
-          }
-          value={assignment.score}
-          placeholder="Enter new score"
-        />
-        <div className="form-check mt-2">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            onChange={(e) =>
-              setAssignment({ ...assignment, completed: e.target.checked })
-            }
-            checked={assignment.completed}
-          />
-          <label className="form-check-label">
-            Completed
-          </label>
+      <div className="text-start">
+        <h4>Retrieving Objects</h4>
+        <div className="d-flex flex-column align-items-start">
+          <a className="btn btn-primary mb-2" href={`${ASSIGNMENT_URL}`}>
+            Get Assignment
+          </a>
+          <a className="btn btn-primary mb-2" href={`${ASSIGNMENT_URL}/title`}>
+            Get Title
+          </a>
+          <a className="btn btn-primary mb-2" href={`${MODULE_URL}`}>
+            Get Module
+          </a>
+          <a className="btn btn-primary mb-2" href={`${MODULE_URL}/name`}>
+            Get Module Name
+          </a>
         </div>
-        <a className="btn btn-primary mb-2" href={`${MODULE_URL}/update/${module.name}`}>
-          Update Module Name
-        </a>
-        <input
-          className="form-control mt-2"
-          type="text"
-          onChange={(e) =>
-            setModule({ ...module, name: e.target.value })
-          }
-          value={module.name}
-          placeholder="Enter new module name"
-        />
+        <h4>Modifying Properties</h4>
+        <div className="d-flex flex-column align-items-start">
+          <a className="btn btn-primary mb-2" href={`${ASSIGNMENT_URL}/title/${assignment.title}`}>
+            Update Title
+          </a>
+          <input
+            className="form-control mt-2"
+            type="text"
+            onChange={(e) =>
+              setAssignment({ ...assignment, title: e.target.value })
+            }
+            value={assignment.title}
+            placeholder="Enter new title"
+          />
+          <input
+            className="form-control mt-2"
+            type="number"
+            onChange={(e) =>
+              setAssignment({ ...assignment, score: parseInt(e.target.value) })
+            }
+            value={assignment.score}
+            placeholder="Enter new score"
+          />
+          <div className="form-check mt-2">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              onChange={(e) =>
+                setAssignment({ ...assignment, completed: e.target.checked })
+              }
+              checked={assignment.completed}
+            />
+            <label className="form-check-label">
+              Completed
+            </label>
+          </div>
+          <a className="btn btn-primary mb-2" href={`${MODULE_URL}/update/${module.name}`}>
+            Update Module Name
+          </a>
+          <input
+            className="form-control mt-2"
+            type="text"
+            onChange={(e) =>
+              setModule({ ...module, name: e.target.value })
+            }
+            value={module.name}
+            placeholder="Enter new module name"
+          />
+        </div>
       </div>
     </div>
   );

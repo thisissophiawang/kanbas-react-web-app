@@ -1,4 +1,3 @@
-// src/Labs/Lab5/index.tsx
 import React from 'react';
 import EncodingParametersInURLs from './EncodingParameterslnURLs';
 import EnvironmentVariables from './EnvironmentVariables';
@@ -14,10 +13,9 @@ export default function Lab5() {
             <a href={`${REMOTE_SERVER}/lab5`}>Hello</a>
             <EnvironmentVariables />
             <h2>Calculator</h2>
-            <WorkingWithArrays />
             <EncodingParametersInURLs />
+            <WorkingWithArrays />
             <WorkingWithObjects />
-            
         </div>
     );
 }
