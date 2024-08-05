@@ -18,3 +18,10 @@ export const updateTitle = async (title: string) => {
   const response = await axios.get(`${ASSIGNMENT_API}/title/${title}`);
   return response.data;
 };
+
+// New function to fetch todos
+const TODOS_API = `${REMOTE_SERVER}/a5/todos`;
+export const fetchTodos = async () => {
+  const response = await axios.get(TODOS_API);
+  return response.data;
+};
