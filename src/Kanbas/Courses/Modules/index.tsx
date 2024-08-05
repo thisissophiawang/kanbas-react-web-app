@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, {useState, useEffect} from 'react';
 import { useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
-import { addModule, deleteModule, editModule, updateModule } from './reducer';
+import { setModules,addModule, deleteModule, editModule, updateModule } from './reducer';
 import ModulesControls from './ModulesControls';
 import LessonControlButtons from './LessonControlButtons';
 import ModuleControlButtons from './ModuleControlButtons';
@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './Modules.css';
 import { BsGripVertical } from 'react-icons/bs';
+import * as client from './client';
 
 interface Lesson {
   _id: string;
@@ -27,6 +28,19 @@ export default function Modules() {
   const { cid } = useParams<{ cid: string }>();
   const modules = useSelector((state: any) => state.modules.modules || []);
   const dispatch = useDispatch();
+  const createModule = async (module: any) => {
+    const newModule = await client.createModule(cid as string, module);
+    dispatch(addModule(newModule));
+  };
+
+  const fetchModules = async () => {
+    const modules = await client.findModulesForCourse(cid as string);
+    dispatch(setModules(modules));
+  };
+  useEffect(() => {
+    fetchModules();
+  }, []);
+
   const [moduleName, setModuleName] = useState('');
 
   return (
@@ -35,7 +49,7 @@ export default function Modules() {
         moduleName={moduleName}
         setModuleName={setModuleName}
         addModule={() => {
-          dispatch(addModule({ name: moduleName, course: cid }));
+          createModule({ name: moduleName, course: cid });
           setModuleName('');
         }}
       />

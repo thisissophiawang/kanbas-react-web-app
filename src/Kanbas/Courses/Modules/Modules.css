@@ -19,6 +19,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  color: black; /* 设置模块标题的文字颜色为黑色 */
 }
 
 .wd-lessons {
