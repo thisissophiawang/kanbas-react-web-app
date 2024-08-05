@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as client from "./client";
-import { FaPlusCircle } from "react-icons/fa";
+import { FaPlusCircle, FaTrash, FaTimes } from "react-icons/fa";
 import './WorkingWithArraysAsynchronously.css';
 
 export default function WorkingWithArraysAsynchronously() {
@@ -44,6 +44,17 @@ export default function WorkingWithArraysAsynchronously() {
     }
   };
 
+  const deleteTodo = async (todoId: any) => {
+    try {
+      console.log("Attempting to delete todo", todoId);
+      await client.deleteTodo(todoId);
+      const newTodos = todos.filter((t) => t.id !== todoId);
+      setTodos(newTodos);
+    } catch (error) {
+      console.error("Error deleting todo", error);
+    }
+  };
+
   useEffect(() => {
     fetchTodos();
   }, []);
@@ -71,12 +82,10 @@ export default function WorkingWithArraysAsynchronously() {
                 {todo.title}
               </span>
             </div>
-            <button
-              className="btn btn-danger"
-              onClick={() => removeTodo(todo)}
-            >
-              Remove
-            </button>
+            <div>
+              <FaTrash onClick={() => removeTodo(todo)} className="text-danger float-end mt-1 me-2" id="wd-remove-todo" />
+              <FaTimes onClick={() => deleteTodo(todo.id)} className="text-danger float-end fs-3 me-2" id="wd-delete-todo" />
+            </div>
           </li>
         ))}
       </ul>
