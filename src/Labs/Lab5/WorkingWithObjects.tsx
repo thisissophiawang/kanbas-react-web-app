@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './WorkingWithObjects.css';  // Assuming you have a CSS file for additional styles
 
 function WorkingWithObjects() {
   const [assignment, setAssignment] = useState({

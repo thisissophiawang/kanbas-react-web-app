@@ -19,9 +19,19 @@ export const updateTitle = async (title: string) => {
   return response.data;
 };
 
-// New function to fetch todos
 const TODOS_API = `${REMOTE_SERVER}/a5/todos`;
 export const fetchTodos = async () => {
   const response = await axios.get(TODOS_API);
+  return response.data;
+};
+
+export const removeTodo = async (todo: any) => {
+  const response = await axios.get(`${TODOS_API}/${todo.id}/delete`);
+  return response.data;
+};
+
+// New function to create a new todo
+export const createTodo = async () => {
+  const response = await axios.get(`${TODOS_API}/create`);
   return response.data;
 };
