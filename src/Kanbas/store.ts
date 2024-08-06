@@ -5,8 +5,8 @@ import assignmentsReducer from './Courses/Assignments/reducer'; // Import the as
 
 const store = configureStore({
   reducer: {
-    modulesReducer,
-    assignmentsReducer, // Add the assignments reducer
+    modules: modulesReducer,
+    assignments: assignmentsReducer, // Add the assignments reducer
   },
 });
 
