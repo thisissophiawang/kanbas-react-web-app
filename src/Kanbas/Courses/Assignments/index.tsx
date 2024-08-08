@@ -1,5 +1,6 @@
 //Users/sophiawang/2024/summer/webdev/kanbas-react-web-app/src/Kanbas/Courses/Assignments/index.tsx
 //index file for Assignments component
+//This component is a container for AssignmentEditor component
 import React, { useEffect } from 'react';
 import { useParams, Link, Routes, Route, useNavigate } from 'react-router-dom';
 import AssignmentEditor from './Editor';
