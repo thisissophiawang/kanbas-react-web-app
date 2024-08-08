@@ -1,17 +1,51 @@
-// src/Kanbas/Courses/Assignments/index.tsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, Link, Routes, Route, useNavigate } from 'react-router-dom';
 import AssignmentEditor from './Editor';
 import { FaSearch, FaPlus, FaCheckCircle, FaEllipsisV, FaPen, FaTrash } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteAssignment } from './reducer';
 import './Assignments.css';
+import { addAssignment, deleteAssignment, updateAssignment, setAssignments } from "./reducer";
+import * as client from "./client";
 
 export default function Assignments() {
-  const { cid } = useParams<{ cid: string }>(); // Get the current course ID
-  const assignments = useSelector((state: any) => state.assignments.assignments.filter((assignment: any) => assignment.course === cid)); // Filter assignments by course ID
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Hook to navigate programmatically
+  const { cid } = useParams<{ cid: string }>();
+  // const assignments = useSelector((state: any) => state.assignments.assignments.filter((assignment: any) => assignment.course === cid));
+  const assignments = useSelector((state: any) => state.assignmentsReducer.assignments);
+  const navigate = useNavigate();
+
+  // Fetch assignments
+  const fetchAssignments = async () => {
+    const assignments = await client.findAssignmentsForCourse(cid as string);
+    dispatch(setAssignments(assignments));
+  };
+
+  useEffect(() => {
+    fetchAssignments();
+  }, [cid]);
+
+  // Create assignment
+  const createAssignment = async () => {
+    const assignment = {
+      title: "New Assignment",
+      course: cid,
+    };
+    const newAssignment = await client.createAssignment(cid as string, assignment);
+    dispatch(addAssignment(newAssignment));
+    navigate(newAssignment._id);
+  };
+
+  // Delete assignment
+  const DeleteAssignment = async (assignmentId: string) => {
+    await client.deleteAssignment(assignmentId);
+    dispatch(deleteAssignment(assignmentId));
+  };
+
+  // Update assignment
+  const handleUpdateAssignment = async (assignment: any) => {
+    await client.updateAssignment(assignment);
+    dispatch(updateAssignment(assignment));
+  };
 
   return (
     <div id="wd-assignments">
@@ -37,7 +71,7 @@ export default function Assignments() {
         </div>
       </div>
       <ul id="wd-assignment-list">
-        {assignments.map((assignment: any) => (
+        {assignments.filter((a: any) => a.course === cid).map((assignment: any) => (
           <li key={assignment._id} className="wd-assignment-list-item">
             <div className="wd-assignment-item-header">
               <FaPen className="wd-pen-icon" />
@@ -49,15 +83,15 @@ export default function Assignments() {
                 className="wd-trash-icon" 
                 onClick={() => {
                   if (window.confirm("Are you sure you want to delete this assignment?")) {
-                    dispatch(deleteAssignment(assignment._id));
+                    DeleteAssignment(assignment._id);
                   }
                 }} 
               />
             </div>
             <div className="wd-assignment-item-details">
-              <span className="wd-multiple-modules">Multiple Modules</span> | Not available until May 6 at 12:00am |
+              <span className="wd-multiple-modules">Multiple Modules</span> | Not available until {assignment.availableFrom} at {assignment.availableUntil} |
               <br />
-              Due May 13 at 11:59pm | 100 pts
+              Due {assignment.dueDate} at 11:59pm | {assignment.points} pts
             </div>
           </li>
         ))}
