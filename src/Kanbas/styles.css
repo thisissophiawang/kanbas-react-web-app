@@ -13,7 +13,7 @@ body * {
 }
 
 #wd-kanbas-navigation {
-  width: 133px; /* Adjust this to fit the smaller logo */
+  width: 135px; /* Adjust this to fit the smaller logo */
   position: fixed;
   top: 0;
   bottom: 0;
