@@ -87,8 +87,10 @@ export default function PeopleTable() {
             <tr key={user._id}>
               <td className="wd-full-name text-nowrap">
                 <Link to={`/Kanbas/Courses/${cid}/People/${user._id}`}>
-                <span className="wd-first-name">{user.firstName}</span>
-                <span className="wd-last-name">{user.lastName}</span>
+                <span className="wd-first-name">{user.firstName}</span>{" "}
+                <span className="wd-last-name">{user.lastName}</span>{" "}
+                <span className="wd-first-name">({user.username}</span>
+                <span className="wd-last-name">{user.password})</span>
                 </Link>
               </td>
               <td className="wd-login-id">{user.loginId}</td>
