@@ -12,6 +12,16 @@ export default function PeopleTable() {
       fetchUsers();
     }
   };
+  const [name, setName] = useState("");
+  const filterUsersByName = async (name: string) => {
+    setName(name);
+    if (name) {
+      const users = await client.findUsersByPartialName(name);
+      setUsers(users);
+    } else {
+      fetchUsers();
+    }
+  };
 
   const fetchUsers = async () => {
     const users = await client.findAllUsers();
