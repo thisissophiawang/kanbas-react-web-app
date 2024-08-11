@@ -5,7 +5,8 @@ export default function Signup() {
   const [user, setUser] = useState<any>({});
   const navigate = useNavigate();
   const signup = async () => {
-    await client.signup(user);
+    //await client.signup(user);
+    await client.signup({...user,email:'${user.username}@neu.edu'});
     navigate("/Kanbas/Account/Profile");
   };
   return (
