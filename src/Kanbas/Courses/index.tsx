@@ -9,6 +9,7 @@ import Grades from './Grades/Grades';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaAlignJustify } from 'react-icons/fa';
 import KanbasNavigation from '../Navigation';
+import PeopleTable from './People/Table';
 
 type Breadcrumbs = {
   Home: string;
@@ -72,6 +73,8 @@ export default function Courses({ courses }: CoursesProps) {
           <Route path="Assignments/:id" element={<AssignmentEditor />} />
           <Route path="Quizzes" element={<h1>Quizzes</h1>} />
           <Route path="Grades" element={<Grades />} />
+          <Route path="People" element={<PeopleTable />} />
+
         </Routes>
       </div>
     </div>
