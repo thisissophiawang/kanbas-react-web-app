@@ -74,6 +74,7 @@ export default function Courses({ courses }: CoursesProps) {
           <Route path="Quizzes" element={<h1>Quizzes</h1>} />
           <Route path="Grades" element={<Grades />} />
           <Route path="People" element={<PeopleTable />} />
+          <Route path="People/:uid" element={<PeopleTable />} /> 
 
         </Routes>
       </div>

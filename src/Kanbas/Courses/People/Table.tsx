@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as client from "./client";
+import PeopleDetails from "./details";
 export default function PeopleTable() {
   const [users, setUsers] = useState<any[]>([]);
   const [role, setRole] = useState("");
@@ -32,11 +33,12 @@ export default function PeopleTable() {
   }, []);
   return (
     <div id="wd-people-table">
+      <PeopleDetails />
       <input placeholder="Search people" onChange={
                (e) => filterUsersByName(e.target.value)}
              className="form-control float-start w-25 me-2"
       />
-      
+
        <select value={role}
               onChange={(e) =>filterUsersByRole(e.target.value)}
               className="form-select float-start w-25" >
