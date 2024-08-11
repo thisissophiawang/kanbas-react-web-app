@@ -26,3 +26,4 @@ export const deleteUser
       axios.delete( `${USERS_API}/${userId}` );
     return response.data;
 };
+
