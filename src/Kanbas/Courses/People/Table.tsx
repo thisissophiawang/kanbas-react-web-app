@@ -36,7 +36,7 @@ export default function PeopleTable() {
   }, []);
   return (
     <div id="wd-people-table">
-      <PeopleDetails />
+      <PeopleDetails fetchUsers={fetchUsers}/>
       <input placeholder="Search people" onChange={
                (e) => filterUsersByName(e.target.value)}
              className="form-control float-start w-25 me-2"
