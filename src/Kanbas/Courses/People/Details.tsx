@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { FaUserCircle } from "react-icons/fa";
+import { FaPencil } from "react-icons/fa6";
+import { FaCheck,FaUserCircle } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
 import { useNavigate,useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -12,6 +13,18 @@ export default function PeopleDetails({
   const { uid, cid } = useParams();
   const [user, setUser] = useState<any>({});
   const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [editing, setEditing] = useState(false);
+  const saveUser = async () => {
+    const [firstName, lastName] = name.split(" ");
+    const updatedUser = { ...user, firstName, lastName };
+    await client.updateUser(updatedUser);
+    setUser(updatedUser);
+    setEditing(false);
+    fetchUsers();
+    navigate(`/Kanbas/Courses/${cid}/People`);
+  };
+
   const deleteUser = async (uid: string) => {
     await client.deleteUser(uid);
     fetchUsers();
