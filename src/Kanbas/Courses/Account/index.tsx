@@ -1,6 +1,8 @@
+//Users/sophiawang/2024/summer/webdev/kanbas-react-web-app/src/Kanbas/Courses/Account/index.tsx
 import { Routes, Route, Navigate } from "react-router-dom";
 import Signin from "./Signin";
 import AccountNavigation from "./Navigation";
+
 import { useSelector } from "react-redux";
 export default function Account() {
   return (

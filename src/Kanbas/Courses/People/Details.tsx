@@ -1,3 +1,4 @@
+//Users/sophiawang/2024/summer/webdev/kanbas-react-web-app/src/Kanbas/Courses/People/Details.tsx
 import { useEffect, useState } from "react";
 import { FaPencil } from "react-icons/fa6";
 import { FaCheck,FaUserCircle } from "react-icons/fa";

@@ -1,3 +1,4 @@
+//Users/sophiawang/2024/summer/webdev/kanbas-react-web-app/src/Kanbas/Courses/Account/Navigation/index.tsx
 import { Link, useLocation, useParams } from "react-router-dom";
 export default function AccountNavigation() {
   const links = ["Signin", "Signup", "Profile"];

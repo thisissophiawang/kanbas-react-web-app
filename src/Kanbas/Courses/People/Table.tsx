@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import{Link, useParams} from "react-router-dom";
 import * as client from "./client";
-import PeopleDetails from "./details";
+import PeopleDetails from "./Details";
 import { FaPlus } from "react-icons/fa";
 export default function PeopleTable() {
 

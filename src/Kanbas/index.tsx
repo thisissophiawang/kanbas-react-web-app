@@ -6,7 +6,9 @@ import Dashboard from './Dashboard';
 import Courses from './Courses';
 import KanbasNavigation from './Navigation';
 import * as client from './Courses/client';
-import './styles.css'; // Ensure this path is correct
+import './styles.css'; 
+import Account from './Courses/Account'; //new import for Account
+
 
 interface Course {
   _id: string;
@@ -90,6 +92,9 @@ export default function Kanbas() {
         <KanbasNavigation />
         <div className="wd-main-content-offset p-3 flex-grow-1">
           <Routes>
+          <Route
+              path="Account/*" element={<Account />} //Add Account routing configuration,Specify the Account component as an element of the route
+            />
             <Route
               path="Dashboard"
               element={
