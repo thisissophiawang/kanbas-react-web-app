@@ -49,7 +49,25 @@ export default function PeopleDetails({
       <div className="text-center mt-2">
         <FaUserCircle className="text-secondary me-2 fs-1"/></div><hr/>
       <div className="text-danger fs-4 wd-name">
-        {user.firstName} {user.lastName} </div>
+      {!editing && (
+          <FaPencil onClick={() => setEditing(true)}
+              className="float-end fs-5 mt-2 wd-edit" /> )}
+        {editing && (
+          <FaCheck onClick={() => saveUser()}
+              className="float-end fs-5 mt-2 me-2 wd-save" /> )}
+        {!editing && (
+          <div className="wd-name"
+               onClick={() => setEditing(true)}>
+            {user.firstName} {user.lastName}</div>)}
+        {user && editing && (
+          <input className="form-control w-50 wd-edit-name"
+            defaultValue={`${user.firstName} ${user.lastName}`}
+            onChange={(e) => setName(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") { saveUser(); }}}
+          />
+        )}
+        </div>
       <b>Roles:</b>   <span> {user.role}         </span> <br />
       <b>Login ID:</b><span> {user.loginId}      </span> <br />
       <b>Section:</b> <span> {user.section}      </span> <br />
