@@ -2,6 +2,17 @@ import React, { useState, useEffect } from "react";
 import * as client from "./client";
 export default function PeopleTable() {
   const [users, setUsers] = useState<any[]>([]);
+  const [role, setRole] = useState("");
+  const filterUsersByRole = async (role: string) => {
+    setRole(role);
+    if (role) {
+      const users = await client.findUsersByRole(role);
+      setUsers(users);
+    } else {
+      fetchUsers();
+    }
+  };
+
   const fetchUsers = async () => {
     const users = await client.findAllUsers();
     setUsers(users);
