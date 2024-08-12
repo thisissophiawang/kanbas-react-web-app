@@ -13,9 +13,9 @@ export default function Signin() {
     try {
       const currentUser =await client.signin(credentials);
       dispatch(setCurrentUser(currentUser));
-    navigate("/Kanbas/Account/Profile");
+      navigate("/Kanbas/Account/Profile");
   } catch (err: any) {
-    setError(err.response.data.message);
+    setError("Unable to sign in. Please try again.");
   }
   };
 
