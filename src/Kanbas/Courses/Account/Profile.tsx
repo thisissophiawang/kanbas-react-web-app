@@ -9,6 +9,11 @@ export default function Profile() {
     const account = await client.profile();
     setProfile(account);
   };
+  const signout = async () => {
+    await client.signout();
+    navigate("/Kanbas/Account/Signin");
+  };
+
   useEffect(() => { fetchProfile(); }, []);
   return (
     <div className="wd-profile-screen">
@@ -40,6 +45,9 @@ export default function Profile() {
             <option value="FACULTY">Faculty</option>{" "}     
              <option value="STUDENT">Student</option>
           </select>
+          <button onClick={signout} className="wd-signout-btn btn btn-danger w-100">
+          Sign out
+          </button>
         </div>
       )}
     </div>
