@@ -15,7 +15,7 @@ export default function Signin() {
       dispatch(setCurrentUser(currentUser));
       navigate("/Kanbas/Account/Profile");
   } catch (err: any) {
-    setError("Unable to sign in. Please try again.");
+    setError(err.response.data.message);
   }
   };
 
