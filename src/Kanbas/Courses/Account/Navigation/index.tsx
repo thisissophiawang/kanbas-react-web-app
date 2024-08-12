@@ -1,7 +1,10 @@
 //Users/sophiawang/2024/summer/webdev/kanbas-react-web-app/src/Kanbas/Courses/Account/Navigation/index.tsx
 import { Link, useLocation, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 export default function AccountNavigation() {
-  const links = ["Signin", "Signup", "Profile"];
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  //const links = ["Signin", "Signup", "Profile"];
+  const links = currentUser ? ["Profile"] : ["Signin", "Signup"];
   const { pathname } = useLocation();
   return (
     <div id="wd-account-navigation" className="list-group fs-5 rounded-0">
