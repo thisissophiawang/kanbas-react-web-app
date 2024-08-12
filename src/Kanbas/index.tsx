@@ -8,6 +8,7 @@ import KanbasNavigation from './Navigation';
 import * as client from './Courses/client';
 import './styles.css'; 
 import Account from './Courses/Account'; //new import for Account
+import Session from './Courses/Account/Session';
 
 
 interface Course {
@@ -88,6 +89,7 @@ export default function Kanbas() {
 
   return (
     <Provider store={store}>
+      <Session >
       <div id="wd-kanbas" className="d-flex">
         <KanbasNavigation />
         <div className="wd-main-content-offset p-3 flex-grow-1">
@@ -112,6 +114,7 @@ export default function Kanbas() {
           </Routes>
         </div>
       </div>
+      </Session>
     </Provider>
   );
 }
