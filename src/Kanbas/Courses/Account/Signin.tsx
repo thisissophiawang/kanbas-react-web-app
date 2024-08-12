@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as client from "./client";
+import { useDispatch } from "react-redux"; // Import the useDispatch hook from react-redux
+import { setCurrentUser } from "./reducer"; // Import the setCurrentUser action
 
 export default function Signin() {
   const [credentials, setCredentials] = useState<any>({});
   const [error, setError] = useState("");  // State to handle error messages
   const navigate = useNavigate();
+  const dispatch = useDispatch(); // Get the dispatch function from the store
   const signin = async () => {
     try {
-    await client.signin(credentials);
+      const currentUser =await client.signin(credentials);
+      dispatch(setCurrentUser(currentUser));
     navigate("/Kanbas/Account/Profile");
   } catch (err: any) {
     setError(err.response.data.message);
