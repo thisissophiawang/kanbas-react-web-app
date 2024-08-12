@@ -9,7 +9,7 @@ import * as client from './Courses/client';
 import './styles.css'; 
 import Account from './Courses/Account'; //new import for Account
 import Session from './Courses/Account/Session';
-
+import ProtectedRoute from './Courses/Account/ProtectedRoute'; //new import for ProtectedRoute
 
 interface Course {
   _id: string;
@@ -89,31 +89,41 @@ export default function Kanbas() {
 
   return (
     <Provider store={store}>
-      <Session >
-      <div id="wd-kanbas" className="d-flex">
-        <KanbasNavigation />
-        <div className="wd-main-content-offset p-3 flex-grow-1">
-          <Routes>
-          <Route
-              path="Account/*" element={<Account />} //Add Account routing configuration,Specify the Account component as an element of the route
-            />
-            <Route
-              path="Dashboard"
-              element={
-                <Dashboard
-                  courses={courses}
-                  course={course}
-                  setCourse={setCourse}
-                  addNewCourse={addNewCourse}
-                  deleteCourse={deleteCourse}
-                  updateCourse={updateCourse}
-                />
-              }
-            />
-            <Route path="Courses/*" element={<Courses courses={courses} />} />
-          </Routes>
+      <Session>
+        <div id="wd-kanbas" className="d-flex">
+          <KanbasNavigation />
+          <div className="wd-main-content-offset p-3 flex-grow-1">
+            <Routes>
+              <Route
+                path="Account/*"
+                element={<Account />} // added Account route, which is a child of Kanbas
+              />
+              <Route
+                path="Dashboard"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard
+                      courses={courses}
+                      course={course}
+                      setCourse={setCourse}
+                      addNewCourse={addNewCourse}
+                      deleteCourse={deleteCourse}
+                      updateCourse={updateCourse}
+                    />
+                  </ProtectedRoute> // added ProtectedRoute to Dashboard
+                }
+              />
+              <Route
+                path="Courses/*"
+                element={
+                  <ProtectedRoute>
+                    <Courses courses={courses} />
+                  </ProtectedRoute> // added ProtectedRoute to Courses
+                }
+              />
+            </Routes>
+          </div>
         </div>
-      </div>
       </Session>
     </Provider>
   );
