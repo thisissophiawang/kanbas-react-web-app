@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 interface Course {
   _id: string;
@@ -23,9 +25,13 @@ interface DashboardProps {
 }
 
 export default function Dashboard({ courses, course, setCourse, addNewCourse, deleteCourse, updateCourse }: DashboardProps) {
+  //implement the logic to get the current user
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+
   return (
     <div id="wd-dashboard" className="p-4">
-      <h1 id="wd-dashboard-title">Dashboard</h1>
+      //show the current user name in the dashboard title
+      <h1 id="wd-dashboard-title">Dashboard({currentUser.username})</h1>
       <hr />
       <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
       <hr />
