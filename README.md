@@ -43,4 +43,12 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
+## LINK for each assignment
+A1:https://a1--kanbas-react-web-app-sophia.netlify.app/#/Kanbas/Dashboard
+A2:https://a2-start--kanbas-react-web-app-sophia.netlify.app/#/Kanbas/Dashboard
+A3:https://669e9b46a4588f00080026f8--kanbas-react-web-app-sophia.netlify.app/#/Kanbas/Dashboard
+A4:https://a4--kanbas-react-web-app-sophia.netlify.app/Kanbas#/Kanbas/Dashboard
+A5🔗(https://a5--kanbas-react-web-app-sophia.netlify.app/#/Labs/Lab5)
+A6🔗(https://a6--kanbas-react-web-app-sophia.netlify.app/#/LandingPage](https://a6--kanbas-react-web-app-sophia.netlify.app/#/Kanbas/Account/Signin)
+
 To learn React, check out the [React documentation](https://reactjs.org/).
