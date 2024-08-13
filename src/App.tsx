@@ -1,3 +1,4 @@
+//App.tsx
 import React, { useState } from "react";
 import { HashRouter, Route, Routes, Navigate } from "react-router-dom";
 import Kanbas from "./Kanbas";
