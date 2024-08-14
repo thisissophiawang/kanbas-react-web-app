@@ -1,3 +1,4 @@
+//Users/sophiawang/2024/summer/webdev/kanbas-react-web-app/src/Kanbas/Courses/index.tsx
 import React from 'react';
 import { Navigate, Route, Routes, useParams, useLocation } from 'react-router';
 import CoursesNavigation from './Navigation';
@@ -10,6 +11,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaAlignJustify } from 'react-icons/fa';
 import KanbasNavigation from '../Navigation';
 import PeopleTable from './People/Table';
+import Quizzes from './Quizzes'; //new import from './Quizzes'
+import QuizEditor from './Quizzes/Editor'; //new import from './Quizzes/Editor'
 
 type Breadcrumbs = {
   Home: string;
@@ -71,10 +74,14 @@ export default function Courses({ courses }: CoursesProps) {
           <Route path="Zoom" element={<h1>Zoom</h1>} />
           <Route path="Assignments" element={<Assignments />} />
           <Route path="Assignments/:id" element={<AssignmentEditor />} />
-          <Route path="Quizzes" element={<h1>Quizzes</h1>} />
           <Route path="Grades" element={<Grades />} />
           <Route path="People" element={<PeopleTable />} />
           <Route path="People/:uid" element={<PeopleTable />} /> 
+          <Route path="Quizzes/*" element={<Quizzes />} /> {/* Add `/*` for nested routes */}
+          <Route path="Quizzes/:id" element={<QuizEditor />} /> {/* Add this line for QuizEditor */}
+
+
+
 
         </Routes>
       </div>
