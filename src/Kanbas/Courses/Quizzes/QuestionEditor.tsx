@@ -1,32 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
+import MultipleChoiceQuestionEditor from './MultipleChoiceQuestionEditor';
 
 export default function QuestionEditor({ questions, setQuestions }: { questions: any[], setQuestions: (questions: any[]) => void }) {
+  const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
   const addQuestion = () => {
     const newQuestion = {
       id: Date.now(),
-      type: 'Multiple Choice',
+      type: 'Multiple Choice',  // Default type is Multiple Choice
       points: 1,
       content: '',
+      choices: [{ text: '', isCorrect: false }],  // Default choices for multiple choice
     };
     setQuestions([...questions, newQuestion]);
+    setEditingIndex(questions.length); // Set the newly added question as the one being edited
   };
 
-  const handleQuestionChange = (index: number, field: string, value: any) => {
+  const handleQuestionChange = (index: number, updatedQuestion: any) => {
     const updatedQuestions = [...questions];
-    updatedQuestions[index] = {
-      ...updatedQuestions[index],
-      [field]: value,
-    };
+    updatedQuestions[index] = updatedQuestion;
     setQuestions(updatedQuestions);
   };
 
   const deleteQuestion = (index: number) => {
-    setQuestions(questions.filter((_, i: number) => i !== index));
+    setQuestions(questions.filter((_, i) => i !== index));
   };
 
   const getTotalPoints = () => {
-    return questions.reduce((total: number, question: any) => total + question.points, 0);
+    return questions.reduce((total, question) => total + question.points, 0);
   };
 
   return (
@@ -36,32 +37,27 @@ export default function QuestionEditor({ questions, setQuestions }: { questions:
           + New Question
         </button>
       </div>
-      
+
       <ul className="questions-list">
-        {questions.map((question: any, index: number) => (
+        {questions.map((question, index) => (
           <li key={question.id} className="question-item">
-            <div className="question-header">
-              <select 
-                value={question.type}
-                onChange={(e) => handleQuestionChange(index, 'type', e.target.value)}
-              >
-                <option value="True/False">True/False</option>
-                <option value="Multiple Choice">Multiple Choice</option>
-                <option value="Fill in the Blanks">Fill in the Blanks</option>
-              </select>
-              <input 
-                type="number" 
-                value={question.points} 
-                onChange={(e) => handleQuestionChange(index, 'points', Number(e.target.value))} 
-                placeholder="Points"
+            {editingIndex === index ? (
+              <MultipleChoiceQuestionEditor
+                question={question}
+                onSave={(updatedQuestion: any) => {
+                  handleQuestionChange(index, updatedQuestion);
+                  setEditingIndex(null); // Exit edit mode after saving
+                }}
+                onCancel={() => setEditingIndex(null)} // Exit edit mode without saving
               />
-              <button onClick={() => deleteQuestion(index)} className="btn btn-danger">Delete</button>
-            </div>
-            <textarea 
-              value={question.content} 
-              onChange={(e) => handleQuestionChange(index, 'content', e.target.value)} 
-              placeholder="Question text"
-            />
+            ) : (
+              <div className="question-preview">
+                <h4>{question.title || 'Untitled Question'}</h4>
+                <p>{question.content}</p>
+                <button onClick={() => setEditingIndex(index)} className="btn btn-secondary">Edit</button>
+                <button onClick={() => deleteQuestion(index)} className="btn btn-danger">Delete</button>
+              </div>
+            )}
           </li>
         ))}
       </ul>

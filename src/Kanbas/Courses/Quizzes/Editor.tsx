@@ -6,7 +6,7 @@ import * as client from './client';
 import './Editor.css';  // Import the CSS file
 import QuestionEditor from './QuestionEditor';  // Import the QuestionEditor component
 
-
+//include the QuestionEditor component in the QuizEditor component
 export default function QuizEditor() {
   const { id, cid } = useParams();
   const navigate = useNavigate();
@@ -267,6 +267,7 @@ export default function QuizEditor() {
           </div>
         </div>
       )}
+
 
 {activeTab === 'questions' && (
         <QuestionEditor questions={questions} setQuestions={setQuestions} />
