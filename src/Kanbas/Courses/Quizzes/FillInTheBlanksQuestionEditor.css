@@ -1,0 +1,103 @@
+
+/* FillInTheBlanksQuestionEditor.css */
+
+.fill-in-the-blanks-editor {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .form-control:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .answer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .answer input.form-control {
+    flex-grow: 1;
+    margin-right: 10px;
+  }
+  
+  .answer .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .btn-secondary:hover, .btn-primary:hover, .btn-danger:hover {
+    opacity: 0.9;
+  }
+  
+  .add-answer-btn {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: #fff;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .button-group .btn {
+    margin-left: 10px;
+  }
+  
+  textarea.question-textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  

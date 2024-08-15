@@ -1,6 +1,5 @@
-// src/Kanbas/Courses/Quizzes/FillInTheBlanksQuestionEditor.tsx
-
 import React, { useState } from 'react';
+import './FillInTheBlanksQuestionEditor.css';
 
 interface FillInTheBlanksQuestionEditorProps {
   question: any;
@@ -12,6 +11,21 @@ const FillInTheBlanksQuestionEditor: React.FC<FillInTheBlanksQuestionEditorProps
   const [title, setTitle] = useState(question.title || '');
   const [points, setPoints] = useState(question.points || 1);
   const [content, setContent] = useState(question.content || '');
+  const [answers, setAnswers] = useState<string[]>(question.answers || ['']);
+
+  const handleAnswerChange = (index: number, value: string) => {
+    const updatedAnswers = [...answers];
+    updatedAnswers[index] = value;
+    setAnswers(updatedAnswers);
+  };
+
+  const addAnswer = () => {
+    setAnswers([...answers, '']);
+  };
+
+  const removeAnswer = (index: number) => {
+    setAnswers(answers.filter((_, i) => i !== index));
+  };
 
   const handleSave = () => {
     onSave({
@@ -19,6 +33,7 @@ const FillInTheBlanksQuestionEditor: React.FC<FillInTheBlanksQuestionEditorProps
       title,
       points,
       content,
+      answers,
     });
   };
 
@@ -45,12 +60,33 @@ const FillInTheBlanksQuestionEditor: React.FC<FillInTheBlanksQuestionEditorProps
       </div>
 
       <div className="form-group">
-        <label>Question</label>
+        <label>Fill in Blanks Question:</label>
+        <label>
+          Enter your question text, then define all possible correct answers for the blanks. <br />
+          Students will see the question followed by a small text box to type their answer.
+        </label>
         <textarea
           className="form-control"
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
+      </div>
+
+      <div className="form-group">
+        <label>Answers:</label>
+        {answers.map((answer, index) => (
+          <div key={index} className="answer">
+            <input
+              type="text"
+              className="form-control"
+              value={answer}
+              onChange={(e) => handleAnswerChange(index, e.target.value)}
+              placeholder={`Possible Answer ${index + 1}`}
+            />
+            <button onClick={() => removeAnswer(index)} className="btn btn-danger">Remove</button>
+          </div>
+        ))}
+        <button onClick={addAnswer} className="btn btn-secondary">+ Add Another Answer</button>
       </div>
 
       <div className="form-group">
