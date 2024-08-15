@@ -10,7 +10,6 @@ interface TrueFalseQuestionEditorProps {
 const TrueFalseQuestionEditor: React.FC<TrueFalseQuestionEditorProps> = ({ question, onSave, onCancel }) => {
   const [title, setTitle] = useState(question.title || '');
   const [points, setPoints] = useState(question.points || 1);
-  const [content, setContent] = useState(question.content || '');
   const [isTrue, setIsTrue] = useState(question.isTrue || false);
 
   const handleSave = () => {
@@ -18,7 +17,6 @@ const TrueFalseQuestionEditor: React.FC<TrueFalseQuestionEditorProps> = ({ quest
       ...question,
       title,
       points,
-      content,
       isTrue,
     });
   };
@@ -46,13 +44,7 @@ const TrueFalseQuestionEditor: React.FC<TrueFalseQuestionEditorProps> = ({ quest
 
       <div className="form-group">
         <label>TRUE /FALSE Question：</label>
-        <label>Enter your question text, then select if True or False is the correct answer.</label>
-        <textarea
-          className="form-control question-textarea"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          placeholder="Enter the question here"
-        />
+        <label>Review the Question , select if True or False is the correct answer.</label>
       </div>
 
       <div className="form-group">
