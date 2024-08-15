@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link, Routes, Route, useNavigate } from 'react-router-dom';
 import QuizEditor from './Editor';
-import { FaSearch, FaCheckCircle, FaEllipsisV, FaTrash, FaTimesCircle, FaRocket } from 'react-icons/fa';
+import { FaSearch, FaCheckCircle, FaEllipsisV, FaTimesCircle, FaRocket } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { addQuiz, deleteQuiz, updateQuiz, setQuizzes } from "./reducer";
-import togglePublish from "./reducer";
 import * as client from "./client";
+import QuizContextMenu from './QuizContextMenu';  // include the QuizContextMenu component
 
 export default function Quizzes() {
     const dispatch = useDispatch();
@@ -13,6 +13,7 @@ export default function Quizzes() {
     const quizzes = useSelector((state: any) => state.quizzesReducer ? state.quizzesReducer.quizzes : []);
     const navigate = useNavigate();
 
+    const [activeQuizId, setActiveQuizId] = useState<string | null>(null);  // use state to keep track of the active quiz
     // Fetch quizzes
     const fetchQuizzes = async () => {
         const quizzes = await client.findQuizzesForCourse(cid as string);
@@ -45,6 +46,11 @@ export default function Quizzes() {
         dispatch({ type: 'TOGGLE_PUBLISH', quizId });
     };
 
+    // Handle edit quiz
+    const handleEditQuiz = (quizId: string) => {
+        navigate(`/Kanbas/Courses/${cid}/Quizzes/${quizId}`);
+    };
+
     return (
         <div style={{ width: '100%', margin: '0', fontFamily: 'Arial, sans-serif' }}>
             <div style={{
@@ -70,7 +76,7 @@ export default function Quizzes() {
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <button 
-                        onClick={createQuiz}
+                        onClick={() => navigate(`/Kanbas/Courses/${cid}/Quizzes/new`)}
                         style={{ 
                             marginLeft: '10px', 
                             backgroundColor: '#dc3545', 
@@ -114,12 +120,7 @@ export default function Quizzes() {
             <ul style={{ listStyleType: 'none', padding: '0' }}>
                 {quizzes.filter((q: any) => q.course === cid).map((quiz: any) => (
                     <li key={quiz._id} style={{ padding: '15px', border: '1px solid #ddd', borderRadius: '5px', backgroundColor: '#fff', marginBottom: '10px', display: 'flex', alignItems: 'center' }}>
-                        <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            width: '100%',
-                            flexDirection: 'column'
-                        }}>
+                        <div style={{ display: 'flex', alignItems: 'center', width: '100%', flexDirection: 'column' }}>
                             <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
                                 <FaRocket style={{ color: '#3E9F41', marginRight: '10px' }} />
                                 {quiz.published ? (
@@ -136,8 +137,18 @@ export default function Quizzes() {
                                 <Link to={quiz._id} style={{ fontSize: '18px', fontWeight: '600', color: '#333', textDecoration: 'none', marginRight: 'auto' }}>
                                     {quiz.title}
                                 </Link>
-                                <FaCheckCircle style={{ marginLeft: '10px', cursor: 'pointer', color: '#3E9F41', fontSize: '20px' }} />
-                                <FaEllipsisV style={{ marginLeft: '10px', cursor: 'pointer', color: '#888', fontSize: '18px' }} />
+                                <FaEllipsisV 
+                                    style={{ marginLeft: '10px', cursor: 'pointer', color: '#888', fontSize: '18px' }} 
+                                    onClick={() => setActiveQuizId(activeQuizId === quiz._id ? null : quiz._id)}
+                                />
+                                {activeQuizId === quiz._id && (
+                                    <QuizContextMenu 
+                                        onEdit={() => handleEditQuiz(quiz._id)} 
+                                        onDelete={() => handleDeleteQuiz(quiz._id)} 
+                                        onTogglePublish={() => handleTogglePublishQuiz(quiz._id)} 
+                                        isPublished={quiz.published}
+                                    />
+                                )}
                             </div>
                             <div style={{ fontSize: '14px', color: '#555', marginTop: '5px', width: '100%', paddingLeft: '28px' }}>
                                 {new Date(quiz.availableDate) > new Date() ? (
