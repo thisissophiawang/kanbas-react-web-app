@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MultipleChoiceQuestionEditor from './MultipleChoiceQuestionEditor';
 
 export default function QuestionEditor({ questions, setQuestions }: { questions: any[], setQuestions: (questions: any[]) => void }) {
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  const navigate = useNavigate(); // Use navigate instead of useHistory
 
   const addQuestion = () => {
     const newQuestion = {
@@ -28,6 +30,12 @@ export default function QuestionEditor({ questions, setQuestions }: { questions:
 
   const getTotalPoints = () => {
     return questions.reduce((total, question) => total + question.points, 0);
+  };
+
+  const handleSaveAndPreview = () => {
+    // Save the quiz data here (e.g., send to the backend)
+    // After saving, navigate to the preview page
+    navigate('/quiz-preview'); // Adjust the path based on your routing setup
   };
 
   return (
@@ -64,6 +72,13 @@ export default function QuestionEditor({ questions, setQuestions }: { questions:
 
       <div className="total-points">
         <strong>Total Points: {getTotalPoints()}</strong>
+      </div>
+
+      {/* Add the "Save and Preview" button here */}
+      <div className="form-group button-group">
+        <button onClick={handleSaveAndPreview} className="btn btn-primary save-btn">
+          Save and Preview Quiz
+        </button>
       </div>
     </div>
   );
