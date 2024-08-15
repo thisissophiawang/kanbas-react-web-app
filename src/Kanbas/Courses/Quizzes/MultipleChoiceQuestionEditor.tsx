@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './MultipleChoiceQuestionEditor.css';
-import TrueFalseQuestionEditor from './TrueFalseQuestionEditor'; // Import True/False editor
-import FillInTheBlanksQuestionEditor from './FillInTheBlanksQuestionEditor'; // Import Fill in the Blanks editor
+import TrueFalseQuestionEditor from './TrueFalseQuestionEditor';
+import FillInTheBlanksQuestionEditor from './FillInTheBlanksQuestionEditor';
 
 interface Choice {
   text: string;
@@ -16,13 +16,29 @@ interface MultipleChoiceQuestionEditorProps {
 
 const MultipleChoiceQuestionEditor: React.FC<MultipleChoiceQuestionEditorProps> = ({ question, onSave, onCancel }) => {
   const [questionType, setQuestionType] = useState(question.type || 'Multiple Choice');
+  const [choices, setChoices] = useState<Choice[]>(question.choices || [{ text: '', isCorrect: false }]);
 
   const handleSave = (updatedQuestion: any) => {
     onSave({
       ...question,
       type: questionType,
       ...updatedQuestion,
+      choices,
     });
+  };
+
+  const addChoice = () => {
+    setChoices([...choices, { text: '', isCorrect: false }]);
+  };
+
+  const removeChoice = (index: number) => {
+    setChoices(choices.filter((_, i) => i !== index));
+  };
+
+  const handleChoiceChange = (index: number, field: string, value: any) => {
+    const updatedChoices = [...choices];
+    updatedChoices[index] = { ...updatedChoices[index], [field]: value };
+    setChoices(updatedChoices);
   };
 
   const renderEditor = () => {
@@ -35,6 +51,17 @@ const MultipleChoiceQuestionEditor: React.FC<MultipleChoiceQuestionEditorProps> 
       default:
         return (
           <div className="multiple-choice-editor">
+            <div className="form-group">
+              <label>Title</label>
+              <input
+                type="text"
+                className="form-control"
+                value={question.title || ''}
+                onChange={(e) => handleSave({ title: e.target.value })}
+                placeholder="Enter question title here"
+              />
+            </div>
+
             <div className="form-group points-group">
               <label htmlFor="points">Points</label>
               <input
@@ -47,7 +74,8 @@ const MultipleChoiceQuestionEditor: React.FC<MultipleChoiceQuestionEditorProps> 
             </div>
 
             <div className="form-group">
-              <label htmlFor="content">Enter your question and multiple answers, then select the one correct answer:</label>
+              <label>Multiple Choice Question：</label>
+              <label>Enter your question and multiple answers, then select the one correct answer:</label>
               <textarea
                 id="content"
                 className="form-control question-textarea"
@@ -58,15 +86,13 @@ const MultipleChoiceQuestionEditor: React.FC<MultipleChoiceQuestionEditorProps> 
 
             <div className="form-group">
               <label>Answers:</label>
-              {question.choices.map((choice: Choice, index: number) => (
+              {choices.map((choice, index) => (
                 <div key={index} className="choice">
                   <input
                     type="text"
                     className="form-control choice-input"
                     value={choice.text}
-                    onChange={(e) => handleSave({
-                      choices: question.choices.map((c: Choice, i: number) => i === index ? { ...c, text: e.target.value } : c)
-                    })}
+                    onChange={(e) => handleChoiceChange(index, 'text', e.target.value)}
                     placeholder={`Possible Answer ${index + 1}`}
                   />
                   <div className="correct-answer-radio">
@@ -74,25 +100,26 @@ const MultipleChoiceQuestionEditor: React.FC<MultipleChoiceQuestionEditorProps> 
                       type="radio"
                       name="correctChoice"
                       checked={choice.isCorrect}
-                      onChange={() => handleSave({
-                        choices: question.choices.map((c: Choice, i: number) => ({ ...c, isCorrect: i === index }))
-                      })}
+                      onChange={() => {
+                        setChoices(
+                          choices.map((c, i) => ({
+                            ...c,
+                            isCorrect: i === index,
+                          }))
+                        );
+                      }}
                     />
                     <label>Correct Answer</label>
                   </div>
-                  <button onClick={() => handleSave({
-                    choices: question.choices.filter((unused: any, i: number) => i !== index)
-                  })} className="btn btn-danger remove-btn">Remove</button>
+                  <button onClick={() => removeChoice(index)} className="btn btn-danger remove-btn">Remove</button>
                 </div>
               ))}
-              <button onClick={() => handleSave({
-                choices: [...question.choices, { text: '', isCorrect: false }]
-              })} className="btn btn-secondary add-answer-btn">+ Add Another Answer</button>
+              <button onClick={addChoice} className="btn btn-secondary add-answer-btn">+ Add Another Answer</button>
             </div>
 
             <div className="form-group button-group">
               <button onClick={onCancel} className="btn btn-secondary cancel-btn">Cancel</button>
-              <button onClick={() => handleSave(question)} className="btn btn-primary save-btn">Update Question</button>
+              <button onClick={() => handleSave({ choices })} className="btn btn-primary save-btn">Update Question</button>
             </div>
           </div>
         );
