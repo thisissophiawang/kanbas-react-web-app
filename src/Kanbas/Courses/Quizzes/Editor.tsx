@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addQuiz, updateQuiz, setQuizzes } from './reducer';
 import * as client from './client';
 import './Editor.css';  // Import the CSS file
+import QuestionEditor from './QuestionEditor';  // Import the QuestionEditor component
+
 
 export default function QuizEditor() {
   const { id, cid } = useParams();
@@ -12,6 +14,10 @@ export default function QuizEditor() {
   const { quizzes } = useSelector((state: any) => state.quizzesReducer);
   const [quiz, setQuiz] = useState<any>(null);
   const [activeTab, setActiveTab] = useState('details');
+
+  //add question state
+  const [questions, setQuestions] = useState<any[]>([]);
+  
 
   const fetchQuizzes = async () => {
     const quizzes = await client.findQuizzesForCourse(cid as string);
@@ -262,12 +268,19 @@ export default function QuizEditor() {
         </div>
       )}
 
-      {activeTab === 'questions' && (
-        <div className="questions-tab">
-          {/* implement the questions editor here */}
-          <p>Questions Editor Coming Soon...</p>
-        </div>
+{activeTab === 'questions' && (
+        <QuestionEditor questions={questions} setQuestions={setQuestions} />
       )}
+
+      <div className="form-group btn-container">
+        <Link to={`/Kanbas/Courses/${quiz.course}/Quizzes`} className="btn btn-secondary">Cancel</Link>
+        <button 
+          className="btn btn-danger" 
+          onClick={saveQuiz}
+        >
+          Save
+        </button>
+      </div>
     </div>
   );
 }
