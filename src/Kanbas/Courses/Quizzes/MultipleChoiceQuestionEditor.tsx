@@ -16,13 +16,18 @@ interface MultipleChoiceQuestionEditorProps {
 
 const MultipleChoiceQuestionEditor: React.FC<MultipleChoiceQuestionEditorProps> = ({ question, onSave, onCancel }) => {
   const [questionType, setQuestionType] = useState(question.type || 'Multiple Choice');
+  const [title, setTitle] = useState(question.title || '');
+  const [points, setPoints] = useState(question.points || 1);
+  const [content, setContent] = useState(question.content || '');
   const [choices, setChoices] = useState<Choice[]>(question.choices || [{ text: '', isCorrect: false }]);
 
-  const handleSave = (updatedQuestion: any) => {
+  const handleSave = () => {
     onSave({
       ...question,
       type: questionType,
-      ...updatedQuestion,
+      title,
+      points,
+      content,
       choices,
     });
   };
@@ -44,9 +49,9 @@ const MultipleChoiceQuestionEditor: React.FC<MultipleChoiceQuestionEditorProps> 
   const renderEditor = () => {
     switch (questionType) {
       case 'True/False':
-        return <TrueFalseQuestionEditor question={question} onSave={handleSave} onCancel={onCancel} />;
+        return <TrueFalseQuestionEditor question={{ title, points, content, isTrue: choices[0]?.isCorrect }} onSave={onSave} onCancel={onCancel} />;
       case 'Fill in the Blanks':
-        return <FillInTheBlanksQuestionEditor question={question} onSave={handleSave} onCancel={onCancel} />;
+        return <FillInTheBlanksQuestionEditor question={{ title, points, content, choices }} onSave={onSave} onCancel={onCancel} />;
       case 'Multiple Choice':
       default:
         return (
@@ -56,8 +61,8 @@ const MultipleChoiceQuestionEditor: React.FC<MultipleChoiceQuestionEditorProps> 
               <input
                 type="text"
                 className="form-control"
-                value={question.title || ''}
-                onChange={(e) => handleSave({ title: e.target.value })}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 placeholder="Enter question title here"
               />
             </div>
@@ -68,8 +73,8 @@ const MultipleChoiceQuestionEditor: React.FC<MultipleChoiceQuestionEditorProps> 
                 id="points"
                 type="number"
                 className="form-control"
-                value={question.points || 1}
-                onChange={(e) => handleSave({ points: Number(e.target.value) })}
+                value={points}
+                onChange={(e) => setPoints(Number(e.target.value))}
               />
             </div>
 
@@ -79,8 +84,8 @@ const MultipleChoiceQuestionEditor: React.FC<MultipleChoiceQuestionEditorProps> 
               <textarea
                 id="content"
                 className="form-control question-textarea"
-                value={question.content || ''}
-                onChange={(e) => handleSave({ content: e.target.value })}
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
               />
             </div>
 
@@ -119,7 +124,7 @@ const MultipleChoiceQuestionEditor: React.FC<MultipleChoiceQuestionEditorProps> 
 
             <div className="form-group button-group">
               <button onClick={onCancel} className="btn btn-secondary cancel-btn">Cancel</button>
-              <button onClick={() => handleSave({ choices })} className="btn btn-primary save-btn">Update Question</button>
+              <button onClick={handleSave} className="btn btn-primary save-btn">Update Question</button>
             </div>
           </div>
         );
