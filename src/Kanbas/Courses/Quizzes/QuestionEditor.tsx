@@ -2,20 +2,21 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MultipleChoiceQuestionEditor from './MultipleChoiceQuestionEditor';
 
+
 export default function QuestionEditor({ questions, setQuestions }: { questions: any[], setQuestions: (questions: any[]) => void }) {
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
-  const navigate = useNavigate(); // Use navigate instead of useHistory
+  const navigate = useNavigate();
 
   const addQuestion = () => {
     const newQuestion = {
       id: Date.now(),
-      type: 'Multiple Choice',  // Default type is Multiple Choice
+      type: 'Multiple Choice',
       points: 1,
       content: '',
-      choices: [{ text: '', isCorrect: false }],  // Default choices for multiple choice
+      choices: [{ text: '', isCorrect: false }],
     };
     setQuestions([...questions, newQuestion]);
-    setEditingIndex(questions.length); // Set the newly added question as the one being edited
+    setEditingIndex(questions.length);
   };
 
   const handleQuestionChange = (index: number, updatedQuestion: any) => {
@@ -32,10 +33,23 @@ export default function QuestionEditor({ questions, setQuestions }: { questions:
     return questions.reduce((total, question) => total + question.points, 0);
   };
 
-  const handleSaveAndPreview = () => {
-    // Save the quiz data here (e.g., send to the backend)
-    // After saving, navigate to the preview page
-    navigate('/quiz-preview'); // Adjust the path based on your routing setup
+  const handleSaveAndPreview = async () => {
+    try {
+      // Simulate saving the quiz data to the backend and receiving the quiz ID
+      const response = await fetch('/api/quizzes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ questions }), // You might need to adjust the payload structure
+      });
+      const savedQuiz = await response.json();
+
+      // Navigate to the preview page with the saved quiz ID
+      navigate(`/quiz-preview/${savedQuiz._id}`);
+    } catch (error) {
+      console.error('Error saving quiz:', error);
+    }
   };
 
   return (
@@ -54,9 +68,9 @@ export default function QuestionEditor({ questions, setQuestions }: { questions:
                 question={question}
                 onSave={(updatedQuestion: any) => {
                   handleQuestionChange(index, updatedQuestion);
-                  setEditingIndex(null); // Exit edit mode after saving
+                  setEditingIndex(null);
                 }}
-                onCancel={() => setEditingIndex(null)} // Exit edit mode without saving
+                onCancel={() => setEditingIndex(null)}
               />
             ) : (
               <div className="question-preview">
@@ -74,7 +88,6 @@ export default function QuestionEditor({ questions, setQuestions }: { questions:
         <strong>Total Points: {getTotalPoints()}</strong>
       </div>
 
-      {/* Add the "Save and Preview" button here */}
       <div className="form-group button-group">
         <button onClick={handleSaveAndPreview} className="btn btn-primary save-btn">
           Save and Preview Quiz
