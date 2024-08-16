@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import './MultipleChoiceQuestionEditor.css';
 import TrueFalseQuestionEditor from './TrueFalseQuestionEditor';
 import FillInTheBlanksQuestionEditor from './FillInTheBlanksQuestionEditor';
@@ -81,11 +83,11 @@ const MultipleChoiceQuestionEditor: React.FC<MultipleChoiceQuestionEditorProps> 
             <div className="form-group">
               <label>Multiple Choice Question：</label>
               <label>Enter your question and multiple answers, then select the one correct answer:</label>
-              <textarea
+              <ReactQuill
                 id="content"
                 className="form-control question-textarea"
                 value={content}
-                onChange={(e) => setContent(e.target.value)}
+                onChange={setContent}
               />
             </div>
 
