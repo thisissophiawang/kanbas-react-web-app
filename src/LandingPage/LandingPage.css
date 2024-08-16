@@ -24,3 +24,45 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+.landing-page-container {
+  padding: 20px;
+}
+
+.landing-page-header h1 {
+  margin-bottom: 20px; /* Add spacing after "Welcome to NEU Kanbas" */
+}
+
+.kanbas-section {
+  margin-top: 40px; /* Add spacing before "NEU Kanbas" */
+}
+
+.team-section {
+  margin-bottom: 20px; /* Adjust spacing after the team section */
+}
+
+.repository-section {
+  margin-top: 20px; /* Adjust spacing before the repository section */
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 5px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #007bff;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
