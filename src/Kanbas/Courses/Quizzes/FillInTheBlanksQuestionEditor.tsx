@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import './FillInTheBlanksQuestionEditor.css';
 
 interface FillInTheBlanksQuestionEditorProps {
@@ -65,10 +67,10 @@ const FillInTheBlanksQuestionEditor: React.FC<FillInTheBlanksQuestionEditorProps
           Enter your question text, then define all possible correct answers for the blanks. <br />
           Students will see the question followed by a small text box to type their answer.
         </label>
-        <textarea
+        <ReactQuill
           className="form-control"
           value={content}
-          onChange={(e) => setContent(e.target.value)}
+          onChange={setContent}
         />
       </div>
 
