@@ -1,84 +1,97 @@
 import React, { useState } from 'react';
-import './TrueFalseQuestionEditor.css';  // Import the CSS file
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import './FillInTheBlanksQuestionEditor.css';
+import { FaArrowRight } from 'react-icons/fa'; // Import the arrow icon
 
-interface TrueFalseQuestionEditorProps {
+interface FillInTheBlanksQuestionEditorProps {
   question: any;
   onSave: (updatedQuestion: any) => void;
   onCancel: () => void;
 }
 
-const TrueFalseQuestionEditor: React.FC<TrueFalseQuestionEditorProps> = ({ question, onSave, onCancel }) => {
+const FillInTheBlanksQuestionEditor: React.FC<FillInTheBlanksQuestionEditorProps> = ({ question, onSave, onCancel }) => {
   const [title, setTitle] = useState(question.title || '');
   const [points, setPoints] = useState(question.points || 1);
-  const [isTrue, setIsTrue] = useState(question.isTrue || false);
+  const [content, setContent] = useState(question.content || '');
+  const [correctAnswer, setCorrectAnswer] = useState(question.correctAnswer || 'True'); // Use correctAnswer instead of a list of answers
 
   const handleSave = () => {
     onSave({
       ...question,
       title,
       points,
-      isTrue,
+      content,
+      correctAnswer,
     });
   };
 
   return (
-    <div className="true-false-editor">
+    <div className="fill-in-the-blanks-editor">
       <div className="form-group">
+        <label>Title</label>
         <input
           type="text"
-          className="form-control question-title"
+          className="form-control"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="Enter question title here"
         />
-        <div className="points-container">
-          <label>pts:</label>
-          <input
-            type="number"
-            className="form-control points-input"
-            value={points}
-            onChange={(e) => setPoints(Number(e.target.value))}
-          />
-        </div>
       </div>
 
       <div className="form-group">
-        <label>TRUE /FALSE Question：</label>
-        <label>Review the Question , select if True or False is the correct answer.</label>
+        <label>Points</label>
+        <input
+          type="number"
+          className="form-control"
+          value={points}
+          onChange={(e) => setPoints(Number(e.target.value))}
+        />
+      </div>
+
+      <div className="form-group">
+        <label>True/False Question:</label>
+        <label>
+          Enter your question text, then select if True or False is the correct answer.
+        </label>
+      </div>
+
+      <div className="form-group">
+        <label>Question:</label>
+        <ReactQuill
+          className="form-control"
+          value={content}
+          onChange={setContent}
+        />
       </div>
 
       <div className="form-group">
         <label>Answers:</label>
-        <div className="true-false-options">
-          <label className={`option ${isTrue ? 'selected' : ''}`}>
-            <input
-              type="radio"
-              name="trueFalse"
-              checked={isTrue}
-              onChange={() => setIsTrue(true)}
-            />
-            <span className="arrow">&#x27A4;</span> {/* Right arrow */}
-            <span className="text-label">True</span>
-          </label>
-          <label className={`option ${!isTrue ? 'false-selected selected' : ''}`}>
-            <input
-              type="radio"
-              name="trueFalse"
-              checked={!isTrue}
-              onChange={() => setIsTrue(false)}
-            />
-            <span className="arrow">&#x27A4;</span> {/* Right arrow */}
-            <span className="text-label">False</span>
-          </label>
+        <div className="answer-option">
+          <FaArrowRight size={24} style={{ color: correctAnswer === 'True' ? 'green' : 'gray' }} />
+          <span
+            style={{ color: correctAnswer === 'True' ? 'green' : 'black', cursor: 'pointer', marginLeft: '8px' }}
+            onClick={() => setCorrectAnswer('True')}
+          >
+            True
+          </span>
+        </div>
+        <div className="answer-option">
+          <FaArrowRight size={24} style={{ color: correctAnswer === 'False' ? 'green' : 'gray' }} />
+          <span
+            style={{ color: correctAnswer === 'False' ? 'green' : 'black', cursor: 'pointer', marginLeft: '8px' }}
+            onClick={() => setCorrectAnswer('False')}
+          >
+            False
+          </span>
         </div>
       </div>
 
-      <div className="form-group button-group">
-        <button onClick={onCancel} className="btn btn-secondary cancel-btn">Cancel</button>
-        <button onClick={handleSave} className="btn btn-primary save-btn">Update Question</button>
+      <div className="form-group">
+        <button onClick={onCancel} className="btn btn-secondary">Cancel</button>
+        <button onClick={handleSave} className="btn btn-danger">Update Question</button>
       </div>
     </div>
   );
 };
 
-export default TrueFalseQuestionEditor;
+export default FillInTheBlanksQuestionEditor;
