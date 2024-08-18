@@ -15,7 +15,7 @@ const quizzesSlice = createSlice({
         addQuiz: (state, { payload: quiz }) => {
             state.quizzes = [
                 ...state.quizzes,
-                { ...quiz, _id: Date.now().toString() },
+                { _id: Date.now().toString(), ...quiz },
             ] as any;
         },
         deleteQuiz: (state, { payload: quizId }) => {

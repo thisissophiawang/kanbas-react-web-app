@@ -9,7 +9,7 @@ const QUIZZES_API = `${REMOTE_SERVER}/api/quizzes`;
 export const createQuiz = async (courseId: string, quiz: any) => {
     const response = await axios.post(
         `${COURSES_API}/${courseId}/quizzes`,
-        quiz
+        { ...quiz, id: new Date().getTime().toString() }
     );
     return response.data;
 };
@@ -32,5 +32,10 @@ export const deleteQuiz = async (quizId: string) => {
 // Find all quizzes for a course
 export const findQuizzesForCourse = async (courseId: string) => {
     const response = await axios.get(`${COURSES_API}/${courseId}/quizzes`);
+    return response.data;
+};
+
+export const findAllQuizzes = async () => {
+    const response = await axios.get(QUIZZES_API);
     return response.data;
 };

@@ -1,5 +1,5 @@
 //Users/sophiawang/2024/summer/webdev/kanbas-react-web-app/src/Kanbas/Courses/index.tsx
-import React from 'react';
+import React from "react";
 import { Navigate, Route, Routes, useParams, useLocation } from 'react-router';
 import CoursesNavigation from './Navigation';
 import Modules from './Modules';
@@ -13,6 +13,7 @@ import KanbasNavigation from '../Navigation';
 import PeopleTable from './People/Table';
 import Quizzes from './Quizzes'; //new import from './Quizzes'
 import QuizEditor from './Quizzes/Editor'; //new import from './Quizzes/Editor'
+import { useSelector } from 'react-redux';
 
 type Breadcrumbs = {
   Home: string;
@@ -50,17 +51,18 @@ interface CoursesProps {
   courses: Course[];
 }
 
-export default function Courses({ courses }: CoursesProps) {
+export default function Courses() {
   const { cid } = useParams<{ cid: string }>();
-  const course = courses.find((course) => course._id === cid);
   const { pathname } = useLocation();
-  
+  const courses = useSelector((state: any) => state.coursesReducer ? state.coursesReducer.courses : []);
+  const course = courses.find((c: any) => c._id === cid);
+
   const currentPath = pathname.split("/")[4] as keyof Breadcrumbs;
 
   return (
     <div id="wd-kanbas" className="d-flex">
       <KanbasNavigation />
-      <CoursesNavigation />
+      <CoursesNavigation courses={courses}/>
       <div className="content p-3 flex-grow-1" style={{ marginLeft: '260px' }}>
         <h2 className="text-danger">
           <FaAlignJustify className="me-3 fs-4 mb-1" />
@@ -76,7 +78,7 @@ export default function Courses({ courses }: CoursesProps) {
           <Route path="Assignments/:id" element={<AssignmentEditor />} />
           <Route path="Grades" element={<Grades />} />
           <Route path="People" element={<PeopleTable />} />
-          <Route path="People/:uid" element={<PeopleTable />} /> 
+          <Route path="People/:uid" element={<PeopleTable />} />
           <Route path="Quizzes/*" element={<Quizzes />} /> {/* Add `/*` for nested routes */}
           <Route path="Quizzes/:id" element={<QuizEditor />} /> {/* Add this line for QuizEditor */}
 

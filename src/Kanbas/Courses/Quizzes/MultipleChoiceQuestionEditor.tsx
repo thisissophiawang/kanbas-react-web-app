@@ -8,6 +8,7 @@ import FillInTheBlanksQuestionEditor from './FillInTheBlanksQuestionEditor';
 interface Choice {
   text: string;
   isCorrect: boolean;
+  id: string;
 }
 
 interface MultipleChoiceQuestionEditorProps {
@@ -21,7 +22,7 @@ const MultipleChoiceQuestionEditor: React.FC<MultipleChoiceQuestionEditorProps> 
   const [title, setTitle] = useState(question.title || '');
   const [points, setPoints] = useState(question.points || 1);
   const [content, setContent] = useState(question.content || '');
-  const [choices, setChoices] = useState<Choice[]>(question.choices || [{ text: '', isCorrect: false }]);
+  const [choices, setChoices] = useState<Choice[]>(question.choices || [{ text: '', isCorrect: false, id: new Date().getTime().toString() }]);
 
   const handleSave = () => {
     onSave({
@@ -35,7 +36,7 @@ const MultipleChoiceQuestionEditor: React.FC<MultipleChoiceQuestionEditorProps> 
   };
 
   const addChoice = () => {
-    setChoices([...choices, { text: '', isCorrect: false }]);
+    setChoices([...choices, { text: '', isCorrect: false, id: new Date().getTime().toString() }]);
   };
 
   const removeChoice = (index: number) => {
@@ -51,9 +52,19 @@ const MultipleChoiceQuestionEditor: React.FC<MultipleChoiceQuestionEditorProps> 
   const renderEditor = () => {
     switch (questionType) {
       case 'True/False':
-        return <TrueFalseQuestionEditor question={{ title, points, content, isTrue: choices[0]?.isCorrect }} onSave={onSave} onCancel={onCancel} />;
+        return (
+        <TrueFalseQuestionEditor
+          question={{ type: questionType, title, points, content, choices }}
+          onSave={onSave}
+          onCancel={onCancel}
+        />);
       case 'Fill in the Blanks':
-        return <FillInTheBlanksQuestionEditor question={{ title, points, content, choices }} onSave={onSave} onCancel={onCancel} />;
+        return (
+          <FillInTheBlanksQuestionEditor
+            question={{ type: questionType, title, points, content, choices }}
+            onSave={onSave}
+            onCancel={onCancel}
+        />);
       case 'Multiple Choice':
       default:
         return (

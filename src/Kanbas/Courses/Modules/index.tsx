@@ -15,7 +15,9 @@ export default function Modules() {
   const { cid } = useParams<{ cid: string }>();
   const [moduleName, setModuleName] = useState('');
   const modules = useSelector((state: any) => state.modulesReducer.modules || []);
+  const curUser = useSelector((state: any) => state.accountReducer.currentUser || {});
   const dispatch = useDispatch();
+  const isStudent = curUser?.role === 'STUDENT';
 
   const saveModule = async (module: any) => {
     const status = await client.updateModule(module);
@@ -28,6 +30,11 @@ export default function Modules() {
   };
 
   const createModule = async (module: any) => {
+    if(isStudent) {
+      // 其他角色是有权限的，比如admin这些需要你们自己定义
+      window.alert('sorry! do not have access');
+      return;
+    }
     const newModule = await client.createModule(cid as string, module);
     dispatch(addModule(newModule));
   };
@@ -66,6 +73,7 @@ export default function Modules() {
                   module.name
                 ) : (
                   <input
+                    disabled={curUser?.role === 'USER'}
                     className="form-control w-50 d-inline-block"
                     value={module.name}
                     onChange={(e) => saveModule({ ...module, name: e.target.value })}
@@ -76,13 +84,15 @@ export default function Modules() {
                     }}
                   />
                 )}
-                <ModuleControlButtons
-                  moduleId={module._id}
-                  deleteModule={(moduleId) => {
-                    removeModule(moduleId);
-                  }}
-                  editModule={(moduleId) => dispatch(editModule(moduleId))}
-                />
+                {!isStudent && (
+                  <ModuleControlButtons
+                    moduleId={module._id}
+                    deleteModule={(moduleId) => {
+                      removeModule(moduleId);
+                    }}
+                    editModule={(moduleId) => dispatch(editModule(moduleId))}
+                  />
+                )}
               </div>
               {module.lessons && (
                 <ul className="wd-lessons list-group rounded-0">

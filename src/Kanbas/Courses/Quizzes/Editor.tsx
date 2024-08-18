@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { addQuiz, updateQuiz, setQuizzes } from './reducer';
+import { addQuiz, updateQuiz } from './reducer';
 import * as client from './client';
 import './Editor.css';  // Import the CSS file
 import QuestionEditor from './QuestionEditor';  // Import the QuestionEditor component
+
+interface question {
+  content: string;
+  title: string;
+  type: string;
+  points: number;
+  choices?: any;
+}
 
 //include the QuestionEditor component in the QuizEditor component
 export default function QuizEditor() {
@@ -17,21 +25,11 @@ export default function QuizEditor() {
 
   //add question state
   const [questions, setQuestions] = useState<any[]>([]);
-  
-
-  const fetchQuizzes = async () => {
-    const quizzes = await client.findQuizzesForCourse(cid as string);
-    dispatch(setQuizzes(quizzes));
-  };
-
-  useEffect(() => {
-    fetchQuizzes();
-  }, [cid]);
 
   useEffect(() => {
     if (id === 'new') {
       setQuiz({
-        title: '',
+        title: 'New Quiz',
         description: '',
         type: 'Graded Quiz',
         points: 0,
@@ -52,16 +50,34 @@ export default function QuizEditor() {
     } else {
       const foundQuiz = quizzes.find((q: any) => q._id === id);
       setQuiz(foundQuiz);
+      setQuestions(foundQuiz?.questions || []);
     }
   }, [id, quizzes, cid]);
 
-  const saveQuiz = () => {
+  const saveQuiz = async (mode: string) => {
+    const points = (quiz?.questions || questions).reduce((acc: number, curr: question) =>
+      (acc || 0) + (curr?.points || 0), 0);
+
     if (id === 'new') {
-      dispatch(addQuiz(quiz));
+      const resQuiz = await client.createQuiz(cid as string, { ...quiz, questions, points });
+      if (!quiz._id || quiz._id === 'new') quiz._id = resQuiz._id;
+      dispatch(addQuiz(resQuiz));
     } else {
-      dispatch(updateQuiz(quiz));
+      const resQuiz = await client.updateQuiz({ ...quiz, questions, points });
+      if (!/^nothing/.test(resQuiz?.message)){
+        dispatch(updateQuiz(resQuiz));
+      }
+      // else {
+      //   window.alert('nothing changed');
+      //   return;
+      // }
     }
-    navigate(`/Kanbas/Courses/${quiz.course}/Quizzes`);
+
+    if (/preview$/.test(mode)) {
+      navigate(`/quiz-${mode}/${quiz._id}`);
+    } else {
+      navigate(`/Kanbas/Courses/${quiz.course}/Quizzes`);
+    }
   };
 
   if (!quiz) {
@@ -71,13 +87,13 @@ export default function QuizEditor() {
   return (
     <div className="editor-container">
       <div className="editor-tabs">
-        <button 
+        <button
           className={activeTab === 'details' ? 'active' : ''}
           onClick={() => setActiveTab('details')}
         >
           Details
         </button>
-        <button 
+        <button
           className={activeTab === 'questions' ? 'active' : ''}
           onClick={() => setActiveTab('questions')}
         >
@@ -89,31 +105,31 @@ export default function QuizEditor() {
         <div className="editor-form">
           <div className="form-group">
             <label htmlFor="wd-title">Quiz Title</label>
-            <input 
-              id="wd-title" 
+            <input
+              id="wd-title"
               className="form-control"
-              value={quiz.title} 
-              onChange={(e) => setQuiz({ ...quiz, title: e.target.value })} 
+              value={quiz.title}
+              onChange={(e) => setQuiz({ ...quiz, title: e.target.value })}
             />
           </div>
 
           <div className="form-group">
             <label htmlFor="wd-description">Quiz Description</label>
-            <textarea 
-              id="wd-description" 
+            <textarea
+              id="wd-description"
               className="form-control"
-              value={quiz.description} 
-              onChange={(e) => setQuiz({ ...quiz, description: e.target.value })} 
+              value={quiz.description}
+              onChange={(e) => setQuiz({ ...quiz, description: e.target.value })}
             />
           </div>
 
           <div className="form-group">
             <label htmlFor="wd-type">Quiz Type</label>
-            <select 
-              id="wd-type" 
+            <select
+              id="wd-type"
               className="form-control"
-              value={quiz.type} 
-              onChange={(e) => setQuiz({ ...quiz, type: e.target.value })} 
+              value={quiz.type}
+              onChange={(e) => setQuiz({ ...quiz, type: e.target.value })}
             >
               <option value="Graded Quiz">Graded Quiz</option>
               <option value="Practice Quiz">Practice Quiz</option>
@@ -124,11 +140,11 @@ export default function QuizEditor() {
 
           <div className="form-group">
             <label htmlFor="wd-assignment-group">Assignment Group</label>
-            <select 
-              id="wd-assignment-group" 
+            <select
+              id="wd-assignment-group"
               className="form-control"
-              value={quiz.assignmentGroup} 
-              onChange={(e) => setQuiz({ ...quiz, assignmentGroup: e.target.value })} 
+              value={quiz.assignmentGroup}
+              onChange={(e) => setQuiz({ ...quiz, assignmentGroup: e.target.value })}
             >
               <option value="Quizzes">Quizzes</option>
               <option value="Exams">Exams</option>
@@ -139,19 +155,22 @@ export default function QuizEditor() {
 
           <div className="form-group">
             <label htmlFor="wd-points">Points</label>
-            <input 
-              id="wd-points" 
+            <input
+              id="wd-points"
               className="form-control"
-              type="number" 
-              value={quiz.points} 
-              onChange={(e) => setQuiz({ ...quiz, points: Number(e.target.value) })} 
+              type="number"
+              disabled
+              value={(quiz?.questions || questions).reduce((acc: number, curr: question) =>
+                (acc || 0) + (curr?.points || 0), 0)
+              }
+              // onChange={(e) => setQuiz({ ...quiz, points: Number(e.target.value) })}
             />
           </div>
 
           <div className="form-group">
             <h3>Options</h3>
             <div className="option-group">
-              <input 
+              <input
                 type="checkbox"
                 checked={quiz.shuffleAnswers}
                 onChange={(e) => setQuiz({ ...quiz, shuffleAnswers: e.target.checked })}
@@ -160,7 +179,7 @@ export default function QuizEditor() {
             </div>
 
             <div className="option-group">
-              <input 
+              <input
                 type="checkbox"
                 checked={quiz.allowMultipleAttempts}
                 onChange={(e) => setQuiz({ ...quiz, allowMultipleAttempts: e.target.checked })}
@@ -169,7 +188,7 @@ export default function QuizEditor() {
             </div>
 
             <div className="option-group">
-              <input 
+              <input
                 type="checkbox"
                 checked={quiz.showCorrectAnswers}
                 onChange={(e) => setQuiz({ ...quiz, showCorrectAnswers: e.target.checked })}
@@ -178,7 +197,7 @@ export default function QuizEditor() {
             </div>
 
             <div className="option-group">
-              <input 
+              <input
                 type="checkbox"
                 checked={quiz.oneQuestionAtATime}
                 onChange={(e) => setQuiz({ ...quiz, oneQuestionAtATime: e.target.checked })}
@@ -187,7 +206,7 @@ export default function QuizEditor() {
             </div>
 
             <div className="option-group">
-              <input 
+              <input
                 type="checkbox"
                 checked={quiz.webcamRequired}
                 onChange={(e) => setQuiz({ ...quiz, webcamRequired: e.target.checked })}
@@ -196,7 +215,7 @@ export default function QuizEditor() {
             </div>
 
             <div className="option-group">
-              <input 
+              <input
                 type="checkbox"
                 checked={quiz.lockQuestionsAfterAnswering}
                 onChange={(e) => setQuiz({ ...quiz, lockQuestionsAfterAnswering: e.target.checked })}
@@ -206,19 +225,20 @@ export default function QuizEditor() {
 
             <div className="form-group">
               <label htmlFor="wd-time-limit">Time Limit (minutes)</label>
-              <input 
-                id="wd-time-limit" 
+              <input
+                id="wd-time-limit"
                 className="form-control"
                 type="number"
                 value={quiz.timeLimit}
+                // step={20}
                 onChange={(e) => setQuiz({ ...quiz, timeLimit: Number(e.target.value) })}
               />
             </div>
 
             <div className="form-group">
               <label htmlFor="wd-access-code">Access Code</label>
-              <input 
-                id="wd-access-code" 
+              <input
+                id="wd-access-code"
                 className="form-control"
                 type="text"
                 value={quiz.accessCode}
@@ -230,37 +250,59 @@ export default function QuizEditor() {
           <div className="form-group">
             <h3>Assign</h3>
             <div className="assign-group">
-              <input 
-                className="form-control"
-                value="Everyone"
-                readOnly
-              />
-              <input 
-                className="form-control"
-                type="date"
-                value={quiz.dueDate || ''}
-                onChange={(e) => setQuiz({ ...quiz, dueDate: e.target.value })}
-              />
-              <input 
-                className="form-control"
-                type="date"
-                value={quiz.availableDate || ''}
-                onChange={(e) => setQuiz({ ...quiz, availableDate: e.target.value })}
-              />
-              <input 
-                className="form-control"
-                type="date"
-                value={quiz.untilDate || ''}
-                onChange={(e) => setQuiz({ ...quiz, untilDate: e.target.value })}
-              />
+              <div className='Everyone'>
+                Assign to
+                <input
+                  value="Everyone"
+                  readOnly
+                />
+              </div>
+
+              <div className='dueDate'>
+                Due
+                <input
+                  type="date"
+                  pattern="yyyy-MM-dd"
+                  value={quiz.dueDate || ''}
+                  onChange={(e) => setQuiz({ ...quiz, dueDate: e.target.value })}
+                />
+              </div>
+
+              <div className='availableDate'>
+                available date
+                <input
+                  type="date"
+                  pattern="yyyy-MM-dd"
+                  value={quiz.availableDate || ''}
+                  onChange={(e) => setQuiz({ ...quiz, availableDate: e.target.value })}
+                />
+              </div>
+
+              <div className='untilDate'>
+                Until
+                <input
+                  type="date"
+                  pattern="yyyy-MM-dd"
+                  value={quiz.untilDate || ''}
+                  onChange={(e) => setQuiz({ ...quiz, untilDate: e.target.value })}
+                />
+              </div>
             </div>
           </div>
 
           <div className="form-group btn-container">
-            <Link to={`/Kanbas/Courses/${quiz.course}/Quizzes`} className="btn btn-secondary">Cancel</Link>
-            <button 
-              className="btn btn-danger" 
-              onClick={saveQuiz}
+            <button onClick={() => saveQuiz('detail-preview')} className="btn btn-primary save-btn">
+              Detail
+            </button>
+            <Link
+              to={`/Kanbas/Courses/${quiz.course}/Quizzes`}
+              className="btn btn-secondary"
+            >
+              Cancel
+            </Link>
+            <button
+              className="btn btn-danger"
+              onClick={() => saveQuiz('')}
             >
               Save
             </button>
@@ -269,19 +311,29 @@ export default function QuizEditor() {
       )}
 
 
-{activeTab === 'questions' && (
-        <QuestionEditor questions={questions} setQuestions={setQuestions} />
+      {activeTab === 'questions' && (
+        <>
+          <QuestionEditor
+            questions={questions}
+            setQuestions={setQuestions}
+            handleSaveAndPreview={() => saveQuiz('preview')}
+          />
+          <div className="form-group btn-container">
+            <Link
+              to={`/Kanbas/Courses/${quiz.course}/Quizzes`}
+              className="btn btn-secondary"
+            >
+              Cancel
+            </Link>
+            <button
+              className="btn btn-danger"
+              onClick={() => saveQuiz('')}
+            >
+              Save
+            </button>
+        </div>
+        </>
       )}
-
-      <div className="form-group btn-container">
-        <Link to={`/Kanbas/Courses/${quiz.course}/Quizzes`} className="btn btn-secondary">Cancel</Link>
-        <button 
-          className="btn btn-danger" 
-          onClick={saveQuiz}
-        >
-          Save
-        </button>
-      </div>
     </div>
   );
 }

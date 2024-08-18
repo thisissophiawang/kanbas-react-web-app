@@ -13,7 +13,8 @@ const FillInTheBlanksQuestionEditor: React.FC<FillInTheBlanksQuestionEditorProps
   const [title, setTitle] = useState(question.title || '');
   const [points, setPoints] = useState(question.points || 1);
   const [content, setContent] = useState(question.content || '');
-  const [answers, setAnswers] = useState<string[]>(question.answers || ['']);
+  const transeAnswers = question.choices.map((c: any) => c.text);
+  const [answers, setAnswers] = useState<string[]>(transeAnswers || ['']);
 
   const handleAnswerChange = (index: number, value: string) => {
     const updatedAnswers = [...answers];
@@ -30,12 +31,15 @@ const FillInTheBlanksQuestionEditor: React.FC<FillInTheBlanksQuestionEditorProps
   };
 
   const handleSave = () => {
+    const choicesArr = answers.map((a: any, i: number) => ({
+      text: a, isCorrect: true, id: new Date().getTime().toString()+i
+    }));
     onSave({
       ...question,
       title,
       points,
       content,
-      answers,
+      choices: choicesArr,
     });
   };
 

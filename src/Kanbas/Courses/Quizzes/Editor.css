@@ -6,13 +6,13 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
-  
+
   .editor-tabs {
     display: flex;
     justify-content: flex-start;
     margin-bottom: 20px;
   }
-  
+
   .editor-tabs button {
     flex: 1;
     padding: 10px 20px;
@@ -23,29 +23,29 @@
     font-weight: bold;
     cursor: pointer;
   }
-  
+
   .editor-tabs button.active {
     background-color: white;
     border-bottom: 2px solid #007bff;
   }
-  
+
   .editor-form {
     padding: 20px;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 5px;
   }
-  
+
   .form-group {
     margin-bottom: 20px;
   }
-  
+
   .form-group label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
   }
-  
+
   .form-group input,
   .form-group select,
   .form-group textarea {
@@ -54,46 +54,50 @@
     border-radius: 5px;
     border: 1px solid #ccc;
   }
-  
+
   .option-group {
     margin-bottom: 10px;
   }
-  
+
   .option-group input {
     margin-right: 10px;
   }
-  
+
   .assign-group {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
+    display: grid;
+    grid-gap: 10px 10px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
   }
-  
-  .assign-group input {
-    flex: 1;
+
+  .assign-group .Everyone {
+    grid-column-start: span 2;
   }
-  
+
+  .assign-group .dueDate {
+    grid-column-start: span 2;
+  }
+
   .btn-container {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
   }
-  
+
   .btn-container .btn {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
   }
-  
+
   .btn-container .btn-secondary {
     background-color: #6c757d;
     color: white;
     border: none;
   }
-  
+
   .btn-container .btn-danger {
     background-color: #dc3545;
     color: white;
     border: none;
   }
-  

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import MultipleChoiceQuestionEditor from './MultipleChoiceQuestionEditor';
 
-
-export default function QuestionEditor({ questions, setQuestions }: { questions: any[], setQuestions: (questions: any[]) => void }) {
+export default function QuestionEditor({ questions, setQuestions, handleSaveAndPreview }: {
+  questions: any[],
+  setQuestions: ( questions: any[] ) => void
+  handleSaveAndPreview: () => void
+}) {
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
-  const navigate = useNavigate();
 
   const addQuestion = () => {
     const newQuestion = {
@@ -31,25 +32,6 @@ export default function QuestionEditor({ questions, setQuestions }: { questions:
 
   const getTotalPoints = () => {
     return questions.reduce((total, question) => total + question.points, 0);
-  };
-
-  const handleSaveAndPreview = async () => {
-    try {
-      // Simulate saving the quiz data to the backend and receiving the quiz ID
-      const response = await fetch('/api/quizzes', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ questions }), // You might need to adjust the payload structure
-      });
-      const savedQuiz = await response.json();
-
-      // Navigate to the preview page with the saved quiz ID
-      navigate(`/quiz-preview/${savedQuiz._id}`);
-    } catch (error) {
-      console.error('Error saving quiz:', error);
-    }
   };
 
   return (

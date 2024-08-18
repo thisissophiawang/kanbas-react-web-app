@@ -1,9 +1,24 @@
 // src/Kanbas/Courses/Navigation.tsx
-import { courses } from "../../Database";
 import { useParams } from "react-router";
 import "./index.css";
 
-export default function CoursesNavigation() {
+interface Course {
+  _id: string;
+  name: string;
+  number: string;
+  startDate: string;
+  endDate: string;
+  department: string;
+  credits: number;
+  description: string;
+  image?: string;
+}
+
+interface CoursesProps {
+  courses: Course[];
+}
+
+export default function CoursesNavigation({ courses }: CoursesProps) {
   const { cid } = useParams();
   const course = courses.find((course) => course._id === cid);
   const links = [

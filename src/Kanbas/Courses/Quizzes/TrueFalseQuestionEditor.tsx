@@ -14,15 +14,20 @@ const FillInTheBlanksQuestionEditor: React.FC<FillInTheBlanksQuestionEditorProps
   const [title, setTitle] = useState(question.title || '');
   const [points, setPoints] = useState(question.points || 1);
   const [content, setContent] = useState(question.content || '');
-  const [correctAnswer, setCorrectAnswer] = useState(question.correctAnswer || 'True'); // Use correctAnswer instead of a list of answers
 
+  const translateChoiceTxt = (question.choices || []).find((c: any) => c.isCorrect)?.text;
+  const [choiceTxt, setIsChoiceTxt] = useState(translateChoiceTxt); // Use correctAnswer instead of a list of answers
+
+  const isCorrect = choiceTxt === 'True';
   const handleSave = () => {
     onSave({
       ...question,
       title,
       points,
       content,
-      correctAnswer,
+      choices: [
+        { text: 'True', isCorrect: choiceTxt === 'True', id: new Date().getTime().toString() },
+        { text: 'False', isCorrect: choiceTxt === 'False', id: new Date().getTime().toString()+1 }      ],
     });
   };
 
@@ -67,19 +72,19 @@ const FillInTheBlanksQuestionEditor: React.FC<FillInTheBlanksQuestionEditorProps
       <div className="form-group">
         <label>Answers:</label>
         <div className="answer-option">
-          <FaArrowRight size={24} style={{ color: correctAnswer === 'True' ? 'green' : 'gray' }} />
+          <FaArrowRight size={24} style={{ color: isCorrect ? 'green' : 'gray' }} />
           <span
-            style={{ color: correctAnswer === 'True' ? 'green' : 'black', cursor: 'pointer', marginLeft: '8px' }}
-            onClick={() => setCorrectAnswer('True')}
+            style={{ color: isCorrect ? 'green' : 'black', cursor: 'pointer', marginLeft: '8px' }}
+            onClick={() => setIsChoiceTxt('True')}
           >
             True
           </span>
         </div>
         <div className="answer-option">
-          <FaArrowRight size={24} style={{ color: correctAnswer === 'False' ? 'green' : 'gray' }} />
+          <FaArrowRight size={24} style={{ color: !isCorrect ? 'green' : 'gray' }} />
           <span
-            style={{ color: correctAnswer === 'False' ? 'green' : 'black', cursor: 'pointer', marginLeft: '8px' }}
-            onClick={() => setCorrectAnswer('False')}
+            style={{ color: !isCorrect ? 'green' : 'black', cursor: 'pointer', marginLeft: '8px' }}
+            onClick={() => setIsChoiceTxt('False')}
           >
             False
           </span>

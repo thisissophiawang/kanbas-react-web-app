@@ -6,10 +6,12 @@ import Dashboard from './Dashboard';
 import Courses from './Courses';
 import KanbasNavigation from './Navigation';
 import * as client from './Courses/client';
-import './styles.css'; 
+import './styles.css';
 import Account from './Courses/Account'; //new import for Account
 import Session from './Courses/Account/Session';
 import ProtectedRoute from './Courses/Account/ProtectedRoute'; //new import for ProtectedRoute
+import { useDispatch } from 'react-redux';
+import { setCourses as setCoursesReducer, addCourses, deleteCourses, updateCourses } from './Courses/reducer';
 
 interface Course {
   _id: string;
@@ -23,19 +25,22 @@ interface Course {
   image?: string;
 }
 
+const defCourse = {
+  _id: "0",
+  name: "New Course",
+  number: "New Number",
+  startDate: "2023-09-10",
+  endDate: "2023-12-15",
+  image: "reactjs.jpg",
+  description: "New Description",
+  department: "New Department",
+  credits: 3,
+};
+
 export default function Kanbas() {
   const [courses, setCourses] = useState<Course[]>([]);
-  const [course, setCourse] = useState<Course>({
-    _id: "0",
-    name: "New Course",
-    number: "New Number",
-    startDate: "2023-09-10",
-    endDate: "2023-12-15",
-    image: "reactjs.jpg",
-    description: "New Description",
-    department: "New Department",
-    credits: 3,
-  });
+  const [course, setCourse] = useState<Course>(defCourse);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,9 +54,15 @@ export default function Kanbas() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    dispatch(setCoursesReducer(courses));
+  }, [courses.length]);
+
   const addNewCourse = async () => {
     try {
-      const newCourse = await client.createCourse(course);
+      const jsonCourse = JSON.parse(JSON.stringify(course));
+      delete jsonCourse._id;
+      const newCourse = await client.createCourse(jsonCourse);
       setCourses([...courses, newCourse]);
     } catch (error) {
       console.error("Error creating course:", error);
@@ -61,7 +72,7 @@ export default function Kanbas() {
   const deleteCourse = async (courseId: string) => {
     try {
       await client.deleteCourse(courseId);
-      setCourses(courses.filter((course) => course._id !== courseId));
+      setCourses(courses.filter((c: any) => c._id !== courseId));
     } catch (error) {
       console.error("Error deleting course:", error);
     }
@@ -69,19 +80,9 @@ export default function Kanbas() {
 
   const updateCourse = async () => {
     try {
-      await client.updateCourse(course);
-      setCourses(courses.map((c) => (c._id === course._id ? course : c)));
-      setCourse({
-        _id: "0",
-        name: "New Course",
-        number: "New Number",
-        startDate: "2023-09-10",
-        endDate: "2023-12-15",
-        image: "reactjs.jpg",
-        description: "New Description",
-        department: "New Department",
-        credits: 3,
-      });
+      // await client.updateCourse(course);
+      setCourses(courses.map((c: any) => (c._id === course._id ? course : c)));
+      setCourse(defCourse);
     } catch (error) {
       console.error("Error updating course:", error);
     }
@@ -117,7 +118,7 @@ export default function Kanbas() {
                 path="Courses/*"
                 element={
                   <ProtectedRoute>
-                    <Courses courses={courses} />
+                    <Courses />
                   </ProtectedRoute> // added ProtectedRoute to Courses
                 }
               />

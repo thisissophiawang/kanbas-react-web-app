@@ -9,7 +9,7 @@ export const fetchAllCourses = async () => {
 };
 
 export const createCourse = async (course: any) => {
-  const { data } = await axios.post(COURSES_API, course);
+  const { data } = await axios.post(COURSES_API, { ...course, id: new Date().getTime().toString() });
   return data;
 };
 
