@@ -47,7 +47,7 @@ export default function Quizzes() {
     // Toggle Publish
     const handleTogglePublishQuiz = async (quizId: string) => {
         if(isStudent) {
-            // 其他角色是有权限的，比如admin这些需要你们自己定义
+            // other roles have permission, such as admin,  need to define them by yourself
             window.alert('sorry! do not have access');
             return;
         }
