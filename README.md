@@ -51,6 +51,7 @@ A3: https://669e9b46a4588f00080026f8--kanbas-react-web-app-sophia.netlify.app/#/
 A4: https://a4--kanbas-react-web-app-sophia.netlify.app/Kanbas#/Kanbas/Dashboard  
 A5: https://a5--kanbas-react-web-app-sophia.netlify.app/#/Labs/Lab5  
 A6: https://a6--kanbas-react-web-app-sophia.netlify.app/#/Kanbas/Account/Signin
+final-project: https://final-project--kanbas-react-web-app-sophia.netlify.app/#/LandingPage
 
 
 To learn React, check out the [React documentation](https://reactjs.org/).
